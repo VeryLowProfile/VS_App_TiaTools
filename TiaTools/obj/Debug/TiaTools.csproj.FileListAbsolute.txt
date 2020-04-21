@@ -1,0 +1,14 @@
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\bin\Debug\TiaTools.exe.config
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\bin\Debug\TiaTools.exe
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\bin\Debug\TiaTools.pdb
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\bin\Debug\CustomUtility_NET_F.dll
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\bin\Debug\CustomUtility_NET_F.pdb
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.FormToolsHome.resources
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.Properties.Resources.resources
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.csproj.GenerateResource.cache
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.csproj.CoreCompileInputs.cache
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.csproj.CopyComplete
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.exe
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.pdb
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.csprojAssemblyReference.cache
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.FormInput.resources
