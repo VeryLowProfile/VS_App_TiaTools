@@ -30,10 +30,11 @@ namespace TiaTools
 
         #region Events
 
-        private void buttonInput_Click(object sender, EventArgs e)
+        private void buttonIO_Click(object sender, EventArgs e)
         {
             ChildForm.OpenChildFormOnPanel(new FormInput(), panelChildForm);
         }
         #endregion
+
     }
 }

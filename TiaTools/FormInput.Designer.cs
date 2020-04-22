@@ -38,6 +38,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dataGridViewInput = new System.Windows.Forms.DataGridView();
+            this.checkBoxD_IN = new System.Windows.Forms.CheckBox();
+            this.checkBoxD_OUT = new System.Windows.Forms.CheckBox();
+            this.buttonCreateFiles = new System.Windows.Forms.Button();
+            this.checkBoxA_OUT = new System.Windows.Forms.CheckBox();
+            this.checkBoxA_IN = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -46,15 +51,20 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.checkBoxA_OUT);
+            this.panel1.Controls.Add(this.checkBoxA_IN);
+            this.panel1.Controls.Add(this.buttonCreateFiles);
+            this.panel1.Controls.Add(this.checkBoxD_OUT);
+            this.panel1.Controls.Add(this.checkBoxD_IN);
             this.panel1.Controls.Add(this.buttonImport);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.textBoxFilePath);
             this.panel1.Controls.Add(this.comboBoxSheetList);
             this.panel1.Controls.Add(this.buttonSelectFile);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 476);
+            this.panel1.Location = new System.Drawing.Point(0, 482);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(627, 80);
+            this.panel1.Size = new System.Drawing.Size(627, 74);
             this.panel1.TabIndex = 0;
             // 
             // buttonImport
@@ -117,9 +127,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label1.Location = new System.Drawing.Point(4, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.Size = new System.Drawing.Size(66, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Input";
+            this.label1.Text = "Input Output";
             // 
             // panel3
             // 
@@ -127,7 +137,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 20);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(627, 456);
+            this.panel3.Size = new System.Drawing.Size(627, 462);
             this.panel3.TabIndex = 2;
             // 
             // dataGridViewInput
@@ -137,8 +147,58 @@
             this.dataGridViewInput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewInput.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewInput.Name = "dataGridViewInput";
-            this.dataGridViewInput.Size = new System.Drawing.Size(627, 456);
+            this.dataGridViewInput.Size = new System.Drawing.Size(627, 462);
             this.dataGridViewInput.TabIndex = 0;
+            // 
+            // checkBoxD_IN
+            // 
+            this.checkBoxD_IN.AutoSize = true;
+            this.checkBoxD_IN.Location = new System.Drawing.Point(407, 8);
+            this.checkBoxD_IN.Name = "checkBoxD_IN";
+            this.checkBoxD_IN.Size = new System.Drawing.Size(51, 17);
+            this.checkBoxD_IN.TabIndex = 5;
+            this.checkBoxD_IN.Text = "D_IN";
+            this.checkBoxD_IN.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxD_OUT
+            // 
+            this.checkBoxD_OUT.AutoSize = true;
+            this.checkBoxD_OUT.Location = new System.Drawing.Point(493, 8);
+            this.checkBoxD_OUT.Name = "checkBoxD_OUT";
+            this.checkBoxD_OUT.Size = new System.Drawing.Size(63, 17);
+            this.checkBoxD_OUT.TabIndex = 6;
+            this.checkBoxD_OUT.Text = "D_OUT";
+            this.checkBoxD_OUT.UseVisualStyleBackColor = true;
+            // 
+            // buttonCreateFiles
+            // 
+            this.buttonCreateFiles.Location = new System.Drawing.Point(405, 45);
+            this.buttonCreateFiles.Name = "buttonCreateFiles";
+            this.buttonCreateFiles.Size = new System.Drawing.Size(150, 25);
+            this.buttonCreateFiles.TabIndex = 7;
+            this.buttonCreateFiles.Text = "Create Files";
+            this.buttonCreateFiles.UseVisualStyleBackColor = true;
+            this.buttonCreateFiles.Click += new System.EventHandler(this.buttonCreateFiles_Click);
+            // 
+            // checkBoxA_OUT
+            // 
+            this.checkBoxA_OUT.AutoSize = true;
+            this.checkBoxA_OUT.Location = new System.Drawing.Point(493, 26);
+            this.checkBoxA_OUT.Name = "checkBoxA_OUT";
+            this.checkBoxA_OUT.Size = new System.Drawing.Size(62, 17);
+            this.checkBoxA_OUT.TabIndex = 9;
+            this.checkBoxA_OUT.Text = "A_OUT";
+            this.checkBoxA_OUT.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxA_IN
+            // 
+            this.checkBoxA_IN.AutoSize = true;
+            this.checkBoxA_IN.Location = new System.Drawing.Point(407, 26);
+            this.checkBoxA_IN.Name = "checkBoxA_IN";
+            this.checkBoxA_IN.Size = new System.Drawing.Size(50, 17);
+            this.checkBoxA_IN.TabIndex = 8;
+            this.checkBoxA_IN.Text = "A_IN";
+            this.checkBoxA_IN.UseVisualStyleBackColor = true;
             // 
             // FormInput
             // 
@@ -173,5 +233,10 @@
         private System.Windows.Forms.Button buttonSelectFile;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridViewInput;
+        private System.Windows.Forms.Button buttonCreateFiles;
+        private System.Windows.Forms.CheckBox checkBoxD_OUT;
+        private System.Windows.Forms.CheckBox checkBoxD_IN;
+        private System.Windows.Forms.CheckBox checkBoxA_OUT;
+        private System.Windows.Forms.CheckBox checkBoxA_IN;
     }
 }

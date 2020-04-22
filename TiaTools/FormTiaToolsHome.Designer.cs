@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormToolsHome));
             this.panelMenu = new System.Windows.Forms.Panel();
-            this.buttonInput = new System.Windows.Forms.Button();
+            this.buttonIO = new System.Windows.Forms.Button();
             this.panelChildForm = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelMenu.SuspendLayout();
@@ -42,22 +42,22 @@
             // 
             this.panelMenu.AutoScroll = true;
             this.panelMenu.BackColor = System.Drawing.Color.Silver;
-            this.panelMenu.Controls.Add(this.buttonInput);
+            this.panelMenu.Controls.Add(this.buttonIO);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(211, 556);
             this.panelMenu.TabIndex = 0;
             // 
-            // buttonInput
+            // buttonIO
             // 
-            this.buttonInput.Location = new System.Drawing.Point(13, 34);
-            this.buttonInput.Name = "buttonInput";
-            this.buttonInput.Size = new System.Drawing.Size(181, 23);
-            this.buttonInput.TabIndex = 0;
-            this.buttonInput.Text = "Input";
-            this.buttonInput.UseVisualStyleBackColor = true;
-            this.buttonInput.Click += new System.EventHandler(this.buttonInput_Click);
+            this.buttonIO.Location = new System.Drawing.Point(13, 34);
+            this.buttonIO.Name = "buttonIO";
+            this.buttonIO.Size = new System.Drawing.Size(181, 23);
+            this.buttonIO.TabIndex = 0;
+            this.buttonIO.Text = "I/O";
+            this.buttonIO.UseVisualStyleBackColor = true;
+            this.buttonIO.Click += new System.EventHandler(this.buttonIO_Click);
             // 
             // panelChildForm
             // 
@@ -100,7 +100,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panelMenu;
-        private System.Windows.Forms.Button buttonInput;
+        private System.Windows.Forms.Button buttonIO;
         private System.Windows.Forms.Panel panelChildForm;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
