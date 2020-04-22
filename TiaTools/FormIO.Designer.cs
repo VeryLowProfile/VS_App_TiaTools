@@ -1,6 +1,6 @@
 ﻿namespace TiaTools
 {
-    partial class FormInput
+    partial class FormIO
     {
         /// <summary>
         /// Required designer variable.

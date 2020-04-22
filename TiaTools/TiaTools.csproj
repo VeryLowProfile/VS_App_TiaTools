@@ -40,6 +40,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Library\CustomUtility_NET_F\CustomUtility_NET_F\bin\Debug\CustomUtility_NET_F.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,22 +57,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormMessages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMessages.Designer.cs">
+      <DependentUpon>FormMessages.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormTiaToolsHome.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormTiaToolsHome.Designer.cs">
       <DependentUpon>FormTiaToolsHome.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormInput.cs">
+    <Compile Include="FormIO.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormInput.Designer.cs">
-      <DependentUpon>FormInput.cs</DependentUpon>
+    <Compile Include="FormIO.Designer.cs">
+      <DependentUpon>FormIO.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormInput.resx">
-      <DependentUpon>FormInput.cs</DependentUpon>
+    <EmbeddedResource Include="FormIO.resx">
+      <DependentUpon>FormIO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMessages.resx">
+      <DependentUpon>FormMessages.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTiaToolsHome.resx">
       <DependentUpon>FormTiaToolsHome.cs</DependentUpon>
@@ -82,6 +95,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

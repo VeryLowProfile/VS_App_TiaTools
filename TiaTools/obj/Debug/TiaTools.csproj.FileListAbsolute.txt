@@ -11,4 +11,5 @@ C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.csproj.CopyC
 C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.exe
 C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.pdb
 C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.csprojAssemblyReference.cache
-C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.FormInput.resources
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.FormIO.resources
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.FormMessages.resources

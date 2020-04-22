@@ -6,11 +6,11 @@ using System.Data;
 
 namespace TiaTools
 {
-    public partial class FormInput : Form
+    public partial class FormIO : Form
     {
         #region Constructor
 
-        public FormInput()
+        public FormIO()
         {
             InitializeComponent();
         }
@@ -75,9 +75,6 @@ namespace TiaTools
                 filePathDOUT = filePath + @"\D_OUT";
                 filePathAOUT = filePath + @"\A_OUT";
                 Directory.CreateDirectory(filePath);
-                Directory.CreateDirectory(filePathAIN);
-                Directory.CreateDirectory(filePathDOUT);
-                Directory.CreateDirectory(filePathAOUT);
 
                 #region DI
                 //Input Files
@@ -496,6 +493,8 @@ BEGIN
                 #endregion
             }
         }
+
+
 
         #endregion
 

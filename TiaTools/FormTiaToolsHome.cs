@@ -32,9 +32,15 @@ namespace TiaTools
 
         private void buttonIO_Click(object sender, EventArgs e)
         {
-            ChildForm.OpenChildFormOnPanel(new FormInput(), panelChildForm);
+            ChildForm.OpenChildFormOnPanel(new FormIO(), panelChildForm);
+        }
+
+        private void buttonMsq_Click(object sender, EventArgs e)
+        {
+            ChildForm.OpenChildFormOnPanel(new FormMessages(), panelChildForm);
         }
         #endregion
+
 
     }
 }
