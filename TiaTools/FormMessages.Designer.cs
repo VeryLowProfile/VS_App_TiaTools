@@ -31,6 +31,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.checkBoxFCMsgTrigger = new System.Windows.Forms.CheckBox();
+            this.checkBoxFBMsgHandler = new System.Windows.Forms.CheckBox();
+            this.buttonCreateFiles = new System.Windows.Forms.Button();
+            this.checkBoxFCMsgConfig = new System.Windows.Forms.CheckBox();
+            this.checkBoxMsgConfig = new System.Windows.Forms.CheckBox();
             this.textBoxExportFilePath = new System.Windows.Forms.TextBox();
             this.buttonImport = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -67,6 +72,11 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.checkBoxFCMsgTrigger);
+            this.panel2.Controls.Add(this.checkBoxFBMsgHandler);
+            this.panel2.Controls.Add(this.buttonCreateFiles);
+            this.panel2.Controls.Add(this.checkBoxFCMsgConfig);
+            this.panel2.Controls.Add(this.checkBoxMsgConfig);
             this.panel2.Controls.Add(this.textBoxExportFilePath);
             this.panel2.Controls.Add(this.buttonImport);
             this.panel2.Controls.Add(this.label2);
@@ -79,6 +89,56 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(627, 120);
             this.panel2.TabIndex = 1;
+            // 
+            // checkBoxFCMsgTrigger
+            // 
+            this.checkBoxFCMsgTrigger.AutoSize = true;
+            this.checkBoxFCMsgTrigger.Location = new System.Drawing.Point(471, 52);
+            this.checkBoxFCMsgTrigger.Name = "checkBoxFCMsgTrigger";
+            this.checkBoxFCMsgTrigger.Size = new System.Drawing.Size(104, 17);
+            this.checkBoxFCMsgTrigger.TabIndex = 15;
+            this.checkBoxFCMsgTrigger.Text = "FC_Msg_Trigger";
+            this.checkBoxFCMsgTrigger.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxFBMsgHandler
+            // 
+            this.checkBoxFBMsgHandler.AutoSize = true;
+            this.checkBoxFBMsgHandler.Location = new System.Drawing.Point(471, 14);
+            this.checkBoxFBMsgHandler.Name = "checkBoxFBMsgHandler";
+            this.checkBoxFBMsgHandler.Size = new System.Drawing.Size(108, 17);
+            this.checkBoxFBMsgHandler.TabIndex = 14;
+            this.checkBoxFBMsgHandler.Text = "FB_Msg_Handler";
+            this.checkBoxFBMsgHandler.UseVisualStyleBackColor = true;
+            // 
+            // buttonCreateFiles
+            // 
+            this.buttonCreateFiles.Location = new System.Drawing.Point(397, 85);
+            this.buttonCreateFiles.Name = "buttonCreateFiles";
+            this.buttonCreateFiles.Size = new System.Drawing.Size(150, 25);
+            this.buttonCreateFiles.TabIndex = 13;
+            this.buttonCreateFiles.Text = "Create Files";
+            this.buttonCreateFiles.UseVisualStyleBackColor = true;
+            this.buttonCreateFiles.Click += new System.EventHandler(this.buttonCreateFiles_Click);
+            // 
+            // checkBoxFCMsgConfig
+            // 
+            this.checkBoxFCMsgConfig.AutoSize = true;
+            this.checkBoxFCMsgConfig.Location = new System.Drawing.Point(471, 34);
+            this.checkBoxFCMsgConfig.Name = "checkBoxFCMsgConfig";
+            this.checkBoxFCMsgConfig.Size = new System.Drawing.Size(101, 17);
+            this.checkBoxFCMsgConfig.TabIndex = 12;
+            this.checkBoxFCMsgConfig.Text = "FC_Msg_Config";
+            this.checkBoxFCMsgConfig.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxMsgConfig
+            // 
+            this.checkBoxMsgConfig.AutoSize = true;
+            this.checkBoxMsgConfig.Location = new System.Drawing.Point(386, 14);
+            this.checkBoxMsgConfig.Name = "checkBoxMsgConfig";
+            this.checkBoxMsgConfig.Size = new System.Drawing.Size(79, 17);
+            this.checkBoxMsgConfig.TabIndex = 11;
+            this.checkBoxMsgConfig.Text = "Msg Config";
+            this.checkBoxMsgConfig.UseVisualStyleBackColor = true;
             // 
             // textBoxExportFilePath
             // 
@@ -196,5 +256,10 @@
         private System.Windows.Forms.TextBox textBoxImportFilePath;
         private System.Windows.Forms.ComboBox comboBoxSheetList;
         private System.Windows.Forms.Button buttonSelectFile;
+        private System.Windows.Forms.CheckBox checkBoxFCMsgTrigger;
+        private System.Windows.Forms.CheckBox checkBoxFBMsgHandler;
+        private System.Windows.Forms.Button buttonCreateFiles;
+        private System.Windows.Forms.CheckBox checkBoxFCMsgConfig;
+        private System.Windows.Forms.CheckBox checkBoxMsgConfig;
     }
 }

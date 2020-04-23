@@ -69,7 +69,7 @@ namespace TiaTools
             {
 
                 //Create a New Directory To store New Files
-                filePath = folderBrowserDialog.SelectedPath + @"\TIA_SourceFile_" + DateTime.Now.ToString().Replace("/", "_").Replace(" ", "_").Replace(":", "_");
+                filePath = folderBrowserDialog.SelectedPath + @"\TIA_SourceFile_IO" + DateTime.Now.ToString().Replace("/", "_").Replace(" ", "_").Replace(":", "_");
                 filePathDIN = filePath + @"\D_IN";
                 filePathAIN = filePath + @"\A_IN";
                 filePathDOUT = filePath + @"\D_OUT";
@@ -493,8 +493,6 @@ BEGIN
                 #endregion
             }
         }
-
-
 
         #endregion
 
