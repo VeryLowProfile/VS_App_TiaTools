@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.checkBoxA_OUT = new System.Windows.Forms.CheckBox();
+            this.checkBoxA_IN = new System.Windows.Forms.CheckBox();
+            this.buttonCreateTIAFiles = new System.Windows.Forms.Button();
+            this.checkBoxD_OUT = new System.Windows.Forms.CheckBox();
+            this.checkBoxD_IN = new System.Windows.Forms.CheckBox();
             this.buttonImport = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxFilePath = new System.Windows.Forms.TextBox();
@@ -38,11 +43,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dataGridViewInput = new System.Windows.Forms.DataGridView();
-            this.checkBoxD_IN = new System.Windows.Forms.CheckBox();
-            this.checkBoxD_OUT = new System.Windows.Forms.CheckBox();
-            this.buttonCreateFiles = new System.Windows.Forms.Button();
-            this.checkBoxA_OUT = new System.Windows.Forms.CheckBox();
-            this.checkBoxA_IN = new System.Windows.Forms.CheckBox();
+            this.buttonTextList = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -51,9 +52,10 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonTextList);
             this.panel1.Controls.Add(this.checkBoxA_OUT);
             this.panel1.Controls.Add(this.checkBoxA_IN);
-            this.panel1.Controls.Add(this.buttonCreateFiles);
+            this.panel1.Controls.Add(this.buttonCreateTIAFiles);
             this.panel1.Controls.Add(this.checkBoxD_OUT);
             this.panel1.Controls.Add(this.checkBoxD_IN);
             this.panel1.Controls.Add(this.buttonImport);
@@ -67,9 +69,59 @@
             this.panel1.Size = new System.Drawing.Size(627, 74);
             this.panel1.TabIndex = 0;
             // 
+            // checkBoxA_OUT
+            // 
+            this.checkBoxA_OUT.AutoSize = true;
+            this.checkBoxA_OUT.Location = new System.Drawing.Point(405, 28);
+            this.checkBoxA_OUT.Name = "checkBoxA_OUT";
+            this.checkBoxA_OUT.Size = new System.Drawing.Size(62, 17);
+            this.checkBoxA_OUT.TabIndex = 9;
+            this.checkBoxA_OUT.Text = "A_OUT";
+            this.checkBoxA_OUT.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxA_IN
+            // 
+            this.checkBoxA_IN.AutoSize = true;
+            this.checkBoxA_IN.Location = new System.Drawing.Point(319, 28);
+            this.checkBoxA_IN.Name = "checkBoxA_IN";
+            this.checkBoxA_IN.Size = new System.Drawing.Size(50, 17);
+            this.checkBoxA_IN.TabIndex = 8;
+            this.checkBoxA_IN.Text = "A_IN";
+            this.checkBoxA_IN.UseVisualStyleBackColor = true;
+            // 
+            // buttonCreateTIAFiles
+            // 
+            this.buttonCreateTIAFiles.Location = new System.Drawing.Point(317, 47);
+            this.buttonCreateTIAFiles.Name = "buttonCreateTIAFiles";
+            this.buttonCreateTIAFiles.Size = new System.Drawing.Size(150, 25);
+            this.buttonCreateTIAFiles.TabIndex = 7;
+            this.buttonCreateTIAFiles.Text = "Create TIA Files";
+            this.buttonCreateTIAFiles.UseVisualStyleBackColor = true;
+            this.buttonCreateTIAFiles.Click += new System.EventHandler(this.buttonCreateFiles_Click);
+            // 
+            // checkBoxD_OUT
+            // 
+            this.checkBoxD_OUT.AutoSize = true;
+            this.checkBoxD_OUT.Location = new System.Drawing.Point(405, 10);
+            this.checkBoxD_OUT.Name = "checkBoxD_OUT";
+            this.checkBoxD_OUT.Size = new System.Drawing.Size(63, 17);
+            this.checkBoxD_OUT.TabIndex = 6;
+            this.checkBoxD_OUT.Text = "D_OUT";
+            this.checkBoxD_OUT.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxD_IN
+            // 
+            this.checkBoxD_IN.AutoSize = true;
+            this.checkBoxD_IN.Location = new System.Drawing.Point(319, 10);
+            this.checkBoxD_IN.Name = "checkBoxD_IN";
+            this.checkBoxD_IN.Size = new System.Drawing.Size(51, 17);
+            this.checkBoxD_IN.TabIndex = 5;
+            this.checkBoxD_IN.Text = "D_IN";
+            this.checkBoxD_IN.UseVisualStyleBackColor = true;
+            // 
             // buttonImport
             // 
-            this.buttonImport.Location = new System.Drawing.Point(169, 46);
+            this.buttonImport.Location = new System.Drawing.Point(161, 47);
             this.buttonImport.Name = "buttonImport";
             this.buttonImport.Size = new System.Drawing.Size(150, 25);
             this.buttonImport.TabIndex = 4;
@@ -80,7 +132,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 33);
+            this.label2.Location = new System.Drawing.Point(8, 34);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 13);
             this.label2.TabIndex = 3;
@@ -88,7 +140,7 @@
             // 
             // textBoxFilePath
             // 
-            this.textBoxFilePath.Location = new System.Drawing.Point(169, 8);
+            this.textBoxFilePath.Location = new System.Drawing.Point(161, 9);
             this.textBoxFilePath.Name = "textBoxFilePath";
             this.textBoxFilePath.Size = new System.Drawing.Size(150, 20);
             this.textBoxFilePath.TabIndex = 2;
@@ -96,14 +148,14 @@
             // comboBoxSheetList
             // 
             this.comboBoxSheetList.FormattingEnabled = true;
-            this.comboBoxSheetList.Location = new System.Drawing.Point(13, 49);
+            this.comboBoxSheetList.Location = new System.Drawing.Point(7, 50);
             this.comboBoxSheetList.Name = "comboBoxSheetList";
             this.comboBoxSheetList.Size = new System.Drawing.Size(150, 21);
             this.comboBoxSheetList.TabIndex = 1;
             // 
             // buttonSelectFile
             // 
-            this.buttonSelectFile.Location = new System.Drawing.Point(13, 5);
+            this.buttonSelectFile.Location = new System.Drawing.Point(7, 6);
             this.buttonSelectFile.Name = "buttonSelectFile";
             this.buttonSelectFile.Size = new System.Drawing.Size(150, 25);
             this.buttonSelectFile.TabIndex = 0;
@@ -150,57 +202,17 @@
             this.dataGridViewInput.Size = new System.Drawing.Size(627, 462);
             this.dataGridViewInput.TabIndex = 0;
             // 
-            // checkBoxD_IN
+            // buttonTextList
             // 
-            this.checkBoxD_IN.AutoSize = true;
-            this.checkBoxD_IN.Location = new System.Drawing.Point(407, 8);
-            this.checkBoxD_IN.Name = "checkBoxD_IN";
-            this.checkBoxD_IN.Size = new System.Drawing.Size(51, 17);
-            this.checkBoxD_IN.TabIndex = 5;
-            this.checkBoxD_IN.Text = "D_IN";
-            this.checkBoxD_IN.UseVisualStyleBackColor = true;
+            this.buttonTextList.Location = new System.Drawing.Point(471, 47);
+            this.buttonTextList.Name = "buttonTextList";
+            this.buttonTextList.Size = new System.Drawing.Size(150, 25);
+            this.buttonTextList.TabIndex = 10;
+            this.buttonTextList.Text = "Create Text List Files";
+            this.buttonTextList.UseVisualStyleBackColor = true;
+            this.buttonTextList.Click += new System.EventHandler(this.buttonTextList_Click);
             // 
-            // checkBoxD_OUT
-            // 
-            this.checkBoxD_OUT.AutoSize = true;
-            this.checkBoxD_OUT.Location = new System.Drawing.Point(493, 8);
-            this.checkBoxD_OUT.Name = "checkBoxD_OUT";
-            this.checkBoxD_OUT.Size = new System.Drawing.Size(63, 17);
-            this.checkBoxD_OUT.TabIndex = 6;
-            this.checkBoxD_OUT.Text = "D_OUT";
-            this.checkBoxD_OUT.UseVisualStyleBackColor = true;
-            // 
-            // buttonCreateFiles
-            // 
-            this.buttonCreateFiles.Location = new System.Drawing.Point(405, 45);
-            this.buttonCreateFiles.Name = "buttonCreateFiles";
-            this.buttonCreateFiles.Size = new System.Drawing.Size(150, 25);
-            this.buttonCreateFiles.TabIndex = 7;
-            this.buttonCreateFiles.Text = "Create Files";
-            this.buttonCreateFiles.UseVisualStyleBackColor = true;
-            this.buttonCreateFiles.Click += new System.EventHandler(this.buttonCreateFiles_Click);
-            // 
-            // checkBoxA_OUT
-            // 
-            this.checkBoxA_OUT.AutoSize = true;
-            this.checkBoxA_OUT.Location = new System.Drawing.Point(493, 26);
-            this.checkBoxA_OUT.Name = "checkBoxA_OUT";
-            this.checkBoxA_OUT.Size = new System.Drawing.Size(62, 17);
-            this.checkBoxA_OUT.TabIndex = 9;
-            this.checkBoxA_OUT.Text = "A_OUT";
-            this.checkBoxA_OUT.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxA_IN
-            // 
-            this.checkBoxA_IN.AutoSize = true;
-            this.checkBoxA_IN.Location = new System.Drawing.Point(407, 26);
-            this.checkBoxA_IN.Name = "checkBoxA_IN";
-            this.checkBoxA_IN.Size = new System.Drawing.Size(50, 17);
-            this.checkBoxA_IN.TabIndex = 8;
-            this.checkBoxA_IN.Text = "A_IN";
-            this.checkBoxA_IN.UseVisualStyleBackColor = true;
-            // 
-            // FormInput
+            // FormIO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -209,7 +221,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormInput";
+            this.Name = "FormIO";
             this.Text = "FormInput";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -233,10 +245,11 @@
         private System.Windows.Forms.Button buttonSelectFile;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridViewInput;
-        private System.Windows.Forms.Button buttonCreateFiles;
+        private System.Windows.Forms.Button buttonCreateTIAFiles;
         private System.Windows.Forms.CheckBox checkBoxD_OUT;
         private System.Windows.Forms.CheckBox checkBoxD_IN;
         private System.Windows.Forms.CheckBox checkBoxA_OUT;
         private System.Windows.Forms.CheckBox checkBoxA_IN;
+        private System.Windows.Forms.Button buttonTextList;
     }
 }

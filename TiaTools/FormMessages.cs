@@ -3,7 +3,6 @@ using CustomUtility_NET_F;
 using System.Windows.Forms;
 using System.IO;
 using System.Data;
-using System.Text;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace TiaTools
