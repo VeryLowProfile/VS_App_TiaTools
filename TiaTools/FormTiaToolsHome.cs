@@ -39,8 +39,13 @@ namespace TiaTools
         {
             ChildForm.OpenChildFormOnPanel(new FormMessages(), panelChildForm);
         }
-        #endregion
 
+        private void buttonSM_Click(object sender, EventArgs e)
+        {
+            ChildForm.OpenChildFormOnPanel(new FormStateMachines(), panelChildForm);
+        }
+
+        #endregion
 
     }
 }

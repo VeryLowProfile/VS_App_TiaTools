@@ -1,0 +1,14 @@
+﻿FUNCTION "FC_SM_Call" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	//********************************************************************//
+	//Name: FC_SM_Call                                     
+	//Version: 0.1
+	//Description: StateMachine Call
+	//Developer: Topcast
+	//********************************************************************//
+	
+
+

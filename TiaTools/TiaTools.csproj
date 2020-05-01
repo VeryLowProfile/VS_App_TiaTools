@@ -63,6 +63,12 @@
     <Compile Include="FormMessages.Designer.cs">
       <DependentUpon>FormMessages.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormStateMachines.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStateMachines.Designer.cs">
+      <DependentUpon>FormStateMachines.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormTiaToolsHome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +89,9 @@
     <EmbeddedResource Include="FormMessages.resx">
       <DependentUpon>FormMessages.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormStateMachines.resx">
+      <DependentUpon>FormStateMachines.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormTiaToolsHome.resx">
       <DependentUpon>FormTiaToolsHome.cs</DependentUpon>
     </EmbeddedResource>
@@ -94,6 +103,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -111,6 +121,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icons\TiaTools.ico" />
+    <Content Include="SM Txt Files\DB_SM.txt" />
+    <Content Include="SM Txt Files\FC_SM.txt" />
+    <Content Include="SM Txt Files\FC_SM_Call.txt" />
+    <Content Include="SM Txt Files\FC_SM_Common.txt" />
+    <Content Include="SM Txt Files\FC_SM_Pause_Seq.txt" />
+    <Content Include="SM Txt Files\FC_SM_Reset_Seq.txt" />
+    <Content Include="SM Txt Files\FC_SM_Stop_Seq.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

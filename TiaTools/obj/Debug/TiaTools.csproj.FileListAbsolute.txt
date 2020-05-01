@@ -13,3 +13,4 @@ C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.pdb
 C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.csprojAssemblyReference.cache
 C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.FormIO.resources
 C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.FormMessages.resources
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Debug\TiaTools.FormStateMachines.resources

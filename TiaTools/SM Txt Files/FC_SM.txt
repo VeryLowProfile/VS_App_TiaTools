@@ -1,0 +1,34 @@
+﻿FUNCTION "FC_SM_$SM_NB$" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_TEMP 
+      SMN : Int;
+   END_VAR
+
+
+BEGIN
+	//********************************************************************//
+	//Name: FC_SM_$SM_NB$
+	//Version: x.x
+	//Description: State Machine $SMNb$ ($SM_NAME$)
+	//Developer: Topcast
+	//********************************************************************//
+	
+	//Init Variables
+	//********************************************************************//
+	#SMN := $SM_NB$;
+	
+	//FC SM Common
+	//********************************************************************//
+	"FC_SM_Common"(#SMN);
+	
+	//SM body
+	//********************************************************************//
+	CASE "DB_SM".Sm[#SMN].Status.StepNb OF
+	        
+	        //SM_$SM_NB$_START_SEQUENCE
+	        //********************************************************************// 
+	    "SM_START_SEQUENCE":
+	        
+	        "FC_SM_$SM_NB$_START_SEQUENCE"();
+	        

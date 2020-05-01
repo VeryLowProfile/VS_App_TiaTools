@@ -1,0 +1,100 @@
+﻿FUNCTION "FC_SM_Common" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      SMN : Int;
+   END_VAR
+
+
+BEGIN
+	//********************************************************************//
+	//Name: FC_SM_Common
+	//Version: x.x
+	//Description: FC_SM_Common
+	//Developer: Topcast
+	//********************************************************************//
+	
+	//SM Status
+	//********************************************************************//
+	"DB_SM".Sm[#SMN].Status.Status := 0;
+	IF "DB_SM".Sm[#SMN].Status.StepNb = 0 THEN
+	    "DB_SM".Sm[#SMN].Status.Status := "SM_WAIT_START";
+	    "DB_SM".Sm[#SMN].Status.StatusName := 'WAIT START';
+	ELSIF "DB_SM".Sm[#SMN].Status.StepNb < "SM_PAUSE_SEQUENCE" THEN
+	    "DB_SM".Sm[#SMN].Status.Status := "SM_PLAY";
+	    "DB_SM".Sm[#SMN].Status.StatusName := 'PLAY';
+	ELSIF "DB_SM".Sm[#SMN].Status.StepNb = "SM_PAUSE_SEQUENCE" THEN
+	    "DB_SM".Sm[#SMN].Status.Status := "SM_PAUSE";
+	    "DB_SM".Sm[#SMN].Status.StatusName := 'PAUSE';
+	ELSIF "DB_SM".Sm[#SMN].Status.StepNb = "SM_STOP_SEQUENCE" THEN
+	    "DB_SM".Sm[#SMN].Status.Status := "SM_STOP";
+	    "DB_SM".Sm[#SMN].Status.StatusName := 'STOP';
+	ELSIF "DB_SM".Sm[#SMN].Status.StepNb = "SM_RESET_SEQUENCE" THEN
+	    "DB_SM".Sm[#SMN].Status.Status := "SM_RESET";
+	    "DB_SM".Sm[#SMN].Status.StatusName := 'RESET';
+	END_IF;
+	
+	"DB_SM".Sm[#SMN].Status.Busy := 0;
+	IF "DB_SM".Sm[#SMN].Status.StepNb > "SM_WAIT_START" THEN
+	    "DB_SM".Sm[#SMN].Status.Busy := 1;
+	END_IF;
+	
+	//SM Control
+	//********************************************************************//
+	//If SM is in "WAIT START"
+	IF "DB_SM".Sm[#SMN].Status.Status = "SM_WAIT_START" THEN
+	    IF "DB_SM".Sm[#SMN].Command.Start THEN
+	        "DB_SM".Sm[#SMN].Command.Start := 0;
+	        "DB_SM".Sm[#SMN].Status.StepNb := "SM_START_SEQUENCE";
+	        "DB_SM".Sm[#SMN].Status.SubStepNb := 0;
+	    END_IF;
+	END_IF;
+	
+	//Autostart
+	IF "DB_SM".Sm[#SMN].Status.Status = "SM_WAIT_START" THEN
+	    "DB_SM".Sm[#SMN].Command.Start := 1;
+	END_IF;
+	
+	//If SM is in "STOP"
+	IF "DB_SM".Sm[#SMN].Status.Status = "SM_STOP" THEN
+	    IF "DB_SM".Sm[#SMN].Command.Reset THEN
+	        "DB_SM".Sm[#SMN].Command.Reset := 0;
+	        "DB_SM".Sm[#SMN].Status.StepNb := "SM_RESET_SEQUENCE";
+	        //Call Reset Sequence
+	        "FC_SM_Reset_Seq"(#SMN);
+	    END_IF;
+	END_IF;
+	
+	//If SM is in "PAUSE"
+	IF "DB_SM".Sm[#SMN].Status.Status = "SM_PAUSE" THEN
+	    IF "DB_SM".Sm[#SMN].Command.Start THEN
+	        "DB_SM".Sm[#SMN].Command.Start := 0;
+	        "DB_SM".Sm[#SMN].Status.StepNb := "DB_SM".Sm[#SMN].Status.LastStepNb;
+	        "DB_SM".Sm[#SMN].Status.SubStepNb := "DB_SM".Sm[#SMN].Status.LastSubStepNb;
+	    ELSIF
+	        "DB_SM".Sm[#SMN].Command.Stop THEN
+	        "DB_SM".Sm[#SMN].Command.Stop := 0;
+	        "DB_SM".Sm[#SMN].Status.StepNb := "SM_STOP_SEQUENCE";
+	    END_IF;
+	END_IF;
+	
+	//If SM is in "PLAY"
+	IF "DB_SM".Sm[#SMN].Status.Status = "SM_PLAY" THEN
+	    IF "DB_SM".Sm[#SMN].Command.Pause THEN
+	        "DB_SM".Sm[#SMN].Command.Pause := 0;
+	        "DB_SM".Sm[#SMN].Status.LastStepNb := "DB_SM".Sm[#SMN].Status.StepNb;
+	        "DB_SM".Sm[#SMN].Status.LastSubStepNb := "DB_SM".Sm[#SMN].Status.SubStepNb;
+	        "DB_SM".Sm[#SMN].Status.StepNb := "SM_PAUSE_SEQUENCE";
+	        "DB_SM".Sm[#SMN].Status.SubStepNb := 0;
+	        //Call Pause Sequence
+	        "FC_SM_Pause_Seq"(#SMN);
+	    ELSIF "DB_SM".Sm[#SMN].Command.Stop THEN
+	        "DB_SM".Sm[#SMN].Command.Stop := 0;
+	        "DB_SM".Sm[#SMN].Status.StepNb := "SM_STOP_SEQUENCE";
+	        //Call Stop Sequence
+	        "FC_SM_Stop_Seq"(#SMN);
+	    END_IF;
+	END_IF;
+	
+END_FUNCTION
+

@@ -30,10 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormToolsHome));
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.buttonMsq = new System.Windows.Forms.Button();
             this.buttonIO = new System.Windows.Forms.Button();
             this.panelChildForm = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.buttonMsq = new System.Windows.Forms.Button();
+            this.buttonSM = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.panelChildForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -43,6 +44,7 @@
             // 
             this.panelMenu.AutoScroll = true;
             this.panelMenu.BackColor = System.Drawing.Color.Silver;
+            this.panelMenu.Controls.Add(this.buttonSM);
             this.panelMenu.Controls.Add(this.buttonMsq);
             this.panelMenu.Controls.Add(this.buttonIO);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
@@ -50,6 +52,16 @@
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(211, 556);
             this.panelMenu.TabIndex = 0;
+            // 
+            // buttonMsq
+            // 
+            this.buttonMsq.Location = new System.Drawing.Point(13, 63);
+            this.buttonMsq.Name = "buttonMsq";
+            this.buttonMsq.Size = new System.Drawing.Size(181, 23);
+            this.buttonMsq.TabIndex = 1;
+            this.buttonMsq.Text = "Messages";
+            this.buttonMsq.UseVisualStyleBackColor = true;
+            this.buttonMsq.Click += new System.EventHandler(this.buttonMsq_Click);
             // 
             // buttonIO
             // 
@@ -82,15 +94,15 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // buttonMsq
+            // buttonSM
             // 
-            this.buttonMsq.Location = new System.Drawing.Point(13, 63);
-            this.buttonMsq.Name = "buttonMsq";
-            this.buttonMsq.Size = new System.Drawing.Size(181, 23);
-            this.buttonMsq.TabIndex = 1;
-            this.buttonMsq.Text = "Messages";
-            this.buttonMsq.UseVisualStyleBackColor = true;
-            this.buttonMsq.Click += new System.EventHandler(this.buttonMsq_Click);
+            this.buttonSM.Location = new System.Drawing.Point(13, 92);
+            this.buttonSM.Name = "buttonSM";
+            this.buttonSM.Size = new System.Drawing.Size(181, 23);
+            this.buttonSM.TabIndex = 2;
+            this.buttonSM.Text = "State Machines";
+            this.buttonSM.UseVisualStyleBackColor = true;
+            this.buttonSM.Click += new System.EventHandler(this.buttonSM_Click);
             // 
             // FormToolsHome
             // 
@@ -116,6 +128,7 @@
         private System.Windows.Forms.Panel panelChildForm;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button buttonMsq;
+        private System.Windows.Forms.Button buttonSM;
     }
 }
 

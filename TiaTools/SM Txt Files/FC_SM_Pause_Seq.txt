@@ -1,0 +1,18 @@
+﻿FUNCTION "FC_SM_Pause_Seq" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      SMN : Int;
+   END_VAR
+
+
+BEGIN
+	//********************************************************************//
+	//Name: FC_SM_Pause_Seq
+	//Version: x.x
+	//Description: FC_SM_Pause_Seq
+	//Developer: Topcast
+	//********************************************************************//
+	
+	CASE #SMN OF
+
