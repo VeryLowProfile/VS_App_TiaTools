@@ -29,6 +29,7 @@ namespace TiaTools
             dataTable.Columns.Add("Phase Name");
             dataTable.Columns.Add("Phase Nb");
             dataTable.Columns.Add("Create Phase FC");
+            dataTable.Columns.Add("First Step");
 
             //Set DataTable As DataGridView Source
             dataGridViewSM.DataSource = dataTable;
@@ -41,19 +42,32 @@ namespace TiaTools
 
             dataGridViewSM.Columns.Add("Phase Nb", "Phase Nb");
 
-            DataGridViewCheckBoxColumn columnAckReq = new DataGridViewCheckBoxColumn();
-            columnAckReq.Name = "Create Phase FC";
-            columnAckReq.HeaderText = "Create Phase FC";
-            dataGridViewSM.Columns.Add(columnAckReq);
+            DataGridViewComboBoxColumn coloumncreateFC = new DataGridViewComboBoxColumn();
+            coloumncreateFC.Name = "Create Phase FC";
+            coloumncreateFC.HeaderText = "Create Phase FC";
+            coloumncreateFC.Items.Add("True");
+            coloumncreateFC.Items.Add("False");
+            dataGridViewSM.Columns.Add(coloumncreateFC);
+
+            DataGridViewComboBoxColumn columnFstep = new DataGridViewComboBoxColumn();
+            columnFstep.Name = "First Step";
+            columnFstep.HeaderText = "First Step";
+            columnFstep.Items.Add("True");
+            columnFstep.Items.Add("False");
+            dataGridViewSM.Columns.Add(columnFstep);
 
             //Bind new Coloums To DataTable Coloumns
             dataGridViewSM.Columns["Phase Name"].DataPropertyName = dataTable.Columns["Phase Name"].ToString();
             dataGridViewSM.Columns["Phase Nb"].DataPropertyName = dataTable.Columns["Phase Nb"].ToString();
             dataGridViewSM.Columns["Create Phase FC"].DataPropertyName = dataTable.Columns["Create Phase FC"].ToString();
+            dataGridViewSM.Columns["First Step"].DataPropertyName = dataTable.Columns["First Step"].ToString();
         }
 
         private void buttonSelectFile_Click(object sender, EventArgs e)
         {
+            //ClearList
+            comboBoxSheetList.Items.Clear();
+
             //Open file
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Excel Workbook|*.xls; *xlsx";
@@ -103,7 +117,7 @@ namespace TiaTools
                     dataTable = (DataTable)dataGridViewSM.DataSource;
 
                     //Export DataTable To Excel
-                    ExcelDataTable.ExportDataTableToExcel(dataTable, Path.GetFullPath(saveFileDialog.FileName), "Messages");
+                    ExcelDataTable.ExportDataTableToExcel(dataTable, Path.GetFullPath(saveFileDialog.FileName), "SM " + textBoxSMNb.Text);
                 }
             }
         }
@@ -118,7 +132,7 @@ namespace TiaTools
 
             foreach (DataRow row in dataTable.Rows)
             {
-                row["Create Phase FC"] = true;
+                row["Create Phase FC"] = "True";
             }
         }
 
@@ -132,7 +146,7 @@ namespace TiaTools
 
             foreach (DataRow row in dataTable.Rows)
             {
-                row["Create Phase FC"] = false;
+                row["Create Phase FC"] = "False";
             }
         }
 
@@ -143,11 +157,23 @@ namespace TiaTools
             folderBrowserDialog.ShowNewFolderButton = true;
             folderBrowserDialog.RootFolder = Environment.SpecialFolder.MyComputer;
 
+            //some Falgs
+            bool OkToCreateFile;
+
+            //String To Save First Step
+            string firstPhase;
+            
+            //String To Save Autostart
+            string autostart;
+
             //New String To Save Filepath
             string filePath;
             string filePathCommon;
             string filePathDB;
             string filePathSM;
+            string filePhatePhaseFC;
+            string filepathTypes;
+            string filepathHmi;
 
             //New DataTable To Store DataGridView Paramaters
             DataTable dataTable = new DataTable();
@@ -172,7 +198,7 @@ namespace TiaTools
                     else
                     {
                         //Create a New Directory To store New Files
-                        filePathCommon = filePath + @"\Common";
+                        filePathCommon = filePath + @"\CommonFiles";
                         Directory.CreateDirectory(filePathCommon);
 
                         #region FC_SM_Common.scl
@@ -324,7 +350,7 @@ namespace TiaTools
                 }
                 #endregion
 
-                #region DB File
+                #region DB
                 if (checkBoxDB.Checked)
                 {
                     if (textBoxSMTotNb.Text == null || textBoxSMTotNb.Text == "" || textBoxSMTotNb.Text == "0")
@@ -361,7 +387,7 @@ namespace TiaTools
                 }
                 #endregion
 
-                #region SM File
+                #region FC_SM
                 if (checkBoxSMFiles.Checked)
                 {
                     if (textBoxSMNb.Text == null || textBoxSMNb.Text == "" || textBoxSMNb.Text == "0")
@@ -376,34 +402,177 @@ namespace TiaTools
                         }
                         else
                         {
+                            //Null firstStep
+                            firstPhase = null;
+                            OkToCreateFile = true;
+
+                            foreach (DataRow row in dataTable.Rows)
+                            {
+                                if (firstPhase != null)
+                                {
+                                    if (row["First Step"].ToString() == "True")
+                                    {
+                                        MessageBox.Show("More than one First Step Selected");
+                                        OkToCreateFile = false;
+                                    }
+                                }
+                                else
+                                {
+                                    if (row["First Step"].ToString() == "True")
+                                    {
+                                        firstPhase = row["Phase Name"].ToString();
+                                    }
+                                }
+                            }
+
+                            if (firstPhase == null)
+                            {
+                                MessageBox.Show("No First Step Selected");
+                                OkToCreateFile = false;
+                            }
+
+                            if (OkToCreateFile)
+                            {
+                                //Create a New Directory To store New Files
+                                filePathSM = filePath + @"\FC_SM";
+                                Directory.CreateDirectory(filePathSM);
+
+                                //Write File With StreamWriter
+                                StreamWriter FC_SM = new StreamWriter(filePathSM + @"\FC_SM_" + textBoxSMNb.Text + ".scl", false);
+
+                                //Check if Autostart
+                                if (checkBoxAutoStart.Checked)
+                                {
+                                    autostart = "1";
+                                }
+                                else
+                                {
+                                    autostart = "0";
+                                }
+
+                                try
+                                {
+                                    //Write File Begin From Source
+                                    FC_SM.Write(TiaTools.Properties.Resources.FC_SM.Replace("$SM_NAME$", textBoxSMName.Text).Replace("$SM_NB$", textBoxSMNb.Text).Replace("$START_PHASE$", firstPhase).Replace("$AUTOSTART$", autostart));
+
+                                    //Write Steps From Source
+                                    foreach (DataRow row in dataTable.Rows)
+                                    {
+                                        FC_SM.Write(TiaTools.Properties.Resources.FC_SM_Step.Replace("$PHASE_NAME$", row["Phase Name"].ToString()));
+                                        FC_SM.Write("\n");
+                                        FC_SM.Write("\n");
+                                    }
+                                    FC_SM.WriteLine("\t" + "END_CASE;");
+                                    FC_SM.Write("\n");
+                                    FC_SM.WriteLine("END_FUNCTION");
+
+                                    //Close Stream
+                                    FC_SM.Close();
+                                    FC_SM.Dispose();
+                                }
+                                catch (Exception ex)
+                                {
+                                    //display error message
+                                    MessageBox.Show("Exception: " + ex.Message);
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion
+
+                #region FC_SM_X_Phase
+                if (checkBoxPhaseFC.Checked)
+                {
+                    //Create a New Directory To store New Files
+                    filePhatePhaseFC = filePath + @"\FC_Phases";
+                    Directory.CreateDirectory(filePhatePhaseFC);
+
+                    //Write File With StreamWriter
+                    StreamWriter FC_Phases = new StreamWriter(filePhatePhaseFC + @"\FC_Phases" + ".scl", false);
+
+                    //Write Steps From Source
+                    foreach (DataRow row in dataTable.Rows)
+                    { 
+                        if (row["Create Phase FC"].ToString() == "True")
+                        {
+                            FC_Phases.Write(TiaTools.Properties.Resources.FC_SM_Phase.Replace("$SM_NB$", textBoxSMNb.Text).Replace("$PHASE_NAME$", row["Phase Name"].ToString()));
+                            FC_Phases.Write("\n");
+                            FC_Phases.Write("\n");
+                        }
+                    }
+
+                    //Close Stream
+                    FC_Phases.Close();
+                    FC_Phases.Dispose();
+                }
+                #endregion
+
+                #region Types
+                if (checkBoxTypes.Checked)
+                {
+                    //Create a New Directory To store New Files
+                    filepathTypes = filePath + @"\Types";
+                    Directory.CreateDirectory(filepathTypes);
+
+                    //Write File With StreamWriter
+                    StreamWriter types = new StreamWriter(filepathTypes + @"\Types.udt", false);
+
+                    //Write Steps From Source
+                    types.Write(TiaTools.Properties.Resources.SM_Types);
+
+                    //Close Stream
+                    types.Close();
+                    types.Dispose();
+                }
+                #endregion
+
+                #region FC_HMI_SM
+                if (checkBoxHmi.Checked)
+                {
+                    if (textBoxSMNb.Text == null || textBoxSMNb.Text == "" || textBoxSMNb.Text == "0")
+                    {
+                        MessageBox.Show("SM Nb bust be > 0");
+                    }
+                    else
+                    {
+                        if (textBoxSMName.Text == null || textBoxSMName.Text == "")
+                        {
+                            MessageBox.Show("SM Name must not be empty");
+                        }
+                        else
+                        {
                             //Create a New Directory To store New Files
-                            filePathSM = filePath + @"\SM";
-                            Directory.CreateDirectory(filePathSM);
+                            filepathHmi = filePath + @"\Hmi";
+                            Directory.CreateDirectory(filepathHmi);
 
-                            #region FC_SM.db
                             //Write File With StreamWriter
-                            StreamWriter FC_SM = new StreamWriter(filePathSM + @"\FC_SM_" + textBoxSMNb.Text + "scl", false);
+                            StreamWriter FC_Hmi = new StreamWriter(filepathHmi + @"\FC_Hmi_SM_" + textBoxSMName.Text + ".scl", false);
 
-                            try
-                            {
-                                //Write File Begin From Source
-                                FC_SM.Write(TiaTools.Properties.Resources.FC_SM.Replace("$SM_NB$", textBoxSMNb.Text));
+                            //Write File Begin From Source
+                            FC_Hmi.Write(TiaTools.Properties.Resources.FC_SM_Hmi.Replace("$SM_NAME$", textBoxSMName.Text).Replace("$SM_NB$", textBoxSMNb.Text));
 
-                                //Close Stream
-                                FC_SM.Close();
-                                FC_SM.Dispose();
-                            }
-                            catch (Exception ex)
+                            //Write Steps From Source
+                            foreach (DataRow row in dataTable.Rows)
                             {
-                                //display error message
-                                MessageBox.Show("Exception: " + ex.Message);
+                                FC_Hmi.Write(TiaTools.Properties.Resources.FC_SM_Hmi_Step.Replace("$PHASE_NAME$", row["Phase Name"].ToString()));
+                                FC_Hmi.Write("\n");
+                                FC_Hmi.Write("\n");
                             }
-                            #endregion
+
+                            FC_Hmi.WriteLine("\t" + "END_CASE;");
+                            FC_Hmi.Write("\n");
+                            FC_Hmi.WriteLine("END_FUNCTION");
+
+                            //Close Stream
+                            FC_Hmi.Close();
+                            FC_Hmi.Dispose();
                         }
                     }
                 }
                 #endregion
             }
         }
+        #endregion
     }
 }

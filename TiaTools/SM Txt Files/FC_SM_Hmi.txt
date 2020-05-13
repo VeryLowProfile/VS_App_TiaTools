@@ -1,0 +1,44 @@
+﻿FUNCTION "FC_Hmi_SM_$SM_NAME$" : Void
+{ S7_Optimized_Access := 'FALSE' }
+VERSION : 0.1
+   VAR_TEMP 
+      FILL_RET_VAL : Int;
+      FILL_B_VAL : Byte;
+   END_VAR
+
+   VAR CONSTANT 
+      SMN : Int := 1;
+   END_VAR
+
+
+BEGIN
+	//********************************************************************//
+	//Name: FC_Hmi_SM_$SM_NAME$
+	//Version: x.x
+	//Description: SM $SM_NAME$ HMI Management
+	//Developer: Topcast
+	//********************************************************************//
+	
+	CASE "DB_SM".Sm[$SM_NB$].Status.StepNb OF
+	        
+	        //RESET_SEQUENCE
+	        //********************************************************************// 
+	    "SM_RESET_SEQUENCE":
+	        
+	        //HMI Management
+			(*Hmi Logic Here*)
+	        
+	        //PAUSE_SEQUENCE
+	        //********************************************************************// 
+	    "SM_PAUSE_SEQUENCE":
+	        
+	        //HMI Management
+			(*Hmi Logic Here*)
+	        
+	        //STOP_SEQUENCE
+	        //********************************************************************// 
+	    "SM_STOP_SEQUENCE":
+	        
+	        //HMI Management
+			(*Hmi Logic Here*)
+

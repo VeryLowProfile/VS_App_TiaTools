@@ -66,7 +66,7 @@ namespace TiaTools.Properties {
         ///VERSION : 0.1
         ///NON_RETAIN
         ///   STRUCT 
-        ///      Sm : Array[0..$SM_NB$] of &quot;Sm_GEN&quot;;
+        ///      Sm : Array[0..$SM_TOT_NB$] of &quot;Sm_GEN&quot;;
         ///   END_STRUCT;
         ///
         ///BEGIN
@@ -85,7 +85,7 @@ namespace TiaTools.Properties {
         ///VERSION : 0.1
         ///NON_RETAIN
         ///   STRUCT 
-        ///      Sm : Array[0..$SM_NB$] of &quot;Sm_GEN&quot;;
+        ///      Sm : Array[0..$SM_TOT_NB$] of &quot;Sm_GEN&quot;;
         ///   END_STRUCT;
         ///
         ///BEGIN
@@ -111,14 +111,13 @@ namespace TiaTools.Properties {
         ///	//********************************************************************//
         ///	//Name: FC_SM_$SM_NB$
         ///	//Version: x.x
-        ///	//Description: State Machine $SMNb$ ($SM_NAME$)
+        ///	//Description: State Machine $SM_NB$ ($SM_NAME$)
         ///	//Developer: Topcast
         ///	//********************************************************************//
         ///	
         ///	//Init Variables
         ///	//********************************************************************//
-        ///	#SMN := 1;
-        /// [stringa troncata]&quot;;.
+        ///	#SMN := $SM [stringa troncata]&quot;;.
         /// </summary>
         internal static string FC_SM {
             get {
@@ -159,21 +158,64 @@ namespace TiaTools.Properties {
         ///
         ///
         ///BEGIN
-        ///	//********************************************************************//
-        ///	//Name: FC_SM_Common
-        ///	//Version: x.x
-        ///	//Description: FC_SM_Common
-        ///	//Developer: Topcast
-        ///	//********************************************************************//
-        ///	
-        ///	//SM Status
-        ///	//********************************************************************//
-        ///	&quot;DB_SM&quot;.Sm[#SMN].Status.Status := 0;
-        /// [stringa troncata]&quot;;.
+        ///    //********************************************************************//
+        ///    //Name: FC_SM_Common
+        ///    //Version: x.x
+        ///    //Description: FC_SM_Common
+        ///    //Developer: Topcast
+        ///    //********************************************************************//
+        ///
+        ///    //SM Status
+        ///    //********************************************************************//
+        ///    &quot;DB_SM&quot;.Sm[# [stringa troncata]&quot;;.
         /// </summary>
         internal static string FC_SM_Common {
             get {
                 return ResourceManager.GetString("FC_SM_Common", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_SM_Hmi_$SM_NAME$&quot; : Void
+        ///{ S7_Optimized_Access := &apos;FALSE&apos; }
+        ///VERSION : 0.1
+        ///   VAR_TEMP 
+        ///      FILL_RET_VAL : Int;
+        ///      FILL_B_VAL : Byte;
+        ///   END_VAR
+        ///
+        ///   VAR CONSTANT 
+        ///      SMN : Int := 1;
+        ///   END_VAR
+        ///
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FC_SM_Hmi_$SM_NAME$
+        ///	//Version: x.x
+        ///	//Description: $SM_NAME$ HMI Management
+        ///	//Developer: Topcast
+        ///	//********************************************************************//
+        ///	
+        ///	CASE &quot;DB_SM [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string FC_SM_Hmi {
+            get {
+                return ResourceManager.GetString("FC_SM_Hmi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a  	        //&amp;PHASE_NAME&amp;
+        ///	        //********************************************************************// 
+        ///	    &quot;&amp;PHASE_NAME&amp;&quot;:
+        ///	        
+        ///	        //HMI Management
+        ///			(*Hmi Logic Here*).
+        /// </summary>
+        internal static string FC_SM_Hmi_Step {
+            get {
+                return ResourceManager.GetString("FC_SM_Hmi_Step", resourceCulture);
             }
         }
         
@@ -201,6 +243,34 @@ namespace TiaTools.Properties {
         internal static string FC_SM_Pause_Seq {
             get {
                 return ResourceManager.GetString("FC_SM_Pause_Seq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_$PHASE_NAME$&quot; : Void
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FC_$PHASE_NAME$
+        ///	//Version: x.x
+        ///	//Description: FC_$PHASE_NAME$
+        ///	//Developer: Topcast
+        ///	//********************************************************************//
+        ///
+        ///	//Step Name 
+        ///	&quot;DB_SM&quot;.Sm[$SM_NB$].Status.StepName := &apos;$PHASE_NAME$&apos;;
+        ///	
+        ///	//Step Logic
+        ///	(*Add Phase Logic Here*)
+        ///	
+        ///	//Reset Hmi Controls
+        ///	(*Reset Hmi Controls He [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string FC_SM_Phase {
+            get {
+                return ResourceManager.GetString("FC_SM_Phase", resourceCulture);
             }
         }
         
@@ -233,6 +303,19 @@ namespace TiaTools.Properties {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a         //$PHASE_NAME$
+        ///        //********************************************************************// 
+        ///    &quot;$PHASE_NAME$&quot;:
+        ///        
+        ///        &quot;FC_$PHASE_NAME$&quot;();.
+        /// </summary>
+        internal static string FC_SM_Step {
+            get {
+                return ResourceManager.GetString("FC_SM_Step", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_SM_Stop_Seq&quot; : Void
         ///{ S7_Optimized_Access := &apos;TRUE&apos; }
         ///VERSION : 0.1
@@ -257,6 +340,45 @@ namespace TiaTools.Properties {
         internal static string FC_SM_Stop_Seq {
             get {
                 return ResourceManager.GetString("FC_SM_Stop_Seq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a TYPE &quot;Sm_COMMANDS&quot;
+        ///VERSION : 0.1
+        ///   STRUCT
+        ///      Start : Bool;
+        ///      Pause : Bool;
+        ///      Stop : Bool;
+        ///      Reset : Bool;
+        ///      ExecuteResetSeq : Bool;
+        ///      ExecutePauseSeq : Bool;
+        ///      ExecuteStopSeq : Bool;
+        ///   END_STRUCT;
+        ///
+        ///END_TYPE
+        ///
+        ///TYPE &quot;Sm_FLAGS&quot;
+        ///VERSION : 0.1
+        ///   STRUCT
+        ///      Release : Bool;
+        ///   END_STRUCT;
+        ///
+        ///END_TYPE
+        ///
+        ///TYPE &quot;Sm_STATUS&quot;
+        ///VERSION : 0.1
+        ///   STRUCT
+        ///      Busy : Bool;
+        ///      StepName : String;
+        ///      StatusName : String;
+        ///      StepNb : Int;
+        ///      SubStepNb : Int;
+        ///   [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string SM_Types {
+            get {
+                return ResourceManager.GetString("SM_Types", resourceCulture);
             }
         }
     }

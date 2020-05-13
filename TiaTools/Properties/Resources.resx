@@ -133,13 +133,28 @@
   <data name="FC_SM_Common" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sm txt files\fc_sm_common.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="FC_SM_Hmi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sm txt files\fc_sm_hmi.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_SM_Hmi_Step" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sm txt files\fc_sm_hmi_step.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="FC_SM_Pause_Seq" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sm txt files\fc_sm_pause_seq.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_SM_Phase" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sm txt files\fc_sm_phase.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="FC_SM_Reset_Seq" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sm txt files\fc_sm_reset_seq.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="FC_SM_Step" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sm txt files\fc_sm_step.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="FC_SM_Stop_Seq" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sm txt files\fc_sm_stop_seq.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SM_Types" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sm txt files\sm_types.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

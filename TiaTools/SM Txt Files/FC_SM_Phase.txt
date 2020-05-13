@@ -1,0 +1,23 @@
+﻿FUNCTION "FC_$PHASE_NAME$" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	//********************************************************************//
+	//Name: FC_$PHASE_NAME$
+	//Version: x.x
+	//Description: FC_$PHASE_NAME$
+	//Developer: Topcast
+	//********************************************************************//
+
+	//Step Name 
+	"DB_SM".Sm[$SM_NB$].Status.StepName := '$PHASE_NAME$';
+	
+	//Step Logic
+	(*Add Phase Logic Here*)
+	
+	//Reset Hmi Controls
+	(*Reset Hmi Controls Here*)
+
+END_FUNCTION
+

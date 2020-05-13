@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.checkBoxTypes = new System.Windows.Forms.CheckBox();
             this.checkBoxDB = new System.Windows.Forms.CheckBox();
             this.textBoxExportFilePath = new System.Windows.Forms.TextBox();
             this.buttonExportExcel = new System.Windows.Forms.Button();
@@ -53,7 +54,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewSM = new System.Windows.Forms.DataGridView();
-            this.checkBoxTypes = new System.Windows.Forms.CheckBox();
+            this.checkBoxAutoStart = new System.Windows.Forms.CheckBox();
+            this.checkBoxHmi = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSM)).BeginInit();
@@ -61,6 +63,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.checkBoxHmi);
+            this.panel1.Controls.Add(this.checkBoxAutoStart);
             this.panel1.Controls.Add(this.checkBoxTypes);
             this.panel1.Controls.Add(this.checkBoxDB);
             this.panel1.Controls.Add(this.textBoxExportFilePath);
@@ -89,10 +93,20 @@
             this.panel1.Size = new System.Drawing.Size(627, 148);
             this.panel1.TabIndex = 1;
             // 
+            // checkBoxTypes
+            // 
+            this.checkBoxTypes.AutoSize = true;
+            this.checkBoxTypes.Location = new System.Drawing.Point(533, 21);
+            this.checkBoxTypes.Name = "checkBoxTypes";
+            this.checkBoxTypes.Size = new System.Drawing.Size(55, 17);
+            this.checkBoxTypes.TabIndex = 23;
+            this.checkBoxTypes.Text = "Types";
+            this.checkBoxTypes.UseVisualStyleBackColor = true;
+            // 
             // checkBoxDB
             // 
             this.checkBoxDB.AutoSize = true;
-            this.checkBoxDB.Location = new System.Drawing.Point(533, 43);
+            this.checkBoxDB.Location = new System.Drawing.Point(533, 37);
             this.checkBoxDB.Name = "checkBoxDB";
             this.checkBoxDB.Size = new System.Drawing.Size(41, 17);
             this.checkBoxDB.TabIndex = 22;
@@ -139,7 +153,7 @@
             // checkBoxPhaseFC
             // 
             this.checkBoxPhaseFC.AutoSize = true;
-            this.checkBoxPhaseFC.Location = new System.Drawing.Point(533, 75);
+            this.checkBoxPhaseFC.Location = new System.Drawing.Point(533, 69);
             this.checkBoxPhaseFC.Name = "checkBoxPhaseFC";
             this.checkBoxPhaseFC.Size = new System.Drawing.Size(72, 17);
             this.checkBoxPhaseFC.TabIndex = 16;
@@ -149,7 +163,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(329, 77);
+            this.label5.Location = new System.Drawing.Point(329, 87);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(54, 13);
             this.label5.TabIndex = 15;
@@ -157,7 +171,7 @@
             // 
             // textBoxSMName
             // 
-            this.textBoxSMName.Location = new System.Drawing.Point(390, 74);
+            this.textBoxSMName.Location = new System.Drawing.Point(390, 84);
             this.textBoxSMName.Name = "textBoxSMName";
             this.textBoxSMName.Size = new System.Drawing.Size(128, 20);
             this.textBoxSMName.TabIndex = 14;
@@ -165,7 +179,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(329, 51);
+            this.label4.Location = new System.Drawing.Point(329, 61);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 13);
             this.label4.TabIndex = 13;
@@ -173,7 +187,7 @@
             // 
             // textBoxSMTotNb
             // 
-            this.textBoxSMTotNb.Location = new System.Drawing.Point(390, 48);
+            this.textBoxSMTotNb.Location = new System.Drawing.Point(390, 58);
             this.textBoxSMTotNb.Name = "textBoxSMTotNb";
             this.textBoxSMTotNb.Size = new System.Drawing.Size(128, 20);
             this.textBoxSMTotNb.TabIndex = 12;
@@ -181,7 +195,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(329, 25);
+            this.label3.Location = new System.Drawing.Point(329, 35);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 11;
@@ -189,7 +203,7 @@
             // 
             // textBoxSMNb
             // 
-            this.textBoxSMNb.Location = new System.Drawing.Point(390, 22);
+            this.textBoxSMNb.Location = new System.Drawing.Point(390, 32);
             this.textBoxSMNb.Name = "textBoxSMNb";
             this.textBoxSMNb.Size = new System.Drawing.Size(128, 20);
             this.textBoxSMNb.TabIndex = 10;
@@ -197,7 +211,7 @@
             // checkBoxSMFiles
             // 
             this.checkBoxSMFiles.AutoSize = true;
-            this.checkBoxSMFiles.Location = new System.Drawing.Point(533, 59);
+            this.checkBoxSMFiles.Location = new System.Drawing.Point(533, 53);
             this.checkBoxSMFiles.Name = "checkBoxSMFiles";
             this.checkBoxSMFiles.Size = new System.Drawing.Size(66, 17);
             this.checkBoxSMFiles.TabIndex = 9;
@@ -217,7 +231,7 @@
             // checkBoxConstants
             // 
             this.checkBoxConstants.AutoSize = true;
-            this.checkBoxConstants.Location = new System.Drawing.Point(533, 91);
+            this.checkBoxConstants.Location = new System.Drawing.Point(533, 100);
             this.checkBoxConstants.Name = "checkBoxConstants";
             this.checkBoxConstants.Size = new System.Drawing.Size(73, 17);
             this.checkBoxConstants.TabIndex = 6;
@@ -227,7 +241,7 @@
             // checkBoxCommon
             // 
             this.checkBoxCommon.AutoSize = true;
-            this.checkBoxCommon.Location = new System.Drawing.Point(533, 11);
+            this.checkBoxCommon.Location = new System.Drawing.Point(533, 5);
             this.checkBoxCommon.Name = "checkBoxCommon";
             this.checkBoxCommon.Size = new System.Drawing.Size(91, 17);
             this.checkBoxCommon.TabIndex = 5;
@@ -308,15 +322,25 @@
             this.dataGridViewSM.Size = new System.Drawing.Size(627, 388);
             this.dataGridViewSM.TabIndex = 3;
             // 
-            // checkBoxTypes
+            // checkBoxAutoStart
             // 
-            this.checkBoxTypes.AutoSize = true;
-            this.checkBoxTypes.Location = new System.Drawing.Point(533, 27);
-            this.checkBoxTypes.Name = "checkBoxTypes";
-            this.checkBoxTypes.Size = new System.Drawing.Size(55, 17);
-            this.checkBoxTypes.TabIndex = 23;
-            this.checkBoxTypes.Text = "Types";
-            this.checkBoxTypes.UseVisualStyleBackColor = true;
+            this.checkBoxAutoStart.AutoSize = true;
+            this.checkBoxAutoStart.Location = new System.Drawing.Point(390, 9);
+            this.checkBoxAutoStart.Name = "checkBoxAutoStart";
+            this.checkBoxAutoStart.Size = new System.Drawing.Size(67, 17);
+            this.checkBoxAutoStart.TabIndex = 24;
+            this.checkBoxAutoStart.Text = "autostart";
+            this.checkBoxAutoStart.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxHmi
+            // 
+            this.checkBoxHmi.AutoSize = true;
+            this.checkBoxHmi.Location = new System.Drawing.Point(533, 84);
+            this.checkBoxHmi.Name = "checkBoxHmi";
+            this.checkBoxHmi.Size = new System.Drawing.Size(73, 17);
+            this.checkBoxHmi.TabIndex = 25;
+            this.checkBoxHmi.Text = "Hmi Logic";
+            this.checkBoxHmi.UseVisualStyleBackColor = true;
             // 
             // FormStateMachines
             // 
@@ -367,5 +391,7 @@
         private System.Windows.Forms.Button buttonExportExcel;
         private System.Windows.Forms.CheckBox checkBoxDB;
         private System.Windows.Forms.CheckBox checkBoxTypes;
+        private System.Windows.Forms.CheckBox checkBoxAutoStart;
+        private System.Windows.Forms.CheckBox checkBoxHmi;
     }
 }

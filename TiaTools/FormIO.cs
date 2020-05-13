@@ -279,8 +279,11 @@ BEGIN
                             FC_Analog_IN_Config.WriteLine("\"" + completeName + "\"" + ".AnalogIN.Config.LowScaleValue := 0;");
                             FC_Analog_IN_Config.WriteLine("\"" + completeName + "\"" + ".AnalogIN.Config.HighLimit := 0;");
                             FC_Analog_IN_Config.WriteLine("\"" + completeName + "\"" + ".AnalogIN.Config.LowLimit := 0;");
+                            FC_Analog_IN_Config.WriteLine("\"" + completeName + "\"" + ".AnalogIN.Config.CompValue := 0;");
                             FC_Analog_IN_Config.WriteLine("\"" + completeName + "\"" + ".AnalogIN.Config.LimitDelay := T#5S;");
                             FC_Analog_IN_Config.WriteLine("\"" + completeName + "\"" + ".AnalogIN.Config.IsBipolar := 0;");
+                            FC_Analog_IN_Config.WriteLine("\"" + completeName + "\"" + ".AnalogIN.Config.DoNotScale := 0;");
+                            FC_Analog_IN_Config.WriteLine("\"" + completeName + "\"" + ".AnalogIN.Config.AddCompensation := 0;");
                             FC_Analog_IN_Config.WriteLine();
                         }
                     }

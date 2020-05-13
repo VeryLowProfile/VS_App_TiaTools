@@ -10,7 +10,7 @@ BEGIN
 	//********************************************************************//
 	//Name: FC_SM_$SM_NB$
 	//Version: x.x
-	//Description: State Machine $SMNb$ ($SM_NAME$)
+	//Description: State Machine $SM_NB$ ($SM_NAME$)
 	//Developer: Topcast
 	//********************************************************************//
 	
@@ -20,15 +20,11 @@ BEGIN
 	
 	//FC SM Common
 	//********************************************************************//
-	"FC_SM_Common"(#SMN);
+	"FC_SM_Common"(SMN:=#SMN,
+				   StartPhase:= "$START_PHASE$",
+				   Autostart:= $AUTOSTART$);
 	
 	//SM body
 	//********************************************************************//
 	CASE "DB_SM".Sm[#SMN].Status.StepNb OF
-	        
-	        //SM_$SM_NB$_START_SEQUENCE
-	        //********************************************************************// 
-	    "SM_START_SEQUENCE":
-	        
-	        "FC_SM_$SM_NB$_START_SEQUENCE"();
 	        

@@ -1,0 +1,47 @@
+﻿TYPE "Sm_COMMANDS"
+VERSION : 0.1
+   STRUCT
+      Start : Bool;
+      Pause : Bool;
+      Stop : Bool;
+      Reset : Bool;
+      ExecuteResetSeq : Bool;
+      ExecutePauseSeq : Bool;
+      ExecuteStopSeq : Bool;
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "Sm_FLAGS"
+VERSION : 0.1
+   STRUCT
+      Release : Bool;
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "Sm_STATUS"
+VERSION : 0.1
+   STRUCT
+      Busy : Bool;
+      StepName : String;
+      StatusName : String;
+      StepNb : Int;
+      SubStepNb : Int;
+      LastStepNb : Int;
+      LastSubStepNb : Int;
+      Status : Int;
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "Sm_GEN"
+VERSION : 0.1
+   STRUCT
+      Status : "Sm_STATUS";
+      Command : "Sm_COMMANDS";
+      Flags : "Sm_FLAGS";
+   END_STRUCT;
+
+END_TYPE
+
