@@ -93,6 +93,11 @@ namespace TiaTools
             //Set DatagridView source As DataTable From Excel File
             dataGridViewSM.DataSource = ExcelDataTable.ImportExcelToDataTable(textBoxImportFilePath.Text, comboBoxSheetList.SelectedIndex);
             dataGridViewSM.Update();
+
+            //Update State Machine Nunmber Tot Number And Name
+            textBoxSMName.Text = comboBoxSheetList.Text;
+            textBoxSMNb.Text = (comboBoxSheetList.SelectedIndex + 1).ToString();
+            textBoxSMTotNb.Text = comboBoxSheetList.Items.Count.ToString();
         }
 
         private void buttonExportExcel_Click(object sender, EventArgs e)
