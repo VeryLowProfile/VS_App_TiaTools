@@ -13,6 +13,10 @@ BEGIN
 	//Description: FC_SM_Pause_Seq
 	//Developer: Topcast
 	//********************************************************************//
+
+	//UTILIZZO
+	//********************************************************************//
+	//Definire per ogni macchina a stati la sequenza delle operazioni da eseguire nella procedura di pausa
 	
 	CASE #SMN OF
 

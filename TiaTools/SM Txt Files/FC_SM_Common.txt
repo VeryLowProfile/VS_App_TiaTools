@@ -15,6 +15,54 @@ BEGIN
 	    //Description: FC_SM_Common
 	    //Developer: Topcast
 	    //********************************************************************//
+
+		//PARAMETRI
+		//********************************************************************//
+		// SMN: Parametro che indica il numero della macchina a stati a cui si sta facendo riferimento, punta all'elemento dell'array SM[] contenuto all'interno di db_SM.
+		// StartPhase: Parametro che indica il numero della prima fase della macchina a stati, quando la macchina va in play la sequenza inizia dalla fase indicata in questo parametro
+		// Autostart: Se 1 La macchina va in Play automaticamente all'avvio del plc, successivi stop o pause richiedono il play manuale
+    
+		//DESCRIZIONE ED UTILIZZO DEL BLOCCO
+		//********************************************************************//
+		// Questo FC Gestisce il core della macchina a stati ovvero le funzioni da pausa stop e start.
+		// L'FC tramite il parametro SMN che viene passato in ingresso (State Machine Number) punta all'elemento SMN dell'array SM[] contenuto nel Db_SM.
+    
+		// Stati della macchina:
+		// BUSY: Indica che la macchina è in uno stato diverso da WAIT_START, ovvero è in esecuzione in uno qualsiasi degli altri astati
+		// 
+		// WAIT_START: la macchina si trova nello step 0, che è riservato, non si può definire una fase con il numero 0
+		// 
+		// PLAY: La macchina è in PLAY, si trova in una delle fasi scritte dal programmatore, 1 => Step < 100
+		// 
+		// PAUSE: La macchina si trova in PAUSA, questo Stato corrisponde allo step 100 che è riservato, la macchina va in questo stato se
+		// mentre era nello stato di PLAY è stato triggerato il comando di PAUSA, la macchina esce da questo stato e Torna nello stato di
+		// PLAY allo step e substep in cui si trovava quando è stato triggerato il comando di PAUSA, se viene triggerato il comando di START,
+		// la macchina esce da questo stato e va nello stato di STOP se viene triggerato il comando di STOP
+		// 
+		// STOP: La macchina si trova nello stato di STOP, questo step corrisponde allo step 110 che è riservato, la macchina va in questo stato se
+		// mentre era nello stato di PLAY oppure PAUSA è stato triggerato il comando di STOP, dallo stato di stop la macchina esce solo ed esclusivamente
+		// se viene triggerato il comando di RESET
+		// 
+		// RESET: La macchina si trova nello stato di RESET, questo stato corrisponde allo step 120 che è riservato, la macchina esce da questo stato e si porta nello stato
+		// di WAIT_START automaticamente dopo aver eseguito la procedura di RESET, si può accedere a questo stato solo dallo stato di STOP.
+		// 
+		//Procedure di pause, stop, reset
+		//Se la macchina entra nello stato di PAUSE, STOP, o RESET vengono chiamate le rispettive routine.
+		//
+		//Step Riservati
+		//0: WAIT_START
+		//100: PAUSE
+		//110: STOP
+		//120: RESET
+		//
+		//Comandi
+		//I comandi sono accessibili nella struttura Commands, a seguito un esempio di accesso per la macchina a stati numero X, i comandi sono di tipo trigger
+		//non è necessario eseguire il reset del comando.
+		//
+		//Db_SM.Sm[x].Commands.Start := 1; per avviare la macchina
+		//Db_SM.Sm[x].Commands.pause := 1; per mettere in pausa la macchina
+		//Db_SM.Sm[x].Commands.Stop := 1; per mettere in stop la macchina
+		//Db_SM.Sm[x].Commands.Reset := 1; per resettare la macchina
 	    
 	    //SM Status
 	    //********************************************************************//

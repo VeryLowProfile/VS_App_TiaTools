@@ -13,6 +13,17 @@ BEGIN
 	//Description: State Machine $SM_NB$ ($SM_NAME$)
 	//Developer: Topcast
 	//********************************************************************//
+
+	//DESCRIZIONE
+	//********************************************************************//
+	// Questo blocco si occupa di richiamare gli FC degli step a secondo dello step in cui si trova la macchina a stati interessata.
+	// Il blocco è costituito da un FC comune a tutte le macchine a stati FC_Common() (si veda la descrizione all'interno del blocco)
+	// e da una parte non comune dedicata al processo da gestire.
+	// La parte non in comune viene gestita con un CASE che ha come indice lo step attuale della macchina, ogni step
+	// della macchina ha associata una "costante utente" definita nell'apposita tabella delle variabili.
+	// è importante inizializzare il valore di #SMN con il corretto indice della macchina stati attuale in modo che FC_Common possa puntare
+	// all'elemento corretto dell'array Sm[] contenuto in Db_SM.
+	// In ogni voce del CASE viene richiamato un FC che contiene la logica relativa allo step 
 	
 	//Init Variables
 	//********************************************************************//
