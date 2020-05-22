@@ -97,19 +97,19 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -121,7 +121,31 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icons\TiaTools.ico" />
+    <Content Include="IO Txt Files\DB_AI.txt" />
+    <Content Include="IO Txt Files\DB_AO.txt" />
+    <Content Include="IO Txt Files\DB_DI.txt" />
+    <Content Include="IO Txt Files\DB_DO.txt" />
+    <Content Include="IO Txt Files\FB_Analog_IN.txt" />
+    <Content Include="IO Txt Files\FB_Analog_OUT.txt" />
+    <Content Include="IO Txt Files\FB_Digital_IN.txt" />
+    <Content Include="IO Txt Files\FB_Digital_OUT.txt" />
     <Content Include="SM Txt Files\DB_SM.txt" />
+    <Content Include="IO Txt Files\FC_Analog_IN.txt" />
+    <Content Include="IO Txt Files\FC_Analog_IN_Config.txt" />
+    <Content Include="IO Txt Files\FC_Analog_IN_Config_Part.txt" />
+    <Content Include="IO Txt Files\FC_Analog_IN_Part.txt" />
+    <Content Include="IO Txt Files\FC_Analog_OUT.txt" />
+    <Content Include="IO Txt Files\FC_Analog_OUT_Config.txt" />
+    <Content Include="IO Txt Files\FC_Analog_OUT_Config_Part.txt" />
+    <Content Include="IO Txt Files\FC_Analog_OUT_Part.txt" />
+    <Content Include="IO Txt Files\FC_Digital_IN.txt" />
+    <Content Include="IO Txt Files\FC_Digital_IN_Config.txt" />
+    <Content Include="IO Txt Files\FC_Digital_IN_Config_Part.txt" />
+    <Content Include="IO Txt Files\FC_Digital_IN_Part.txt" />
+    <Content Include="IO Txt Files\FC_Digital_OUT.txt" />
+    <Content Include="IO Txt Files\FC_Digital_OUT_Config.txt" />
+    <Content Include="IO Txt Files\FC_Digital_OUT_Config_Part.txt" />
+    <Content Include="IO Txt Files\FC_Digital_OUT_Part.txt" />
     <Content Include="SM Txt Files\FC_SM_Hmi_Step.txt" />
     <Content Include="SM Txt Files\FC_SM_Hmi.txt" />
     <Content Include="SM Txt Files\FC_SM.txt" />
@@ -132,6 +156,7 @@
     <Content Include="SM Txt Files\FC_SM_Reset_Seq.txt" />
     <Content Include="SM Txt Files\FC_SM_Step.txt" />
     <Content Include="SM Txt Files\FC_SM_Stop_Seq.txt" />
+    <Content Include="IO Txt Files\IO_Types.txt" />
     <Content Include="SM Txt Files\SM_Types.txt" />
   </ItemGroup>
   <ItemGroup />

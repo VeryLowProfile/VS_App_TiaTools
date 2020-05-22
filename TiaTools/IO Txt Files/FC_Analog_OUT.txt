@@ -1,0 +1,26 @@
+﻿FUNCTION "FC_Analog_OUT" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	//********************************************************************//
+	//Name: FC_Analog_OUT
+	//Version: x.x
+	//Description: Instances OF FB_Analog_OUT
+	//Developer: Topcast
+	//********************************************************************//
+	
+	//ELESMPIO DI RCHIAMO FB_Analog_OUT
+	//********************************************************************//
+	//Si considera una uscita analogica definito sulla tabella delle variabili PLC come "USCITA_ANALOGICA" al quale può essere assegnata qualsiasi word di uscita, questo non è importante.
+	//Si richiama il blocco FB_Analog_OUT e si genera il db di istanza semplice con nome AI_USCITA_ANALOGICA, il codice PLC prenderà questa Forma:
+	//
+	//"AO_USCITA_ANALOGICA"();
+	//
+	//Tra le parentesi si inserisce il nome della variabile dichiarata sulla tabella delle variabili PLC in questo caso "USCITA_ANALOGICA", il codice prende la seguente forma:
+	//
+	//"AI_USCITA_ANALOGICA"("USCITA_ANALOGICA");
+	//
+	//Il richiamo è adesso completo
+	
+	

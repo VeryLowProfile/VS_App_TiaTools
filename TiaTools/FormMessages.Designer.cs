@@ -31,6 +31,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.labelSMNumber = new System.Windows.Forms.Label();
+            this.textBoxSMNumber = new System.Windows.Forms.TextBox();
+            this.buttonNewTable = new System.Windows.Forms.Button();
             this.checkBoxFCMsgTrigger = new System.Windows.Forms.CheckBox();
             this.checkBoxFBMsgHandler = new System.Windows.Forms.CheckBox();
             this.buttonCreateFiles = new System.Windows.Forms.Button();
@@ -72,6 +75,9 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.labelSMNumber);
+            this.panel2.Controls.Add(this.textBoxSMNumber);
+            this.panel2.Controls.Add(this.buttonNewTable);
             this.panel2.Controls.Add(this.checkBoxFCMsgTrigger);
             this.panel2.Controls.Add(this.checkBoxFBMsgHandler);
             this.panel2.Controls.Add(this.buttonCreateFiles);
@@ -90,10 +96,36 @@
             this.panel2.Size = new System.Drawing.Size(627, 120);
             this.panel2.TabIndex = 1;
             // 
+            // labelSMNumber
+            // 
+            this.labelSMNumber.AutoSize = true;
+            this.labelSMNumber.Location = new System.Drawing.Point(320, 34);
+            this.labelSMNumber.Name = "labelSMNumber";
+            this.labelSMNumber.Size = new System.Drawing.Size(63, 13);
+            this.labelSMNumber.TabIndex = 18;
+            this.labelSMNumber.Text = "SM Number";
+            // 
+            // textBoxSMNumber
+            // 
+            this.textBoxSMNumber.Location = new System.Drawing.Point(318, 50);
+            this.textBoxSMNumber.Name = "textBoxSMNumber";
+            this.textBoxSMNumber.Size = new System.Drawing.Size(150, 20);
+            this.textBoxSMNumber.TabIndex = 17;
+            // 
+            // buttonNewTable
+            // 
+            this.buttonNewTable.Location = new System.Drawing.Point(318, 86);
+            this.buttonNewTable.Name = "buttonNewTable";
+            this.buttonNewTable.Size = new System.Drawing.Size(150, 25);
+            this.buttonNewTable.TabIndex = 16;
+            this.buttonNewTable.Text = "New Table";
+            this.buttonNewTable.UseVisualStyleBackColor = true;
+            this.buttonNewTable.Click += new System.EventHandler(this.buttonNewTable_Click);
+            // 
             // checkBoxFCMsgTrigger
             // 
             this.checkBoxFCMsgTrigger.AutoSize = true;
-            this.checkBoxFCMsgTrigger.Location = new System.Drawing.Point(471, 52);
+            this.checkBoxFCMsgTrigger.Location = new System.Drawing.Point(502, 63);
             this.checkBoxFCMsgTrigger.Name = "checkBoxFCMsgTrigger";
             this.checkBoxFCMsgTrigger.Size = new System.Drawing.Size(104, 17);
             this.checkBoxFCMsgTrigger.TabIndex = 15;
@@ -103,7 +135,7 @@
             // checkBoxFBMsgHandler
             // 
             this.checkBoxFBMsgHandler.AutoSize = true;
-            this.checkBoxFBMsgHandler.Location = new System.Drawing.Point(471, 14);
+            this.checkBoxFBMsgHandler.Location = new System.Drawing.Point(502, 25);
             this.checkBoxFBMsgHandler.Name = "checkBoxFBMsgHandler";
             this.checkBoxFBMsgHandler.Size = new System.Drawing.Size(108, 17);
             this.checkBoxFBMsgHandler.TabIndex = 14;
@@ -112,7 +144,7 @@
             // 
             // buttonCreateFiles
             // 
-            this.buttonCreateFiles.Location = new System.Drawing.Point(397, 85);
+            this.buttonCreateFiles.Location = new System.Drawing.Point(474, 86);
             this.buttonCreateFiles.Name = "buttonCreateFiles";
             this.buttonCreateFiles.Size = new System.Drawing.Size(150, 25);
             this.buttonCreateFiles.TabIndex = 13;
@@ -123,7 +155,7 @@
             // checkBoxFCMsgConfig
             // 
             this.checkBoxFCMsgConfig.AutoSize = true;
-            this.checkBoxFCMsgConfig.Location = new System.Drawing.Point(471, 34);
+            this.checkBoxFCMsgConfig.Location = new System.Drawing.Point(502, 45);
             this.checkBoxFCMsgConfig.Name = "checkBoxFCMsgConfig";
             this.checkBoxFCMsgConfig.Size = new System.Drawing.Size(101, 17);
             this.checkBoxFCMsgConfig.TabIndex = 12;
@@ -133,7 +165,7 @@
             // checkBoxMsgConfig
             // 
             this.checkBoxMsgConfig.AutoSize = true;
-            this.checkBoxMsgConfig.Location = new System.Drawing.Point(386, 14);
+            this.checkBoxMsgConfig.Location = new System.Drawing.Point(502, 6);
             this.checkBoxMsgConfig.Name = "checkBoxMsgConfig";
             this.checkBoxMsgConfig.Size = new System.Drawing.Size(79, 17);
             this.checkBoxMsgConfig.TabIndex = 11;
@@ -142,7 +174,7 @@
             // 
             // textBoxExportFilePath
             // 
-            this.textBoxExportFilePath.Location = new System.Drawing.Point(159, 88);
+            this.textBoxExportFilePath.Location = new System.Drawing.Point(159, 89);
             this.textBoxExportFilePath.Name = "textBoxExportFilePath";
             this.textBoxExportFilePath.Size = new System.Drawing.Size(150, 20);
             this.textBoxExportFilePath.TabIndex = 10;
@@ -219,6 +251,7 @@
             this.dataGridViewMsg.Name = "dataGridViewMsg";
             this.dataGridViewMsg.Size = new System.Drawing.Size(627, 416);
             this.dataGridViewMsg.TabIndex = 0;
+            this.dataGridViewMsg.Click += new System.EventHandler(this.dataGridViewMsg_Click);
             // 
             // FormMessages
             // 
@@ -261,5 +294,8 @@
         private System.Windows.Forms.Button buttonCreateFiles;
         private System.Windows.Forms.CheckBox checkBoxFCMsgConfig;
         private System.Windows.Forms.CheckBox checkBoxMsgConfig;
+        private System.Windows.Forms.Label labelSMNumber;
+        private System.Windows.Forms.TextBox textBoxSMNumber;
+        private System.Windows.Forms.Button buttonNewTable;
     }
 }

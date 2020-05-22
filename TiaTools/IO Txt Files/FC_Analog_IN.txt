@@ -1,0 +1,25 @@
+﻿FUNCTION "FC_Analog_IN" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	//********************************************************************//
+	//Name: FC_Analog_IN
+	//Version: x.x
+	//Description: Instances OF FB_Analog_IN
+	//Developer: Topcast
+	//********************************************************************//
+	
+	//ELESMPIO DI RCHIAMO FB_Analog_IN
+	//********************************************************************//
+	//Si considera un ingresso analogico definito sulla tabella delle variabili PLC come "INGRESSO_ANALOGICO" al quale può essere assegnata qualsiasi word di ingresso, questo non è importante.
+	//Si richiama il blocco FB_Analog_IN e si genera il db di istanza semplice con nome AI_INGRESSO_ANALOGICO, il codice PLC prenderà questa Forma:
+	//
+	//"AI_INGRESSO_ANALOGICO"();
+	//
+	//Tra le parentesi si inserisce il nome della variabile dichiarata sulla tabella delle variabili PLC in questo caso "INGRESSO_ANALOGICO", il codice prende la seguente forma:
+	//
+	//"AI_INGRESSO_ANALOGICO"("INGRESSO_ANALOGICO");
+	//
+	//Il richiamo è adesso completo
+	

@@ -1,0 +1,4 @@
+//DI_$VAR_NAME$
+//********************************************************************//
+"DI_$VAR_NAME$".DigitalIN.Config.Name := $TEXT_NUMBER$;
+"DI_$VAR_NAME$".DigitalIN.Config.DebounceTime := T#0MS;

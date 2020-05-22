@@ -1,0 +1,9 @@
+﻿DATA_BLOCK "AO_$VAR_NAME$"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+"FB_Analog_OUT"
+
+BEGIN
+
+END_DATA_BLOCK

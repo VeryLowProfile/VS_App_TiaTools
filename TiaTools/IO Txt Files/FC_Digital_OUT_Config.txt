@@ -1,0 +1,18 @@
+﻿FUNCTION "FC_Digital_OUT_Config" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	//********************************************************************//
+	//Name: FC_Digital_OUT_Config
+	//Version: x.x
+	//Description: Configuration Digital OUT
+	//Developer: Topcast
+	//********************************************************************//
+	
+	//ESEMPIO DI CONFIGURAZIONE
+	//********************************************************************//
+	// "DO_USCITA_DIGITALE.DigitalOUT.Config.Name := 2220;  Indice Dell'elenco testi per visualizzazione nome variabile su HMI
+	// "DO_USCITA_DIGITALE".DigitalOUT.Config.OFFDelay := T#0MS; Tempo di ritardo sull'azionamento
+	// "DO_USCITA_DIGITALE".DigitalOUT.Config.OnDelay := T#0MS; Tempo di ritardo sul rilascio
+	

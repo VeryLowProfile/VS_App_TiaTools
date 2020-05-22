@@ -118,11 +118,83 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="DB_AI" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\db_ai.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="DB_AO" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\db_ao.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="DB_DI" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\db_di.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="DB_DO" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\db_do.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="DB_SM" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sm txt files\db_sm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="DB_SM1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sm txt files\db_sm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FB_Analog_IN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fb_analog_in.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FB_Analog_OUT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fb_analog_out.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FB_Digital_IN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fb_digital_in.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FB_Digital_OUT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fb_digital_out.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Analog_IN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fc_analog_in.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Analog_IN_Config" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fc_analog_in_config.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Analog_IN_Config_Part" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fc_analog_in_config_part.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="FC_Analog_IN_Part" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fc_analog_in_part.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="FC_Analog_OUT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fc_analog_out.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Analog_OUT_Config" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fc_analog_out_config.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Analog_OUT_Config_Part" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fc_analog_out_config_part.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="FC_Analog_OUT_Part" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fc_analog_out_part.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="FC_Digital_IN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fc_digital_in.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Digital_IN_Config" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fc_digital_in_config.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Digital_IN_Config_Part" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fc_digital_in_config_part.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="FC_Digital_IN_Part" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fc_digital_in_part.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="FC_Digital_OUT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fc_digital_out.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Digital_OUT_Config" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fc_digital_out_config.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Digital_OUT_Config_Part" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fc_digital_out_config_part.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="FC_Digital_OUT_Part" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\fc_digital_out_part.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="FC_SM" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sm txt files\fc_sm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
@@ -153,6 +225,9 @@
   </data>
   <data name="FC_SM_Stop_Seq" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sm txt files\fc_sm_stop_seq.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IO_Types" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\io txt files\io_types.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="SM_Types" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sm txt files\sm_types.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

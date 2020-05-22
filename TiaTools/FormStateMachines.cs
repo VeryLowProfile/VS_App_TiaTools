@@ -89,7 +89,7 @@ namespace TiaTools
         }
 
         private void buttonImport_Click(object sender, EventArgs e)
-        {
+        { 
             //Set DatagridView source As DataTable From Excel File
             dataGridViewSM.DataSource = ExcelDataTable.ImportExcelToDataTable(textBoxImportFilePath.Text, comboBoxSheetList.SelectedIndex);
             dataGridViewSM.Update();
@@ -517,18 +517,18 @@ namespace TiaTools
                 if (checkBoxTypes.Checked)
                 {
                     //Create a New Directory To store New Files
-                    filepathTypes = filePath + @"\Types";
+                    filepathTypes = filePath + @"\SM_Types";
                     Directory.CreateDirectory(filepathTypes);
 
                     //Write File With StreamWriter
-                    StreamWriter types = new StreamWriter(filepathTypes + @"\Types.udt", false);
+                    StreamWriter SM_types = new StreamWriter(filepathTypes + @"\SM_Types.udt", false);
 
-                    //Write Steps From Source
-                    types.Write(TiaTools.Properties.Resources.SM_Types);
+                    //Write From Source
+                    SM_types.Write(TiaTools.Properties.Resources.SM_Types);
 
                     //Close Stream
-                    types.Close();
-                    types.Dispose();
+                    SM_types.Close();
+                    SM_types.Dispose();
                 }
                 #endregion
 

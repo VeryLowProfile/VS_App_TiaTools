@@ -1,0 +1,21 @@
+﻿FUNCTION "FC_Analog_OUT_Config" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	//********************************************************************//
+	//Name: FC_Analog_OUT_Config
+	//Version: x.x
+	//Description: Configuration Analog OUT
+	//Developer: Topcast
+	//********************************************************************//
+	
+	//ESEMPIO DI CONFIGURAZIONE
+	//********************************************************************//
+	// "AO_USCITA_ANALOGICA.AnalogOUT.Config.Name := 4226; Indice Dell'elenco testi per visualizzazione nome variabile su HMI
+	// "AO_USCITA_ANALOGICA".AnalogOUT.Config.MUnit := 0; Indice dell'elenco testi per visualizare unità di misura su HMI
+	// "AO_USCITA_ANALOGICA".AnalogOUT.Config.HighUnscaleLimit := 0; Valore di processo che deve corrispondere al massimo valore raggiungibile dall'uscita analogica (se per esempio si vuole controllare un'uscita come percentuale questo valore sarà 100, in caso di controllo in tensione corrisponderà a 10V in caso di corrente a 20mA)
+	// "AO_USCITA_ANALOGICA".AnalogOUT.Config.LowUnscaleLimit := 0; Valore di processo che deve corrispondere al minimo valore raggiungibile dall'uscita analogica (se per esempio si vuole controllare un'uscita come percentuale questo valore sarà 0, in caso di controllo in tensione corrisponderà a 0V in caso di corrente a 4mA)
+	// "AO_USCITA_ANALOGICA".AnalogOUT.Config.IsBipolar := 0; Se 1 allora Si presume che il valore nel parametro IN sia bipolare e si collochi in un campo di valori compreso tra -27648 e 27648
+	
+	

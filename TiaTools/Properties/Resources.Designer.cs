@@ -61,6 +61,78 @@ namespace TiaTools.Properties {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a DATA_BLOCK &quot;AI_$VAR_NAME$&quot;
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///NON_RETAIN
+        ///&quot;FB_Analog_IN&quot;
+        ///
+        ///BEGIN
+        ///
+        ///END_DATA_BLOCK
+        ///.
+        /// </summary>
+        internal static string DB_AI {
+            get {
+                return ResourceManager.GetString("DB_AI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a DATA_BLOCK &quot;AO_$VAR_NAME$&quot;
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///NON_RETAIN
+        ///&quot;FB_Analog_OUT&quot;
+        ///
+        ///BEGIN
+        ///
+        ///END_DATA_BLOCK
+        ///.
+        /// </summary>
+        internal static string DB_AO {
+            get {
+                return ResourceManager.GetString("DB_AO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a DATA_BLOCK &quot;DI_$VAR_NAME$&quot;
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///NON_RETAIN
+        ///&quot;FB_Digital_IN&quot;
+        ///
+        ///BEGIN
+        ///
+        ///END_DATA_BLOCK
+        ///.
+        /// </summary>
+        internal static string DB_DI {
+            get {
+                return ResourceManager.GetString("DB_DI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a DATA_BLOCK &quot;DO_$VAR_NAME$&quot;
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///NON_RETAIN
+        ///&quot;FB_Digital_OUT&quot;
+        ///
+        ///BEGIN
+        ///
+        ///END_DATA_BLOCK
+        ///.
+        /// </summary>
+        internal static string DB_DO {
+            get {
+                return ResourceManager.GetString("DB_DO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a DATA_BLOCK &quot;DB_SM&quot;
         ///{ S7_Optimized_Access := &apos;FALSE&apos; }
         ///VERSION : 0.1
@@ -99,6 +171,404 @@ namespace TiaTools.Properties {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION_BLOCK &quot;FB_Analog_IN&quot;
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///   VAR_INPUT 
+        ///      Signal : Int;
+        ///   END_VAR
+        ///
+        ///   VAR 
+        ///      AnalogIN : &quot;Analog_IN&quot;;
+        ///      T_HighLimit {InstructionName := &apos;TON_TIME&apos;; LibVersion := &apos;1.0&apos;} : TON_TIME;
+        ///      T_LowLimit {InstructionName := &apos;TON_TIME&apos;; LibVersion := &apos;1.0&apos;} : TON_TIME;
+        ///      SCALE_RET_VAL : Word;
+        ///   END_VAR
+        ///
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FB_Analog_IN
+        ///	//Version: 0.1
+        ///	//Desc [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string FB_Analog_IN {
+            get {
+                return ResourceManager.GetString("FB_Analog_IN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION_BLOCK &quot;FB_Analog_OUT&quot;
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///   VAR_OUTPUT 
+        ///      Signal : Int;
+        ///   END_VAR
+        ///
+        ///   VAR 
+        ///      AnalogOUT : &quot;Analog_OUT&quot;;
+        ///      CommandResult : Real;
+        ///      UNSCALE_RET_VAL : Word;
+        ///   END_VAR
+        ///
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FB_Analog_OUT
+        ///	//Version: 0.1
+        ///	//Description: Analogic OUT Management
+        ///	//Developer: Topcast
+        ///	//********************************************************************//        /// [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string FB_Analog_OUT {
+            get {
+                return ResourceManager.GetString("FB_Analog_OUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION_BLOCK &quot;FB_Digital_IN&quot;
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///   VAR_INPUT 
+        ///      Signal : Bool;
+        ///   END_VAR
+        ///
+        ///   VAR 
+        ///      DigitalIN : &quot;Digital_IN&quot;;
+        ///      R_DigitalIN {InstructionName := &apos;R_TRIG&apos;; LibVersion := &apos;1.0&apos;} : R_TRIG;
+        ///      F_DigitalIN {InstructionName := &apos;F_TRIG&apos;; LibVersion := &apos;1.0&apos;} : F_TRIG;
+        ///      T_Debounce {InstructionName := &apos;TON_TIME&apos;; LibVersion := &apos;1.0&apos;} : TON_TIME;
+        ///   END_VAR
+        ///
+        ///
+        ///BEGIN
+        ///	//******************************************************************** [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string FB_Digital_IN {
+            get {
+                return ResourceManager.GetString("FB_Digital_IN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION_BLOCK &quot;FB_Digital_OUT&quot;
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///   VAR_OUTPUT 
+        ///      Signal : Bool;
+        ///   END_VAR
+        ///
+        ///   VAR 
+        ///      DigitalOUT : &quot;Digital_OUT&quot;;
+        ///      T_OnDelay {InstructionName := &apos;TON_TIME&apos;; LibVersion := &apos;1.0&apos;} : TON_TIME;
+        ///      T_OffDelay {InstructionName := &apos;TOF_TIME&apos;; LibVersion := &apos;1.0&apos;} : TOF_TIME;
+        ///      R_DigitalOUT {InstructionName := &apos;R_TRIG&apos;; LibVersion := &apos;1.0&apos;} : R_TRIG;
+        ///      F_DigitalOUT {InstructionName := &apos;F_TRIG&apos;; LibVersion := &apos;1.0&apos;} : F_TRIG;
+        ///       [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string FB_Digital_OUT {
+            get {
+                return ResourceManager.GetString("FB_Digital_OUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_Analog_IN&quot; : Void
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FC_Analog_IN
+        ///	//Version: x.x
+        ///	//Description: Instances OF FB_Analog_IN
+        ///	//Developer: Topcast
+        ///	//********************************************************************//
+        ///	
+        ///	//ELESMPIO DI RCHIAMO FB_Analog_IN
+        ///	//********************************************************************//
+        ///	//Si considera un ingresso analogico definito sul [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string FC_Analog_IN {
+            get {
+                return ResourceManager.GetString("FC_Analog_IN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_Analog_IN_Config&quot; : Void
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FC_Analog_IN_Config
+        ///	//Version: x.x
+        ///	//Description: Configuration Analog IN
+        ///	//Developer: Topcast
+        ///	//********************************************************************//
+        ///	
+        ///	//ESEMPIO DI CONFIGURAZIONE 
+        ///	//********************************************************************//
+        ///	// &quot;AI_INGRESSO_ANALOGICO&quot;.AnalogIN.Config. [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string FC_Analog_IN_Config {
+            get {
+                return ResourceManager.GetString("FC_Analog_IN_Config", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a //AI_$VAR_NAME$
+        /////********************************************************************//
+        ///&quot;AI_$VAR_NAME$&quot;.AnalogIN.Config.Name := $TEXT_NUMBER$;
+        ///&quot;AI_$VAR_NAME$&quot;.AnalogIN.Config.MUnit := 0;
+        ///&quot;AI_$VAR_NAME$&quot;.AnalogIN.Config.HighScaleValue := 0;
+        ///&quot;AI_$VAR_NAME$&quot;.AnalogIN.Config.LowScaleValue := 0;
+        ///&quot;AI_$VAR_NAME$&quot;.AnalogIN.Config.HighLimit := 0;
+        ///&quot;AI_$VAR_NAME$&quot;.AnalogIN.Config.LowLimit := 0;
+        ///&quot;AI_$VAR_NAME$&quot;.AnalogIN.Config.CompValue := 0;
+        ///&quot;AI_$VAR_NAME$&quot;.AnalogIN.Config.LimitDelay := T#5S;
+        ///&quot;AI_$VAR_NAME$ [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string FC_Analog_IN_Config_Part {
+            get {
+                return ResourceManager.GetString("FC_Analog_IN_Config_Part", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a //AI_$VAR_NAME$
+        /////********************************************************************//
+        ///&quot;AI_$VAR_NAME$&quot;(&quot;$VAR_NAME$&quot;);
+        ///.
+        /// </summary>
+        internal static string FC_Analog_IN_Part {
+            get {
+                return ResourceManager.GetString("FC_Analog_IN_Part", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_Analog_OUT&quot; : Void
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FC_Analog_OUT
+        ///	//Version: x.x
+        ///	//Description: Instances OF FB_Analog_OUT
+        ///	//Developer: Topcast
+        ///	//********************************************************************//
+        ///	
+        ///	//ELESMPIO DI RCHIAMO FB_Analog_OUT
+        ///	//********************************************************************//
+        ///	//Si considera una uscita analogica definito  [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string FC_Analog_OUT {
+            get {
+                return ResourceManager.GetString("FC_Analog_OUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_Analog_OUT_Config&quot; : Void
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FC_Analog_OUT_Config
+        ///	//Version: x.x
+        ///	//Description: Configuration Analog OUT
+        ///	//Developer: Topcast
+        ///	//********************************************************************//
+        ///	
+        ///	//ESEMPIO DI CONFIGURAZIONE
+        ///	//********************************************************************//
+        ///	// &quot;AO_USCITA_ANALOGICA.AnalogOUT.Config. [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string FC_Analog_OUT_Config {
+            get {
+                return ResourceManager.GetString("FC_Analog_OUT_Config", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a //AO_$VAR_NAME$
+        /////********************************************************************//
+        ///&quot;AO_$VAR_NAME$&quot;.AnalogOUT.Config.Name := $TEXT_NUMBER$;
+        ///&quot;AO_$VAR_NAME$&quot;.AnalogOUT.Config.MUnit := 0;
+        ///&quot;AO_$VAR_NAME$&quot;.AnalogOUT.Config.HighUnscaleLimit := 0;
+        ///&quot;AO_$VAR_NAME$&quot;.AnalogOUT.Config.LowUnscaleLimit := 0;
+        ///&quot;AO_$VAR_NAME$&quot;.AnalogOUT.Config.IsBipolar := 0;
+        ///.
+        /// </summary>
+        internal static string FC_Analog_OUT_Config_Part {
+            get {
+                return ResourceManager.GetString("FC_Analog_OUT_Config_Part", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a //AO_$VAR_NAME$
+        /////********************************************************************//
+        ///&quot;AO_$VAR_NAME$&quot;(&quot;$VAR_NAME$&quot;);
+        ///.
+        /// </summary>
+        internal static string FC_Analog_OUT_Part {
+            get {
+                return ResourceManager.GetString("FC_Analog_OUT_Part", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_Digital_IN&quot; : Void
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FC_Digital_IN
+        ///	//Version: x.x
+        ///	//Description: Instances OF FB_Digital_In
+        ///	//Developer: Topcast
+        ///	//********************************************************************//
+        ///	
+        ///	//ELESMPIO DI RCHIAMO FB_Digital_IN
+        ///	//********************************************************************//
+        ///	//Si considera un ingresso digitale definito  [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string FC_Digital_IN {
+            get {
+                return ResourceManager.GetString("FC_Digital_IN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_Digital_IN_Config&quot; : Void
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FC_Digital_IN_Config
+        ///	//Version: x.x
+        ///	//Description: Configuration Digital IN
+        ///	//Developer: Topcast
+        ///	//********************************************************************//
+        ///	
+        ///	//ESEMPIO DI CONFIGURAZIONE
+        ///	//********************************************************************//
+        ///	//&quot;DI_INGRESSO_DIGITALE&quot;.DigitalIN.Config [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string FC_Digital_IN_Config {
+            get {
+                return ResourceManager.GetString("FC_Digital_IN_Config", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a //DI_$VAR_NAME$
+        /////********************************************************************//
+        ///&quot;DI_$VAR_NAME$&quot;.DigitalIN.Config.Name := $TEXT_NUMBER$;
+        ///&quot;DI_$VAR_NAME$&quot;.DigitalIN.Config.DebounceTime := T#0MS;
+        ///.
+        /// </summary>
+        internal static string FC_Digital_IN_Config_Part {
+            get {
+                return ResourceManager.GetString("FC_Digital_IN_Config_Part", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a //DI_$VAR_NAME$
+        /////********************************************************************//
+        ///&quot;DI_$VAR_NAME$&quot;(&quot;$VAR_NAME$&quot;);
+        ///.
+        /// </summary>
+        internal static string FC_Digital_IN_Part {
+            get {
+                return ResourceManager.GetString("FC_Digital_IN_Part", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_Digital_OUT&quot; : Void
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FC_Digital_OUT
+        ///	//Version: x.x
+        ///	//Description: Instances OF FB_Digital_OUT
+        ///	//Developer: Topcast
+        ///	//********************************************************************//
+        ///	
+        ///	//ELESMPIO DI RCHIAMO FB_Digital_OUT
+        ///	//********************************************************************//
+        ///	//Si considera una uscita digitale defini [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string FC_Digital_OUT {
+            get {
+                return ResourceManager.GetString("FC_Digital_OUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_Digital_OUT_Config&quot; : Void
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FC_Digital_OUT_Config
+        ///	//Version: x.x
+        ///	//Description: Configuration Digital OUT
+        ///	//Developer: Topcast
+        ///	//********************************************************************//
+        ///	
+        ///	//ESEMPIO DI CONFIGURAZIONE
+        ///	//********************************************************************//
+        ///	// &quot;DO_USCITA_DIGITALE.DigitalOUT.Conf [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string FC_Digital_OUT_Config {
+            get {
+                return ResourceManager.GetString("FC_Digital_OUT_Config", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a //DO_$VAR_NAME$
+        /////********************************************************************//
+        ///&quot;DO_$VAR_NAME$&quot;.DigitalOUT.Config.Name := $TEXT_NUMBER$;
+        ///&quot;DO_$VAR_NAME$&quot;.DigitalOUT.Config.OFFDelay := T#0MS;
+        ///&quot;DO_$VAR_NAME$&quot;.DigitalOUT.Config.OnDelay := T#0MS;
+        ///.
+        /// </summary>
+        internal static string FC_Digital_OUT_Config_Part {
+            get {
+                return ResourceManager.GetString("FC_Digital_OUT_Config_Part", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a //DO_$VAR_NAME$
+        /////********************************************************************//
+        ///&quot;DO_$VAR_NAME$&quot;(&quot;$VAR_NAME$&quot;);
+        ///.
+        /// </summary>
+        internal static string FC_Digital_OUT_Part {
+            get {
+                return ResourceManager.GetString("FC_Digital_OUT_Part", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_SM_$SM_NB$&quot; : Void
         ///{ S7_Optimized_Access := &apos;TRUE&apos; }
         ///VERSION : 0.1
@@ -114,10 +584,10 @@ namespace TiaTools.Properties {
         ///	//Description: State Machine $SM_NB$ ($SM_NAME$)
         ///	//Developer: Topcast
         ///	//********************************************************************//
-        ///	
-        ///	//Init Variables
+        ///
+        ///	//DESCRIZIONE
         ///	//********************************************************************//
-        ///	#SMN := $SM [stringa troncata]&quot;;.
+        ///	// Questo blocc [stringa troncata]&quot;;.
         /// </summary>
         internal static string FC_SM {
             get {
@@ -154,20 +624,21 @@ namespace TiaTools.Properties {
         ///VERSION : 0.1
         ///   VAR_INPUT 
         ///      SMN : Int;
+        ///      StartPhase : Int;
+        ///      Autostart : Bool;
         ///   END_VAR
         ///
         ///
         ///BEGIN
-        ///    //********************************************************************//
-        ///    //Name: FC_SM_Common
-        ///    //Version: x.x
-        ///    //Description: FC_SM_Common
-        ///    //Developer: Topcast
-        ///    //********************************************************************//
+        ///	    //********************************************************************//
+        ///	    //Name: FC_SM_Common
+        ///	    //Version: x.x
+        ///	    //Description: FC_SM_Common
+        ///	    //Developer: Topcast
+        ///	    //********************************************************************//
         ///
-        ///    //SM Status
-        ///    //********************************************************************//
-        ///    &quot;DB_SM&quot;.Sm[# [stringa troncata]&quot;;.
+        ///		//PARAMETRI
+        ///		//************************************ [stringa troncata]&quot;;.
         /// </summary>
         internal static string FC_SM_Common {
             get {
@@ -176,7 +647,7 @@ namespace TiaTools.Properties {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_SM_Hmi_$SM_NAME$&quot; : Void
+        ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_Hmi_SM_$SM_NAME$&quot; : Void
         ///{ S7_Optimized_Access := &apos;FALSE&apos; }
         ///VERSION : 0.1
         ///   VAR_TEMP 
@@ -191,13 +662,13 @@ namespace TiaTools.Properties {
         ///
         ///BEGIN
         ///	//********************************************************************//
-        ///	//Name: FC_SM_Hmi_$SM_NAME$
+        ///	//Name: FC_Hmi_SM_$SM_NAME$
         ///	//Version: x.x
-        ///	//Description: $SM_NAME$ HMI Management
+        ///	//Description: SM $SM_NAME$ HMI Management
         ///	//Developer: Topcast
         ///	//********************************************************************//
         ///	
-        ///	CASE &quot;DB_SM [stringa troncata]&quot;;.
+        ///	CASE &quot;DB [stringa troncata]&quot;;.
         /// </summary>
         internal static string FC_SM_Hmi {
             get {
@@ -206,10 +677,11 @@ namespace TiaTools.Properties {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a  	        //&amp;PHASE_NAME&amp;
+        ///   Cerca una stringa localizzata simile a  	        //$PHASE_NAME$
         ///	        //********************************************************************// 
-        ///	    &quot;&amp;PHASE_NAME&amp;&quot;:
+        ///	    &quot;$PHASE_NAME$&quot;:
         ///	        
+        ///			;
         ///	        //HMI Management
         ///			(*Hmi Logic Here*).
         /// </summary>
@@ -235,10 +707,10 @@ namespace TiaTools.Properties {
         ///	//Description: FC_SM_Pause_Seq
         ///	//Developer: Topcast
         ///	//********************************************************************//
-        ///	
-        ///	CASE #SMN OF
         ///
-        ///.
+        ///	//UTILIZZO
+        ///	//********************************************************************//
+        ///	//Definire per ogni macchina a  [stringa troncata]&quot;;.
         /// </summary>
         internal static string FC_SM_Pause_Seq {
             get {
@@ -291,10 +763,9 @@ namespace TiaTools.Properties {
         ///	//Developer: Topcast
         ///	//********************************************************************//
         ///	
-        ///	CASE #SMN OF
-        ///
-        ///
-        ///.
+        ///	//UTILIZZO
+        ///	//********************************************************************//
+        ///	//Definire per ogni macchina  [stringa troncata]&quot;;.
         /// </summary>
         internal static string FC_SM_Reset_Seq {
             get {
@@ -332,10 +803,9 @@ namespace TiaTools.Properties {
         ///	//Developer: Topcast
         ///	//********************************************************************//
         ///	
-        ///	CASE #SMN OF
-        ///
-        ///
-        ///.
+        ///	//UTILIZZO
+        ///	//********************************************************************//
+        ///	//Definire per ogni macchina a st [stringa troncata]&quot;;.
         /// </summary>
         internal static string FC_SM_Stop_Seq {
             get {
@@ -344,16 +814,36 @@ namespace TiaTools.Properties {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a TYPE &quot;Analog_IN_ALARM&quot;
+        ///VERSION : 0.1
+        ///   STRUCT
+        ///      LowLimitExceeded : Bool;   // Allarme Limite inferiore superato
+        ///      HighLimitExceeded : Bool;   // Allarme Limite superiore superato
+        ///   END_STRUCT;
+        ///
+        ///END_TYPE
+        ///
+        ///TYPE &quot;Analog_IN_CONFIG&quot;
+        ///VERSION : 0.1
+        ///   STRUCT
+        ///      &quot;Name&quot; : Int;   // Indice della voce dell&apos;elenco testi che visualizza il nome della I/O su Hmi 
+        ///      MUnit : Int;   // Indice della voce dell&apos;elenco testi che visualizza il nome l&apos;unità di misura su Hmi
+        ///      HighLimit : Real;    [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string IO_Types {
+            get {
+                return ResourceManager.GetString("IO_Types", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a TYPE &quot;Sm_COMMANDS&quot;
         ///VERSION : 0.1
         ///   STRUCT
-        ///      Start : Bool;
-        ///      Pause : Bool;
-        ///      Stop : Bool;
-        ///      Reset : Bool;
-        ///      ExecuteResetSeq : Bool;
-        ///      ExecutePauseSeq : Bool;
-        ///      ExecuteStopSeq : Bool;
+        ///      Start : Bool;   // Trigger che mette in play la macchina a stati
+        ///      Pause : Bool;   // Trigger che mette in pausa la macchina a stati
+        ///      Stop : Bool;   // Trigger che mette in pausa la macchina a stati
+        ///      Reset : Bool;   // Trigger che resetta la macchina a stati
         ///   END_STRUCT;
         ///
         ///END_TYPE
@@ -361,20 +851,7 @@ namespace TiaTools.Properties {
         ///TYPE &quot;Sm_FLAGS&quot;
         ///VERSION : 0.1
         ///   STRUCT
-        ///      Release : Bool;
-        ///   END_STRUCT;
-        ///
-        ///END_TYPE
-        ///
-        ///TYPE &quot;Sm_STATUS&quot;
-        ///VERSION : 0.1
-        ///   STRUCT
-        ///      Busy : Bool;
-        ///      StepName : String;
-        ///      StatusName : String;
-        ///      StepNb : Int;
-        ///      SubStepNb : Int;
-        ///   [stringa troncata]&quot;;.
+        ///      Release : Bool;   // Flag da utilizzare nel primo step della macchina a stati, si utilizza per interpola [stringa troncata]&quot;;.
         /// </summary>
         internal static string SM_Types {
             get {

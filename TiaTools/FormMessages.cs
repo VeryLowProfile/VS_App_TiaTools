@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Data;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Drawing;
 
 namespace TiaTools
 {
@@ -18,9 +19,16 @@ namespace TiaTools
 
         #endregion
 
-        #region Events
+       #region Events
 
         private void FormMessages_Load(object sender, EventArgs e)
+        {
+
+            //SM Number Default Value
+            textBoxSMNumber.Text = 6.ToString();
+        }
+
+        private void buttonNewTable_Click(object sender, EventArgs e)
         {
             //Create new DataTable
             DataTable dataTable = new DataTable();
@@ -39,132 +47,22 @@ namespace TiaTools
             dataTable.Columns.Add("Info Text td");
             dataTable.Columns.Add("Info Text sp");
             dataTable.Columns.Add("Ack Req");
-            dataTable.Columns.Add("Msg Reaction SM 1");
-            dataTable.Columns.Add("Msg Reaction SM 2");
-            dataTable.Columns.Add("Msg Reaction SM 3");
-            dataTable.Columns.Add("Msg Reaction SM 4");
-            dataTable.Columns.Add("Msg Reaction SM 5");
-            dataTable.Columns.Add("Msg Reaction SM 6");
+            for (int i = 1; i <= Int32.Parse(textBoxSMNumber.Text); i++)
+            {
+                dataTable.Columns.Add("Msg Reaction SM " + i.ToString());
+            }
             dataTable.Columns.Add("Msg Store For All");
 
-            //Set DataTable As DataGridView Source
-            dataGridViewMsg.DataSource = dataTable;
+            //Update DataGridView Structure
+            SetDatGridViewSMCol(dataGridViewMsg, dataTable);
 
-            //Clear Coloumn On DatagridView
-            dataGridViewMsg.Columns.Clear();
-
-            //Add Same Coloumns To DataGridView but of a different Type
-            dataGridViewMsg.Columns.Add("Nb", "Nb");
-
-            dataGridViewMsg.Columns.Add("Device", "Device");
-
-            dataGridViewMsg.Columns.Add("Msg Text it", "Msg Text it");
-
-            dataGridViewMsg.Columns.Add("Msg Text en", "Msg Text en");
-
-            dataGridViewMsg.Columns.Add("Msg Text fr", "Msg Text fr");
-
-            dataGridViewMsg.Columns.Add("Msg Text td", "Msg Text td");
-
-            dataGridViewMsg.Columns.Add("Msg Text sp", "Msg Text sp");
-
-            dataGridViewMsg.Columns.Add("Info Text it", "Info Text it");
-
-            dataGridViewMsg.Columns.Add("Info Text en", "Info Text en");
-
-            dataGridViewMsg.Columns.Add("Info Text fr", "Info Text fr");
-
-            dataGridViewMsg.Columns.Add("Info Text td", "Info Text td");
-
-            dataGridViewMsg.Columns.Add("Info Text sp", "Info Text sp");
-
-            DataGridViewComboBoxColumn columnAckReq = new DataGridViewComboBoxColumn();
-            columnAckReq.Name = "Ack Req";
-            columnAckReq.HeaderText = "Ack Req";
-            columnAckReq.Items.Add("True");
-            columnAckReq.Items.Add("False");
-            dataGridViewMsg.Columns.Add(columnAckReq);
-
-            DataGridViewComboBoxColumn columnReactionSM1 = new DataGridViewComboBoxColumn();
-            columnReactionSM1.Name = "Msg Reaction SM 1";
-            columnReactionSM1.HeaderText = "Msg Reaction SM 1";
-            columnReactionSM1.Items.Add("NONE");
-            columnReactionSM1.Items.Add("PAUSE");
-            columnReactionSM1.Items.Add("HALT");
-            dataGridViewMsg.Columns.Add(columnReactionSM1);
-
-            DataGridViewComboBoxColumn columnReactionSM2 = new DataGridViewComboBoxColumn();
-            columnReactionSM2.Name = "Msg Reaction SM 2";
-            columnReactionSM2.HeaderText = "Msg Reaction SM 2";
-            columnReactionSM2.Items.Add("NONE");
-            columnReactionSM2.Items.Add("PAUSE");
-            columnReactionSM2.Items.Add("HALT");
-            dataGridViewMsg.Columns.Add(columnReactionSM2);
-
-            DataGridViewComboBoxColumn columnReactionSM3 = new DataGridViewComboBoxColumn();
-            columnReactionSM3.Name = "Msg Reaction SM 3";
-            columnReactionSM3.HeaderText = "Msg Reaction SM 3";
-            columnReactionSM3.Items.Add("NONE");
-            columnReactionSM3.Items.Add("PAUSE");
-            columnReactionSM3.Items.Add("HALT");
-            dataGridViewMsg.Columns.Add(columnReactionSM3);
-
-            DataGridViewComboBoxColumn columnReactionSM4 = new DataGridViewComboBoxColumn();
-            columnReactionSM4.Name = "Msg Reaction SM 4";
-            columnReactionSM4.HeaderText = "Msg Reaction SM 4";
-            columnReactionSM4.Items.Add("NONE");
-            columnReactionSM4.Items.Add("PAUSE");
-            columnReactionSM4.Items.Add("HALT");
-            dataGridViewMsg.Columns.Add(columnReactionSM4);
-
-            DataGridViewComboBoxColumn columnReactionSM5 = new DataGridViewComboBoxColumn();
-            columnReactionSM5.Name = "Msg Reaction SM 5";
-            columnReactionSM5.HeaderText = "Msg Reaction SM 5";
-            columnReactionSM5.Items.Add("NONE");
-            columnReactionSM5.Items.Add("PAUSE");
-            columnReactionSM5.Items.Add("HALT");
-            dataGridViewMsg.Columns.Add(columnReactionSM5);
-
-            DataGridViewComboBoxColumn columnReactionSM6 = new DataGridViewComboBoxColumn();
-            columnReactionSM6.Name = "Msg Reaction SM 6";
-            columnReactionSM6.HeaderText = "Msg Reaction SM 6";
-            columnReactionSM6.Items.Add("NONE");
-            columnReactionSM6.Items.Add("PAUSE");
-            columnReactionSM6.Items.Add("HALT");
-            dataGridViewMsg.Columns.Add(columnReactionSM6);
-
-            DataGridViewComboBoxColumn columnStoreAll = new DataGridViewComboBoxColumn();
-            columnStoreAll.Name = "Msg Store For All";
-            columnStoreAll.HeaderText = "Msg Store For All";
-            columnStoreAll.Items.Add("True");
-            columnStoreAll.Items.Add("False");
-            dataGridViewMsg.Columns.Add(columnStoreAll);
-
-            //Bind new Coloums To DataTable Coloumns
-            dataGridViewMsg.Columns["Nb"].DataPropertyName = dataTable.Columns["Nb"].ToString();
-            dataGridViewMsg.Columns["Device"].DataPropertyName = dataTable.Columns["Device"].ToString();
-            dataGridViewMsg.Columns["Msg Text it"].DataPropertyName = dataTable.Columns["Msg Text it"].ToString();
-            dataGridViewMsg.Columns["Msg Text en"].DataPropertyName = dataTable.Columns["Msg Text en"].ToString();
-            dataGridViewMsg.Columns["Msg Text fr"].DataPropertyName = dataTable.Columns["Msg Text fr"].ToString();
-            dataGridViewMsg.Columns["Msg Text td"].DataPropertyName = dataTable.Columns["Msg Text td"].ToString();
-            dataGridViewMsg.Columns["Msg Text sp"].DataPropertyName = dataTable.Columns["Msg Text sp"].ToString();
-            dataGridViewMsg.Columns["Info Text it"].DataPropertyName = dataTable.Columns["Info Text it"].ToString();
-            dataGridViewMsg.Columns["Info Text en"].DataPropertyName = dataTable.Columns["Info Text en"].ToString();
-            dataGridViewMsg.Columns["Info Text fr"].DataPropertyName = dataTable.Columns["Info Text fr"].ToString();
-            dataGridViewMsg.Columns["Info Text td"].DataPropertyName = dataTable.Columns["Info Text td"].ToString();
-            dataGridViewMsg.Columns["Info Text sp"].DataPropertyName = dataTable.Columns["Info Text sp"].ToString();
-            dataGridViewMsg.Columns["Ack Req"].DataPropertyName = dataTable.Columns["Ack Req"].ToString();
-            dataGridViewMsg.Columns["Msg Reaction SM 1"].DataPropertyName = dataTable.Columns["Msg Reaction SM 1"].ToString();
-            dataGridViewMsg.Columns["Msg Reaction SM 2"].DataPropertyName = dataTable.Columns["Msg Reaction SM 2"].ToString();
-            dataGridViewMsg.Columns["Msg Reaction SM 3"].DataPropertyName = dataTable.Columns["Msg Reaction SM 3"].ToString();
-            dataGridViewMsg.Columns["Msg Reaction SM 4"].DataPropertyName = dataTable.Columns["Msg Reaction SM 4"].ToString();
-            dataGridViewMsg.Columns["Msg Reaction SM 5"].DataPropertyName = dataTable.Columns["Msg Reaction SM 5"].ToString();
-            dataGridViewMsg.Columns["Msg Reaction SM 6"].DataPropertyName = dataTable.Columns["Msg Reaction SM 6"].ToString();
-            dataGridViewMsg.Columns["Msg Store For All"].DataPropertyName = dataTable.Columns["Msg Store For All"].ToString();
         }
 
         private void buttonSelectFile_Click(object sender, EventArgs e)
         {
+            //Clear comboBox
+            comboBoxSheetList.Items.Clear();
+
             //Open file
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Excel Workbook|*.xls; *xlsx";
@@ -187,36 +85,43 @@ namespace TiaTools
 
         private void buttonImport_Click(object sender, EventArgs e)
         {
-            //Set DatagridView source As DataTable From Excel File
-            dataGridViewMsg.DataSource = ExcelDataTable.ImportExcelToDataTable(textBoxImportFilePath.Text, comboBoxSheetList.SelectedIndex);
-            dataGridViewMsg.Update();
+            //hide New Table Buttons and TextBox
+            buttonNewTable.Hide();
+            labelSMNumber.Hide();
+            textBoxSMNumber.Hide();
+
+            //Update DataGridView Structure
+            SetDatGridViewSMCol(dataGridViewMsg, ExcelDataTable.ImportExcelToDataTable(textBoxImportFilePath.Text, comboBoxSheetList.SelectedIndex));
         }
 
         private void buttonExportExcel_Click(object sender, EventArgs e)
         {
+            //Prompt Savefiledialog
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Excel Workbook|*xlsx";
+            saveFileDialog.Title = "Export";
+            saveFileDialog.InitialDirectory = @"C:\";
+            saveFileDialog.FileName = @"Messages" + "_" + DateTime.Now.ToString().Replace("/", "_").Replace(" ", "_").Replace(":", "_");
+
+            textBoxExportFilePath.Text = Path.GetFullPath(saveFileDialog.FileName);
+            textBoxExportFilePath.Update();
+
+            if (saveFileDialog.FileName != "" && saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                //Prompt Savefiledialog
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "Excel Workbook|*xlsx";
-                saveFileDialog.Title = "Export";
-                saveFileDialog.InitialDirectory = @"C:\";
-                saveFileDialog.FileName = @"Messages" + "_" + DateTime.Now.ToString().Replace("/", "_").Replace(" ", "_").Replace(":", "_");
+                //New DataTable
+                DataTable dataTable = new DataTable();
 
-                textBoxExportFilePath.Text = Path.GetFullPath(saveFileDialog.FileName);
-                textBoxExportFilePath.Update();
+                //Fill DataTable With Datasource To Datatable Casting
+                dataTable = (DataTable)dataGridViewMsg.DataSource;
 
-                if (saveFileDialog.FileName != "" && saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    //New DataTable
-                    DataTable dataTable = new DataTable();
-
-                    //Fill DataTable With Datasource To Datatable Casting
-                    dataTable = (DataTable)dataGridViewMsg.DataSource;
-
-                    //Export DataTable To Excel
-                    ExcelDataTable.ExportDataTableToExcel(dataTable, Path.GetFullPath(saveFileDialog.FileName), "Messages");
-                }
+                //Export DataTable To Excel
+                ExcelDataTable.ExportDataTableToExcel(dataTable, Path.GetFullPath(saveFileDialog.FileName), "Messages");
             }
+
+            //show New Table Buttons and TextBox
+            buttonNewTable.Show();
+            labelSMNumber.Show();
+            textBoxSMNumber.Show();
         }
 
         private void buttonCreateFiles_Click(object sender, EventArgs e)
@@ -460,7 +365,103 @@ BEGIN");
                 }
                 #endregion
             }
-            #endregion
         }
+
+        private void dataGridViewMsg_Click(object sender, EventArgs e)
+        {
+            //hide New Table Buttons and TextBox
+            buttonNewTable.Hide();
+            labelSMNumber.Hide();
+            textBoxSMNumber.Hide();
+        }
+
+        #endregion
+
+        #region Metods
+
+        public static void SetDatGridViewSMCol(DataGridView dataGridView, DataTable dataTable)
+        {
+            int SMColNb = 0;
+
+            //Number of SM Coloumns in DataTable
+            foreach (DataColumn column in dataTable.Columns)
+            {
+                if (column.ColumnName.Contains("Msg Reaction SM "))
+                {
+                    SMColNb++;
+                }
+            }
+
+            //Set DataTable As DataGridView Source
+            dataGridView.DataSource = dataTable;
+
+            //Clear Coloumn On DatagridView
+            dataGridView.Columns.Clear();
+
+            //Add Same Coloumns To DataGridView but of a different Type
+            dataGridView.Columns.Add("Nb", "Nb");
+            dataGridView.Columns.Add("Device", "Device");
+            dataGridView.Columns.Add("Msg Text it", "Msg Text it");
+            dataGridView.Columns.Add("Msg Text en", "Msg Text en");
+            dataGridView.Columns.Add("Msg Text fr", "Msg Text fr");
+            dataGridView.Columns.Add("Msg Text td", "Msg Text td");
+            dataGridView.Columns.Add("Msg Text sp", "Msg Text sp");
+            dataGridView.Columns.Add("Info Text it", "Info Text it");
+            dataGridView.Columns.Add("Info Text en", "Info Text en");
+            dataGridView.Columns.Add("Info Text fr", "Info Text fr");
+            dataGridView.Columns.Add("Info Text td", "Info Text td");
+            dataGridView.Columns.Add("Info Text sp", "Info Text sp");
+
+            DataGridViewComboBoxColumn columnAckReq = new DataGridViewComboBoxColumn();
+            columnAckReq.Name = "Ack Req";
+            columnAckReq.HeaderText = "Ack Req";
+            columnAckReq.Items.Add("True");
+            columnAckReq.Items.Add("False");
+            dataGridView.Columns.Add(columnAckReq);
+
+            for (int i = 1; i <= SMColNb; i++)
+            {
+                string colName = "Msg Reaction SM " + i.ToString();
+                DataGridViewComboBoxColumn columnReaction = new DataGridViewComboBoxColumn();
+                columnReaction.Name = colName;
+                columnReaction.HeaderText = colName;
+                columnReaction.Items.Add("NONE");
+                columnReaction.Items.Add("PAUSE");
+                columnReaction.Items.Add("HALT");
+                dataGridView.Columns.Add(columnReaction);
+            }
+
+            DataGridViewComboBoxColumn columnStoreAll = new DataGridViewComboBoxColumn();
+            columnStoreAll.Name = "Msg Store For All";
+            columnStoreAll.HeaderText = "Msg Store For All";
+            columnStoreAll.Items.Add("True");
+            columnStoreAll.Items.Add("False");
+            dataGridView.Columns.Add(columnStoreAll);
+
+            //Bind new Coloums To DataTable Coloumns
+            dataGridView.Columns["Nb"].DataPropertyName = dataTable.Columns["Nb"].ToString();
+            dataGridView.Columns["Device"].DataPropertyName = dataTable.Columns["Device"].ToString();
+            dataGridView.Columns["Msg Text it"].DataPropertyName = dataTable.Columns["Msg Text it"].ToString();
+            dataGridView.Columns["Msg Text en"].DataPropertyName = dataTable.Columns["Msg Text en"].ToString();
+            dataGridView.Columns["Msg Text fr"].DataPropertyName = dataTable.Columns["Msg Text fr"].ToString();
+            dataGridView.Columns["Msg Text td"].DataPropertyName = dataTable.Columns["Msg Text td"].ToString();
+            dataGridView.Columns["Msg Text sp"].DataPropertyName = dataTable.Columns["Msg Text sp"].ToString();
+            dataGridView.Columns["Info Text it"].DataPropertyName = dataTable.Columns["Info Text it"].ToString();
+            dataGridView.Columns["Info Text en"].DataPropertyName = dataTable.Columns["Info Text en"].ToString();
+            dataGridView.Columns["Info Text fr"].DataPropertyName = dataTable.Columns["Info Text fr"].ToString();
+            dataGridView.Columns["Info Text td"].DataPropertyName = dataTable.Columns["Info Text td"].ToString();
+            dataGridView.Columns["Info Text sp"].DataPropertyName = dataTable.Columns["Info Text sp"].ToString();
+            dataGridView.Columns["Ack Req"].DataPropertyName = dataTable.Columns["Ack Req"].ToString();
+            for (int i = 1; i <= SMColNb; i++)
+            {
+                dataGridView.Columns["Msg Reaction SM " + i.ToString()].DataPropertyName = dataTable.Columns["Msg Reaction SM " + i.ToString()].ToString();
+            }
+            dataGridView.Columns["Msg Store For All"].DataPropertyName = dataTable.Columns["Msg Store For All"].ToString();
+
+            dataGridView.Update();
+        }
+
+        #endregion
+
     }
 }

@@ -1,0 +1,25 @@
+﻿FUNCTION "FC_Digital_OUT" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	//********************************************************************//
+	//Name: FC_Digital_OUT
+	//Version: x.x
+	//Description: Instances OF FB_Digital_OUT
+	//Developer: Topcast
+	//********************************************************************//
+	
+	//ELESMPIO DI RCHIAMO FB_Digital_OUT
+	//********************************************************************//
+	//Si considera una uscita digitale definito sulla tabella delle variabili PLC come "USCITA_DIGITALE" al quale può essere assegnata qualsiasi bit di uscita, questo non è importante.
+	//Si richiama il blocco FB_Digital_OUT e si genera il db di istanza semplice con nome DI_USCITA_DIGITALE, il codice PLC prenderà questa Forma:
+	//
+	//"DI_USCITA_DIGITALE"();
+	//
+	//Tra le parentesi si inserisce il nome della variabile dichiarata sulla tabella delle variabili PLC in questo caso "USCITA_DIGITALE", il codice prende la seguente forma:
+	//
+	//"DI_USCITA_DIGITALE"("USCITA_DIGITALE");
+	//
+	//Il richiamo è adesso completo
+	

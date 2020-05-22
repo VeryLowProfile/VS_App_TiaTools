@@ -1,0 +1,69 @@
+﻿FUNCTION_BLOCK "FB_Analog_OUT"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_OUTPUT 
+      Signal : Int;
+   END_VAR
+
+   VAR 
+      AnalogOUT : "Analog_OUT";
+      CommandResult : Real;
+      UNSCALE_RET_VAL : Word;
+   END_VAR
+
+
+BEGIN
+	//********************************************************************//
+	//Name: FB_Analog_OUT
+	//Version: 0.1
+	//Description: Analogic OUT Management
+	//Developer: Topcast
+	//********************************************************************//
+	
+	//PARAMETRI
+	//********************************************************************//
+	//Signal: Word di uscite di tipo "int" dichiarata sulla tabella delle variabili PLC
+	
+	//ESEMPIO DI UTILIZZO
+	//********************************************************************//
+	//Dopo aver richiamato correttamente il blocco ed avere eseguito la configurazione si può accedere alla varei funzioni nel seguente modo.
+	//Si fa riferimento alla variabile di esempio "USCITA_ANALOGICA" usata negli esempi precedenti
+	//
+	//Impostazione del valore di uscita
+	//AO_USCITA_ANALOGICA.AnalogOUT.Command := Valore che si desidera assegnare all'uscita (questo valore deve essere di tipo "Real", se il valore assegnato è oltre i limiti impostati in configurazione questo verrà arrotondato al valore massimo o minimo a seconda dei casi)
+	
+	//Command Result
+	//********************************************************************//
+	IF #AnalogOUT.Hmi.Manual THEN
+	    #CommandResult := #AnalogOUT.Hmi.Command;
+	ELSE
+	    #CommandResult := #AnalogOUT.Command;
+	    #AnalogOUT.Hmi.Command := #AnalogOUT.Command;
+	END_IF;
+	
+	//Command Limit
+	//********************************************************************//
+	IF #CommandResult > #AnalogOUT.Config.HighUnscaleLimit THEN
+	    #CommandResult := #AnalogOUT.Config.HighUnscaleLimit;
+	END_IF;
+	
+	IF #CommandResult < #AnalogOUT.Config.LowUnscaleLimit THEN
+	    #CommandResult := #AnalogOUT.Config.LowUnscaleLimit;
+	END_IF;
+	
+	//Output
+	//********************************************************************//
+	#UNSCALE_RET_VAL := UNSCALE(IN := #CommandResult,
+	                            HI_LIM := #AnalogOUT.Config.LowUnscaleLimit,
+	                            LO_LIM := #AnalogOUT.Config.HighUnscaleLimit,
+	                            BIPOLAR := #AnalogOUT.Config.IsBipolar,
+	                            OUT => #Signal);
+	
+	//Hmi
+	//********************************************************************//
+	#AnalogOUT.Hmi.Name := #AnalogOUT.Config.Name;
+	#AnalogOUT.Hmi.MUnit := #AnalogOUT.Config.MUnit;
+	#AnalogOUT.Hmi.Value := #Signal;
+	
+END_FUNCTION_BLOCK
+

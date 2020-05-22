@@ -1,0 +1,7 @@
+//AO_$VAR_NAME$
+//********************************************************************//
+"AO_$VAR_NAME$".AnalogOUT.Config.Name := $TEXT_NUMBER$;
+"AO_$VAR_NAME$".AnalogOUT.Config.MUnit := 0;
+"AO_$VAR_NAME$".AnalogOUT.Config.HighUnscaleLimit := 0;
+"AO_$VAR_NAME$".AnalogOUT.Config.LowUnscaleLimit := 0;
+"AO_$VAR_NAME$".AnalogOUT.Config.IsBipolar := 0;

@@ -1,0 +1,78 @@
+﻿FUNCTION_BLOCK "FB_Analog_IN"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      Signal : Int;
+   END_VAR
+
+   VAR 
+      AnalogIN : "Analog_IN";
+      T_HighLimit {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      T_LowLimit {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      SCALE_RET_VAL : Word;
+   END_VAR
+
+
+BEGIN
+	//********************************************************************//
+	//Name: FB_Analog_IN
+	//Version: 0.1
+	//Description: Analogic IN Management
+	//Developer: Topcast
+	//********************************************************************//
+	
+	//PARAMETRI
+	//********************************************************************//
+	//Signal: Word di ingresso di tipo "int" dichiarata sulla tabella delle variabili PLC
+	
+	//ESEMPIO DI UTILIZZO
+	//********************************************************************//
+	//Dopo aver richiamato correttamente il blocco ed avere eseguito la configurazione si può accedere alla varei funzioni nel seguente modo.
+	//Si fa riferimento alla variabile di esempio "INGRESSO_ANALOGICO" usata negli esempi precedenti
+	//
+	//Lettura del valore
+	//MyValue := AI_INGRESSO_ANALOGICO.AnalogIN.Value
+	//
+	//Allarmi
+	// MyAlarm1 := "AI_INGRESSO_ANALOGICO".AnalogIN.Alarm.HighLimitExceeded;
+	// MyAlarm2 := "AI_INGRESSO_ANALOGICO".AnalogIN.Alarm.LowLimitExceeded;
+	
+	//Value
+	//********************************************************************//
+	IF NOT #AnalogIN.Config.DoNotScale THEN
+	    #SCALE_RET_VAL := SCALE(IN := #Signal,
+	                            HI_LIM := #AnalogIN.Config.HighScaleValue,
+	                            LO_LIM := #AnalogIN.Config.LowScaleValue,
+	                            BIPOLAR := #AnalogIN.Config.IsBipolar,
+	                            OUT => #AnalogIN.Value);
+	ELSE
+	    #AnalogIN.Value := #Signal;
+	END_IF;
+	
+	IF #AnalogIN.Config.AddCompensation THEN
+	    #AnalogIN.Value := #AnalogIN.Value + #AnalogIN.Config.CompValue;
+	END_IF;
+	
+	//Limit Delay
+	//********************************************************************//
+	#T_HighLimit(IN := #AnalogIN.Value > #AnalogIN.Config.HighLimit,
+	             PT := #AnalogIN.Config.LimitDelay);
+	
+	#T_LowLimit(IN := #AnalogIN.Value < #AnalogIN.Config.LowLimit,
+	            PT := #AnalogIN.Config.LimitDelay);
+	
+	//Alarms
+	//********************************************************************//
+	IF #AnalogIN.Config.EnableAlarm THEN
+	    #AnalogIN.Alarm.HighLimitExceeded := #T_HighLimit.Q;
+	    #AnalogIN.Alarm.LowLimitExceeded := #T_LowLimit.Q;
+	END_IF;
+	
+	//Hmi
+	//********************************************************************//
+	#AnalogIN.Hmi.Name := #AnalogIN.Config.Name;
+	#AnalogIN.Hmi.MUnit := #AnalogIN.Config.MUnit;
+	#AnalogIN.Hmi.Value := #AnalogIN.Value;
+	#AnalogIN.Hmi.Alarm := #AnalogIN.Alarm.HighLimitExceeded OR #AnalogIN.Alarm.LowLimitExceeded;
+END_FUNCTION_BLOCK
+
