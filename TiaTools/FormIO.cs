@@ -101,6 +101,7 @@ namespace TiaTools
                         if (row["Logical Address"].ToString().Contains("I") && !row["Logical Address"].ToString().Contains("W"))
                         {
                             FC_Digital_IN.Write(TiaTools.Properties.Resources.FC_Digital_IN_Part.Replace("$VAR_NAME$", row["Name"].ToString()));
+                            FC_Digital_IN.Write("\n");
                         }
                     }
                     FC_Digital_IN.Write("END_FUNCTION");
@@ -137,6 +138,7 @@ namespace TiaTools
                         {
                             string textNumber = row["Logical Address"].ToString().Replace("%", "").Replace("I", "").Replace("W", "").Replace("Q", "").Replace(".", "").Insert(0, "1");
                             FC_Digital_IN_Config.Write(TiaTools.Properties.Resources.FC_Digital_IN_Config_Part.Replace("$TEXT_NUMBER$", textNumber).Replace("$VAR_NAME$", row["Name"].ToString()));
+                            FC_Digital_IN_Config.Write("\n");
                         }
                     }
                     FC_Digital_IN_Config.Write("END_FUNCTION");
@@ -165,6 +167,7 @@ namespace TiaTools
                         if (row["Logical Address"].ToString().Contains("I") && row["Logical Address"].ToString().Contains("W"))
                         {
                             FC_Analog_IN.Write(TiaTools.Properties.Resources.FC_Analog_IN_Part.Replace("$VAR_NAME$", row["Name"].ToString()));
+                            FC_Analog_IN.Write("\n");
                         }
                     }
                     FC_Analog_IN.Write("END_FUNCTION");
@@ -201,6 +204,7 @@ namespace TiaTools
                         {
                             string textNumber = row["Logical Address"].ToString().Replace("%", "").Replace("I", "").Replace("W", "").Replace("Q", "").Replace(".", "").Insert(0, "3");
                             FC_Analog_IN_Config.Write(TiaTools.Properties.Resources.FC_Analog_IN_Config_Part.Replace("$TEXT_NUMBER$", textNumber).Replace("$VAR_NAME$", row["Name"].ToString()));
+                            FC_Analog_IN_Config.Write("\n");
                         }
                     }
                     FC_Analog_IN_Config.Write("END_FUNCTION");
@@ -229,6 +233,7 @@ namespace TiaTools
                         if (row["Logical Address"].ToString().Contains("Q") && !row["Logical Address"].ToString().Contains("W"))
                         {
                             FC_Digital_OUT.Write(TiaTools.Properties.Resources.FC_Digital_OUT_Part.Replace("$VAR_NAME$", row["Name"].ToString()));
+                            FC_Digital_OUT.Write("\n");
                         }
                     }
                     FC_Digital_OUT.Write("END_FUNCTION");
@@ -265,6 +270,7 @@ namespace TiaTools
                         {
                             string textNumber = row["Logical Address"].ToString().Replace("%", "").Replace("I", "").Replace("W", "").Replace("Q", "").Replace(".", "").Insert(0, "2");
                             FC_Digital_OUT_Config.Write(TiaTools.Properties.Resources.FC_Digital_OUT_Config_Part.Replace("$TEXT_NUMBER$", textNumber).Replace("$VAR_NAME$", row["Name"].ToString()));
+                            FC_Digital_OUT_Config.Write("\n");
                         }
                     }
                     FC_Digital_OUT_Config.Write("END_FUNCTION");
@@ -293,6 +299,7 @@ namespace TiaTools
                         if (row["Logical Address"].ToString().Contains("Q") && row["Logical Address"].ToString().Contains("W"))
                         {
                             FC_Analog_OUT.Write(TiaTools.Properties.Resources.FC_Analog_OUT_Part.Replace("$VAR_NAME$", row["Name"].ToString()));
+                            FC_Analog_OUT.Write("\n");
                         }
                     }
                     FC_Analog_OUT.Write("END_FUNCTION");
@@ -329,6 +336,7 @@ namespace TiaTools
                         {
                             string textNumber = row["Logical Address"].ToString().Replace("%", "").Replace("I", "").Replace("W", "").Replace("Q", "").Replace(".", "").Insert(0, "4");
                             FC_Analog_OUT_Config.Write(TiaTools.Properties.Resources.FC_Analog_OUT_Config_Part.Replace("$TEXT_NUMBER$", textNumber).Replace("$VAR_NAME$", row["Name"].ToString()));
+                            FC_Analog_OUT_Config.Write("\n");
                         }
                     }
                     FC_Analog_OUT_Config.Write("END_FUNCTION");
@@ -345,7 +353,7 @@ namespace TiaTools
                     Directory.CreateDirectory(filePathTypes);
 
                     //New Stream For FC_Analog_OUT
-                    StreamWriter IO_Types = new StreamWriter(filePathAOUT + @"\IO_Types.udt", false);
+                    StreamWriter IO_Types = new StreamWriter(filePathTypes + @"\IO_Types.udt", false);
 
 
                     //Write From Source
@@ -361,19 +369,19 @@ namespace TiaTools
                 if (checkBoxFB.Checked)
                 {
                     //Create Directory
-                    Directory.CreateDirectory(filePathTypes);
+                    Directory.CreateDirectory(filePathFB);
 
                     //New Stream For FC_Analog_OUT
-                    StreamWriter FB_Analog_IN = new StreamWriter(filePathAOUT + @"\FB_Analog_IN.scl", false);
-                    StreamWriter FB_Digital_IN = new StreamWriter(filePathAOUT + @"\FB_Digital_IN.scl", false);
-                    StreamWriter FB_Analog_OUT = new StreamWriter(filePathAOUT + @"\FB_Analog_OUT.scl", false);
-                    StreamWriter FB_Digital_OUT = new StreamWriter(filePathAOUT + @"\FB_Digital_OUT.scl", false);
+                    StreamWriter FB_Analog_IN = new StreamWriter(filePathFB + @"\FB_Analog_IN.scl", false);
+                    StreamWriter FB_Digital_IN = new StreamWriter(filePathFB + @"\FB_Digital_IN.scl", false);
+                    StreamWriter FB_Analog_OUT = new StreamWriter(filePathFB + @"\FB_Analog_OUT.scl", false);
+                    StreamWriter FB_Digital_OUT = new StreamWriter(filePathFB + @"\FB_Digital_OUT.scl", false);
 
                     //Write From Source
                     FB_Analog_IN.Write(TiaTools.Properties.Resources.FB_Analog_IN);
-                    FB_Analog_IN.Write(TiaTools.Properties.Resources.FB_Digital_IN);
-                    FB_Analog_IN.Write(TiaTools.Properties.Resources.FB_Analog_OUT);
-                    FB_Analog_IN.Write(TiaTools.Properties.Resources.FB_Digital_OUT);
+                    FB_Digital_IN.Write(TiaTools.Properties.Resources.FB_Digital_IN);
+                    FB_Analog_OUT.Write(TiaTools.Properties.Resources.FB_Analog_OUT);
+                    FB_Digital_OUT.Write(TiaTools.Properties.Resources.FB_Digital_OUT);
 
                     //Close Stream
                     FB_Analog_IN.Close();

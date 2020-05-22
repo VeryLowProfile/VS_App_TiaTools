@@ -23,4 +23,3 @@ BEGIN
 	//
 	//Il richiamo è adesso completo
 	
-	
