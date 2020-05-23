@@ -1,0 +1,4 @@
+﻿	//Msg $MSG_NUMBER$ 
+	//********************************************************************//
+	"DB_Msg".Msg.Msg[$MSG_NUMBER$].Config.Nb := $MSG_NUMBER$ ;
+	"DB_Msg".Msg.Msg[$MSG_NUMBER$].Sql.StoreForAll := 0;

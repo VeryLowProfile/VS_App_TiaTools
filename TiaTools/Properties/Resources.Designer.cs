@@ -133,6 +133,28 @@ namespace TiaTools.Properties {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a DATA_BLOCK &quot;DB_Msg&quot;
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///NON_RETAIN
+        ///   VAR 
+        ///      Msg : &quot;Msg&quot;;
+        ///   END_VAR
+        ///
+        ///
+        ///BEGIN
+        ///
+        ///END_DATA_BLOCK
+        ///
+        ///.
+        /// </summary>
+        internal static string DB_Msg {
+            get {
+                return ResourceManager.GetString("DB_Msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a DATA_BLOCK &quot;DB_SM&quot;
         ///{ S7_Optimized_Access := &apos;FALSE&apos; }
         ///VERSION : 0.1
@@ -569,6 +591,257 @@ namespace TiaTools.Properties {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_Msg_Config&quot; : Void
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///   VAR CONSTANT 
+        ///      NONE : USInt := 0;
+        ///      PAUSE : USInt := 1;
+        ///      HALT : USInt := 2;
+        ///   END_VAR
+        ///
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FC_Msg_Config
+        ///	//Version: 0.1
+        ///	//Description: FC_Msg_Config
+        ///	//Developer: Topcast
+        ///	//********************************************************************//
+        ///	
+        ///
+        ///
+        ///.
+        /// </summary>
+        internal static string FC_Msg_Config_Begin {
+            get {
+                return ResourceManager.GetString("FC_Msg_Config_Begin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a 	//Msg $MSG_NUMBER$ 
+        ///	//********************************************************************//
+        ///	&quot;DB_Msg&quot;.Msg.Msg[$MSG_NUMBER$].Config.Nb := $MSG_NUMBER$ ;
+        ///	&quot;DB_Msg&quot;.Msg.Msg[$MSG_NUMBER$].Sql.StoreForAll := 0;
+        ///
+        ///
+        ///
+        ///
+        ///.
+        /// </summary>
+        internal static string FC_Msg_Config_Body {
+            get {
+                return ResourceManager.GetString("FC_Msg_Config_Body", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a 	&quot;DB_Msg&quot;.Msg.Msg[$MSG_NUMBER$].Config.Reaction[$SM_NUMBER$] := #NONE;
+        ///
+        ///
+        ///
+        ///
+        ///.
+        /// </summary>
+        internal static string FC_Msg_Config_Body_2 {
+            get {
+                return ResourceManager.GetString("FC_Msg_Config_Body_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a 	//Msg General Config
+        ///	//********************************************************************//
+        ///	&quot;DB_Msg&quot;.Msg.Config.MsgHmiWordNb := $WORD_NUMBER&quot;;
+        ///	&quot;DB_Msg&quot;.Msg.Config.MsgMaxNb := $MSG_TOT_NUMBER&quot;;
+        ///	&quot;DB_Msg&quot;.Msg.Config.MsgMaxSM := $SM_TOT$;
+        ///	
+        ///END_FUNCTION
+        ///
+        ///.
+        /// </summary>
+        internal static string FC_Msg_Config_End {
+            get {
+                return ResourceManager.GetString("FC_Msg_Config_End", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_Msg_Handler&quot; : Void
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///   VAR_IN_OUT 
+        ///      Msg : &quot;Msg&quot;;
+        ///   END_VAR
+        ///
+        ///   VAR_TEMP 
+        ///      i : Int;
+        ///      ToBeAck : Int;
+        ///   END_VAR
+        ///
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FC_Msg_Handler
+        ///	//Version: 0.1
+        ///	//Description: FC_Msg_Handler
+        ///	//Developer: Topcast
+        ///	//********************************************************************//
+        ///	
+        ///
+        ///
+        ///.
+        /// </summary>
+        internal static string FC_Msg_Handler_Begin {
+            get {
+                return ResourceManager.GetString("FC_Msg_Handler_Begin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a 	//Msg $MSG_NUMBER$
+        ///	//********************************************************************//
+        ///	&quot;FC_Msg_Reaction&quot;(MsgNb:=$MSG_NUMBER$,
+        ///	                  Msg:=&quot;DB_Msg&quot;.Msg);
+        ///	
+        ///	&quot;FC_Msg_Store_Sql&quot;(MsgNb:=$MSG_NUMBER$,
+        ///	                   FOData:=&quot;DB_FO_Data&quot;.FOData,
+        ///	                   Msg:=&quot;DB_Msg&quot;.Msg);
+        ///
+        ///
+        ///
+        ///.
+        /// </summary>
+        internal static string FC_Msg_Handler_Body {
+            get {
+                return ResourceManager.GetString("FC_Msg_Handler_Body", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a //Ack
+        ///	//********************************************************************//
+        ///	IF #Msg.Ack THEN
+        ///	    FOR #i := 0 TO #Msg.Config.MsgHmiWordNb DO
+        ///	        #Msg.Msg_Hmi[#i] := 16#00;
+        ///	    END_FOR;
+        ///	    #Msg.Ack := 0;
+        ///	END_IF;
+        ///	
+        ///	            
+        ///END_FUNCTION
+        ///
+        ///.
+        /// </summary>
+        internal static string FC_Msg_Handler_End {
+            get {
+                return ResourceManager.GetString("FC_Msg_Handler_End", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_Msg_Reaction&quot; : Void
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///   VAR_INPUT 
+        ///      MsgNb : Int;
+        ///   END_VAR
+        ///
+        ///   VAR_IN_OUT 
+        ///      Msg : &quot;Msg&quot;;
+        ///   END_VAR
+        ///
+        ///   VAR_TEMP 
+        ///      i : Int;
+        ///      HmiWordNb : Int;
+        ///      HmiBitNb : Int;
+        ///   END_VAR
+        ///
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FC_Msg_Reaction
+        ///	//Version: 0.1
+        ///	//Description: FC_Msg_Reaction
+        ///	//Developer: Topcast
+        ///	//*************************************************** [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string FC_Msg_Reaction {
+            get {
+                return ResourceManager.GetString("FC_Msg_Reaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_Msg_Store_Sql&quot; : Void
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///   VAR_INPUT 
+        ///      MsgNb : Int;
+        ///      FOData : Array[0..11] of &quot;Fo_DATA&quot;;
+        ///   END_VAR
+        ///
+        ///   VAR_IN_OUT 
+        ///      Msg : &quot;Msg&quot;;
+        ///   END_VAR
+        ///
+        ///   VAR_TEMP 
+        ///      i : Int;
+        ///   END_VAR
+        ///
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FC_Msg_Store_Sql
+        ///	//Version: 0.1
+        ///	//Description: FC_Msg_Store_Sql
+        ///	//Developer: Topcast
+        ///	//**************************************************** [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string FC_Msg_Store_Sql {
+            get {
+                return ResourceManager.GetString("FC_Msg_Store_Sql", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_Msg_Trigger&quot; : Void
+        ///{ S7_Optimized_Access := &apos;TRUE&apos; }
+        ///VERSION : 0.1
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FC_Msg_Trigger
+        ///	//Version: 0.1
+        ///	//Description: FC_Msg_Trigger
+        ///	//Developer: Topcast
+        ///	//********************************************************************//
+        ///	
+        ///
+        ///.
+        /// </summary>
+        internal static string FC_Msg_Trigger_Begin {
+            get {
+                return ResourceManager.GetString("FC_Msg_Trigger_Begin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a 	//Msg 1 
+        ///	//********************************************************************//
+        ///	&quot;DB_Msg&quot;.Msg.Msg[1].Trigger := FALSE;
+        ///
+        ///
+        ///.
+        /// </summary>
+        internal static string FC_Msg_Trigger_Body {
+            get {
+                return ResourceManager.GetString("FC_Msg_Trigger_Body", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_SM_$SM_NB$&quot; : Void
         ///{ S7_Optimized_Access := &apos;TRUE&apos; }
         ///VERSION : 0.1
@@ -833,6 +1106,36 @@ namespace TiaTools.Properties {
         internal static string IO_Types {
             get {
                 return ResourceManager.GetString("IO_Types", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a TYPE &quot;Msg_CONFIG&quot;
+        ///VERSION : 0.1
+        ///   STRUCT
+        ///      Nb : Word;   // Numero Del Messaggio
+        ///      Reaction : Array[0..$SM_NUMBER$] of Int;   // Reazione Scaturita dal msg 0 = None, 1 = pause, 2 = Halt
+        ///   END_STRUCT;
+        ///
+        ///END_TYPE
+        ///
+        ///TYPE &quot;Msg_SQL&quot;
+        ///VERSION : 0.1
+        ///   STRUCT
+        ///      Stored : Bool;
+        ///      StoreForAll : Bool;   // Se 1 il msg viene salvato su SQL per tutti gli FO attivi su tutte le macchine a stati
+        ///   END_STRUCT;
+        ///
+        ///END_TYPE
+        ///
+        ///TYPE &quot;Msg_GEN&quot;
+        ///VERSION : 0.1
+        ///   STRUCT
+        ///      Trigger { S7_SetPoint : [stringa troncata]&quot;;.
+        /// </summary>
+        internal static string Msg_Types {
+            get {
+                return ResourceManager.GetString("Msg_Types", resourceCulture);
             }
         }
         

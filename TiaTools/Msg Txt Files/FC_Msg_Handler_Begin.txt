@@ -1,0 +1,21 @@
+﻿FUNCTION "FC_Msg_Handler" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_IN_OUT 
+      Msg : "Msg";
+   END_VAR
+
+   VAR_TEMP 
+      i : Int;
+      ToBeAck : Int;
+   END_VAR
+
+
+BEGIN
+	//********************************************************************//
+	//Name: FC_Msg_Handler
+	//Version: 0.1
+	//Description: FC_Msg_Handler
+	//Developer: Topcast
+	//********************************************************************//
+	

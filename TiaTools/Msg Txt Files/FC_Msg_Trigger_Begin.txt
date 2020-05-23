@@ -1,0 +1,12 @@
+﻿FUNCTION "FC_Msg_Trigger" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	//********************************************************************//
+	//Name: FC_Msg_Trigger
+	//Version: 0.1
+	//Description: FC_Msg_Trigger
+	//Developer: Topcast
+	//********************************************************************//
+

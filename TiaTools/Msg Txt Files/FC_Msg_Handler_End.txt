@@ -1,0 +1,11 @@
+﻿//Ack
+	//********************************************************************//
+	IF #Msg.Ack THEN
+	    FOR #i := 0 TO #Msg.Config.MsgHmiWordNb DO
+	        #Msg.Msg_Hmi[#i] := 16#00;
+	    END_FOR;
+	    #Msg.Ack := 0;
+	END_IF;
+	
+	            
+END_FUNCTION

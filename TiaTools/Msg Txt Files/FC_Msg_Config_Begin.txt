@@ -1,0 +1,18 @@
+﻿FUNCTION "FC_Msg_Config" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR CONSTANT 
+      NONE : USInt := 0;
+      PAUSE : USInt := 1;
+      HALT : USInt := 2;
+   END_VAR
+
+
+BEGIN
+	//********************************************************************//
+	//Name: FC_Msg_Config
+	//Version: 0.1
+	//Description: FC_Msg_Config
+	//Developer: Topcast
+	//********************************************************************//
+	

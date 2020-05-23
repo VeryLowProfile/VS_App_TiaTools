@@ -130,6 +130,9 @@
   <data name="DB_DO" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\io txt files\db_do.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="DB_Msg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\msg txt files\db_msg.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="DB_SM" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sm txt files\db_sm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -196,6 +199,39 @@
   <data name="FC_Digital_OUT_Part" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\io txt files\fc_digital_out_part.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="FC_Msg_Config_Begin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\msg txt files\fc_msg_config_begin.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Msg_Config_Body" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\msg txt files\fc_msg_config_body.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Msg_Config_Body_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\msg txt files\fc_msg_config_body_2.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Msg_Config_End" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\msg txt files\fc_msg_config_end.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Msg_Handler_Begin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\msg txt files\fc_msg_handler_begin.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Msg_Handler_Body" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\msg txt files\fc_msg_handler_body.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Msg_Handler_End" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\msg txt files\fc_msg_handler_end.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Msg_Reaction" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\msg txt files\fc_msg_reaction.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Msg_Store_Sql" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\msg txt files\fc_msg_store_sql.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Msg_Trigger_Begin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\msg txt files\fc_msg_trigger_begin.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Msg_Trigger_Body" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\msg txt files\fc_msg_trigger_body.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="FC_SM" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sm txt files\fc_sm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -228,6 +264,9 @@
   </data>
   <data name="IO_Types" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\io txt files\io_types.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Msg_Types" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\msg txt files\msg_types.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="SM_Types" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sm txt files\sm_types.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

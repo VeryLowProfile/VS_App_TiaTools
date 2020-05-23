@@ -1,0 +1,89 @@
+﻿FUNCTION "FC_Msg_Reaction" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      MsgNb : Int;
+   END_VAR
+
+   VAR_IN_OUT 
+      Msg : "Msg";
+   END_VAR
+
+   VAR_TEMP 
+      i : Int;
+      HmiWordNb : Int;
+      HmiBitNb : Int;
+   END_VAR
+
+
+BEGIN
+	//********************************************************************//
+	//Name: FC_Msg_Reaction
+	//Version: 0.1
+	//Description: FC_Msg_Reaction
+	//Developer: Topcast
+	//********************************************************************//
+	
+	//Check Reaction For Every SM
+	//********************************************************************//
+	IF #Msg.Msg[#MsgNb].Trigger THEN
+	    FOR #i := 0 TO #Msg.Config.MsgMaxSM DO
+	        IF #Msg.Msg[#MsgNb].Config.Reaction[#i] = "NONE" THEN
+	            ; //Non Sono Previste Comandi
+	        ELSIF #Msg.Msg[#MsgNb].Config.Reaction[#i] = "PAUSE" THEN
+	            #Msg.MsgReactionCommand[#i].Pause := 1;
+	        ELSIF #Msg.Msg[#MsgNb].Config.Reaction[#i] = "HALT" THEN
+	            #Msg.MsgReactionCommand[#i].Halt := 1;
+	        END_IF;
+	    END_FOR;
+	END_IF;
+	
+	//Hmi Msg Trigger
+	//********************************************************************//
+	#HmiBitNb := 0;
+	#HmiWordNb := 0;
+	IF #Msg.Msg[#MsgNb].Trigger THEN
+	    //Hmi Trigger
+	    #HmiWordNb := #MsgNb / 16;
+	    #HmiBitNb := (#MsgNb MOD 16) - 1;
+	    CASE #HmiBitNb OF
+	        0:
+	            #Msg.Msg_Hmi[#HmiWordNb].%X0 := 1;
+	        1:
+	            #Msg.Msg_Hmi[#HmiWordNb].%X1 := 1;
+	        2:
+	            #Msg.Msg_Hmi[#HmiWordNb].%X2 := 1;
+	        3:
+	            #Msg.Msg_Hmi[#HmiWordNb].%X3 := 1;
+	        4:
+	            #Msg.Msg_Hmi[#HmiWordNb].%X4 := 1;
+	        5:
+	            #Msg.Msg_Hmi[#HmiWordNb].%X5 := 1;
+	        6:
+	            #Msg.Msg_Hmi[#HmiWordNb].%X6 := 1;
+	        7:
+	            #Msg.Msg_Hmi[#HmiWordNb].%X7 := 1;
+	        8:
+	            #Msg.Msg_Hmi[#HmiWordNb].%X8 := 1;
+	        9:
+	            #Msg.Msg_Hmi[#HmiWordNb].%X9 := 1;
+	        10:
+	            #Msg.Msg_Hmi[#HmiWordNb].%X10 := 1;
+	        11:
+	            #Msg.Msg_Hmi[#HmiWordNb].%X11 := 1;
+	        12:
+	            #Msg.Msg_Hmi[#HmiWordNb].%X12 := 1;
+	        13:
+	            #Msg.Msg_Hmi[#HmiWordNb].%X13 := 1;
+	        14:
+	            #Msg.Msg_Hmi[#HmiWordNb].%X14 := 1;
+	        15:
+	            #Msg.Msg_Hmi[#HmiWordNb].%X15 := 1;
+	    END_CASE;
+	END_IF;
+	
+	
+	
+	            
+END_FUNCTION
+

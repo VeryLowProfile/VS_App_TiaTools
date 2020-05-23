@@ -1,0 +1,13 @@
+﻿DATA_BLOCK "DB_Msg"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+   VAR 
+      Msg : "Msg";
+   END_VAR
+
+
+BEGIN
+
+END_DATA_BLOCK
+

@@ -1,0 +1,80 @@
+﻿TYPE "Msg_CONFIG"
+VERSION : 0.1
+   STRUCT
+      Nb : Word;   // Numero Del Messaggio
+      Reaction : Array[0..$SM_TOT$] of Int;   // Reazione Scaturita dal msg 0 = None, 1 = pause, 2 = Halt
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "Msg_SQL"
+VERSION : 0.1
+   STRUCT
+      Stored : Bool;
+      StoreForAll : Bool;   // Se 1 il msg viene salvato su SQL per tutti gli FO attivi su tutte le macchine a stati
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "Msg_GEN"
+VERSION : 0.1
+   STRUCT
+      Trigger { S7_SetPoint := 'True'} : Bool;   // Trigger del msg, se 1 il messaggio viene visualizzato e viene generato il relativo comando di pausa o stop configurato
+      Config : "Msg_CONFIG";
+      Sql : "Msg_SQL";
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "Msg_GEN_CONFIG"
+VERSION : 0.1
+   STRUCT
+      MsgHmiWordNb : Int;  //Numero di Word Usate Per inviare la visualizzazione HMI
+      MsgMaxNb : Int;   // Numero massimo dei messaggi = lunghezza array Msg
+      MsgMaxSM : Int;   // Numero di Macchine a stati utilizzate 
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "Msg_REACTION_COMMANDS"
+VERSION : 0.1
+   STRUCT
+      Pause : Bool;   // Comando di pausa generato da uno o piu msg
+      Halt : Bool;   // Comando di halt generato da uno o più msg
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "Msg_RESUME"
+VERSION : 0.1
+   STRUCT
+      MsgPending : Bool;   // Almeno un Msg attivo
+      MsgPendingSM : Array[0..$SM_TOT$] of Bool;
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "Msg"
+VERSION : 0.1
+   STRUCT
+      Msg : Array[0..$MSG_NUMBER$] of "Msg_GEN";
+      Msg_Hmi : Array[0..$WORD_NUMBER$] of Word;
+      MsgReactionCommand : Array[0..$SM_TOT$] of "Msg_REACTION_COMMANDS";
+      MsgRecap : "Msg_RESUME";
+      Config : "Msg_GEN_CONFIG";
+      Ack { S7_SetPoint := 'True'} : Bool;
+      AckCounter : Int;
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "Msg_REACTION_SUM"
+VERSION : 0.1
+   STRUCT
+      None : Int;   // Somma dei messaggi attivi che hanno reazione NONE
+      Pause : Int;   // Somma dei messaggi attivi che hanno reazione PAUSE
+      Halt : Int;   // Somma dei messaggi attivi che hanno reazione HALT
+   END_STRUCT;
+
+END_TYPE
+

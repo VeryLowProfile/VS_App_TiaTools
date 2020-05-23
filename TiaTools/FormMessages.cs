@@ -138,6 +138,25 @@ namespace TiaTools
             DataTable dataTable = new DataTable();
             dataTable = (DataTable)dataGridViewMsg.DataSource;
 
+            //Some Data
+            int MsgNb = 0;
+            int WordNb = 0;
+            int SMNb = 0;
+
+            //Calculate Tot Alarm Number Hmi word Number SM Number
+            MsgNb = dataTable.Rows.Count;
+            WordNb = (MsgNb / 16);
+            WordNb = WordNb + (WordNb % 16);
+
+            //Number of SM Coloumns in DataTable
+            foreach (DataColumn column in dataTable.Columns)
+            {
+                if (column.ColumnName.Contains("Msg Reaction SM "))
+                {
+                    SMNb++;
+                }
+            }
+
             //Create Source Files
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
@@ -214,66 +233,20 @@ namespace TiaTools
                 if (checkBoxFBMsgHandler.Checked)
                 {
                     //New Stream For MsgConfig
-                    StreamWriter FB_Msg_Handler = new StreamWriter(filePath + @"\FB_Msg_Handler.scl", false);
+                    StreamWriter FC_Msg_Handler = new StreamWriter(filePath + @"\FC_Msg_Handler.scl", false);
 
                     //Body
-                    FB_Msg_Handler.WriteLine(@"FUNCTION_BLOCK ""FB_Msg_Handler""
-{ S7_Optimized_Access := 'TRUE' }
-VERSION : 0.1
-   VAR_INPUT
-      ""Msg_ACK"" : Bool;
-   END_VAR
-
-   VAR_IN_OUT
-      Msg : ""Msg"";
-   END_VAR
-
-   VAR ");
-
+                    FC_Msg_Handler.Write(TiaTools.Properties.Resources.FC_Msg_Handler_Begin);
+                    FC_Msg_Handler.Write("\n");
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        FB_Msg_Handler.WriteLine("      Msg_" + row["Nb"] + " " + "{InstructionName := 'Program_Alarm'; LibVersion := '1.0'} : Program_Alarm;");
+                        FC_Msg_Handler.Write(TiaTools.Properties.Resources.FC_Msg_Handler_Body.Replace("$MSG_NUMBER$", row["Nb"].ToString())); ;
+                        FC_Msg_Handler.Write("\n");
                     }
-                    FB_Msg_Handler.WriteLine("      ACK_ALARMS_ERROR { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;");
-                    FB_Msg_Handler.WriteLine("      ACK_ALARM_STATUS { ExternalAccessible:= 'False'; ExternalVisible:= 'False'; ExternalWritable:= 'False'} : Word;");
-                    FB_Msg_Handler.WriteLine("   END_VAR");
-                    FB_Msg_Handler.Write("\n");
-                    FB_Msg_Handler.Write("\n");
-                    FB_Msg_Handler.WriteLine("BEGIN");
-                    FB_Msg_Handler.WriteLine("//********************************************************************//");
-                    FB_Msg_Handler.WriteLine("//Name: FB_Msg_Handler");
-                    FB_Msg_Handler.WriteLine("//Version: x.x");
-                    FB_Msg_Handler.WriteLine("//Description: xxx");
-                    FB_Msg_Handler.WriteLine("//Developer: Topcast");
-                    FB_Msg_Handler.WriteLine("//********************************************************************//");
-                    FB_Msg_Handler.Write("\n");
-                    FB_Msg_Handler.Write("\n");
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        FB_Msg_Handler.WriteLine("// Msg " + row["Nb"]);
-                        FB_Msg_Handler.WriteLine("//********************************************************************//");
-                        FB_Msg_Handler.WriteLine("#Msg_" + row["Nb"] + "(SIG := #Msg.msg[" + row["Nb"] + "].Trigger,");
-                        FB_Msg_Handler.WriteLine("\t" + "SD_1 := #Msg.msg[" + row["Nb"] + "].Config.Nb);");
-                        FB_Msg_Handler.Write("\n");
-                        FB_Msg_Handler.WriteLine("\"" + "FC_Msg_Get_Status" + "\"" + "(MsgInstance := #Msg_" + row["Nb"] + ",");
-                        FB_Msg_Handler.WriteLine("\t" + "\t" + "\t" + "MsgMaxSM:= #Msg.MsgMaxSM,");
-                        FB_Msg_Handler.WriteLine("\t" + "\t" + "\t" + "MsgBase:= #Msg.Msg["+ row["Nb"] + "]);");
-                        FB_Msg_Handler.Write("\n");
-                    }
-                    FB_Msg_Handler.WriteLine("//Message Reaction");
-                    FB_Msg_Handler.WriteLine("//********************************************************************//");
-                    FB_Msg_Handler.WriteLine("\"" + "FC_Msg_Reaction" + "\"" + "(#Msg);");
-                    FB_Msg_Handler.Write("\n");
-                    FB_Msg_Handler.WriteLine("//Message ACK");
-                    FB_Msg_Handler.WriteLine("//********************************************************************//");
-                    FB_Msg_Handler.WriteLine("Ack_Alarms(MODE := BOOL_TO_UINT(#Msg_ACK AND #ACK_ALARM_STATUS = 0),");
-                    FB_Msg_Handler.WriteLine("\t" + "ERROR => #ACK_ALARMS_ERROR,");
-                    FB_Msg_Handler.WriteLine("\t" + "STATUS => #ACK_ALARM_STATUS);");
-                    FB_Msg_Handler.Write("\n");
-                    FB_Msg_Handler.Write("\n");
-                    FB_Msg_Handler.WriteLine("END_FUNCTION_BLOCK");
+                    FC_Msg_Handler.Write(TiaTools.Properties.Resources.FC_Msg_Handler_End);
 
-                    FB_Msg_Handler.Close();
+                    FC_Msg_Handler.Close();
+                    FC_Msg_Handler.Dispose();
                 }
                 #endregion
 
@@ -284,51 +257,21 @@ VERSION : 0.1
                     StreamWriter FC_Msg_Config = new StreamWriter(filePath + @"\FC_Msg_Config.scl", false);
 
                     //Body
-                    FC_Msg_Config.WriteLine(@"FUNCTION ""FC_Msg_Config"" : Void
-{ S7_Optimized_Access := 'TRUE' }
-VERSION : 0.1
-   VAR CONSTANT
-      NONE : Usint:= 0;
-      PAUSE : Usint:= 1;
-      HALT : Usint:= 2;
-   END_VAR
-
-
-BEGIN");
-                    FC_Msg_Config.WriteLine("//********************************************************************//");
-                    FC_Msg_Config.WriteLine("//Name: FC_Msg_Config");
-                    FC_Msg_Config.WriteLine("//Version: x.x");
-                    FC_Msg_Config.WriteLine("//Description: xxx");
-                    FC_Msg_Config.WriteLine("//Developer: Topcast");
-                    FC_Msg_Config.WriteLine("//********************************************************************//");
-                    FC_Msg_Config.Write("\n");
-                    FC_Msg_Config.Write("\n");
+                    FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Begin);
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        FC_Msg_Config.WriteLine("// Msg " + row["Nb"]);
-                        FC_Msg_Config.WriteLine("//********************************************************************//");
-                        FC_Msg_Config.WriteLine(@"""DB_Msg"".Msg.Msg[" + row["Nb"] + "].Config.Nb := " + row["Nb"] + ";");
-                        if (row["Msg Store For All"].ToString() == "True")
+                        FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body.Replace("$MSG_NUMBER$", row["Nb"].ToString()));
+                        for (int i = 1; i <= SMNb; i++)
                         {
-                            FC_Msg_Config.WriteLine(@"""DB_Msg"".Msg.Msg[" + row["Nb"] + "].Config.StoreForAll := 1;");
-                        } else
-                        {
-                            FC_Msg_Config.WriteLine(@"""DB_Msg"".Msg.Msg[" + row["Nb"] + "].Config.StoreForAll := 0;");
+                            FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body_2.Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$SM_NUMBER$", i.ToString()));
                         }
-                        for (int i = 1; i <= 6; i++)
-                        {
-                            FC_Msg_Config.WriteLine(@"""DB_Msg"".Msg.Msg[" + row["Nb"] + "].Config.Reaction[" + i + "] := " + row["Msg Reaction SM " + i] + ";");
-                        }
-                        FC_Msg_Config.Write("\n");
                     }
-                    FC_Msg_Config.WriteLine("//Gen Config");
-                    FC_Msg_Config.WriteLine("//********************************************************************//");
-                    FC_Msg_Config.WriteLine(@"""DB_Msg"".Msg.MsgMaxNb := 300;");
-                    FC_Msg_Config.WriteLine(@"""DB_Msg"".Msg.MsgMaxSM := 6;");
+                    FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_End.Replace("$WORD_NUMBER",WordNb.ToString()).Replace("$MSG_TOT_NUMBER", MsgNb.ToString().Replace("$SM_TOT$", SMNb.ToString())));
                     FC_Msg_Config.Write("\n");
-                    FC_Msg_Config.WriteLine("END_FUNCTION");
+
 
                     FC_Msg_Config.Close();
+                    FC_Msg_Config.Dispose();
                 }
                 #endregion
 
@@ -339,29 +282,44 @@ BEGIN");
                     StreamWriter FC_Msg_Trigger = new StreamWriter(filePath + @"\FC_Msg_Trigger.scl", false);
 
                     //Body
-                    FC_Msg_Trigger.WriteLine(@"FUNCTION ""FC_Msg_Trigger"" : Void
-{ S7_Optimized_Access:= 'TRUE' }
-VERSION: 0.1
-
-BEGIN");
-                    FC_Msg_Trigger.WriteLine("//********************************************************************//");
-                    FC_Msg_Trigger.WriteLine("//Name: FC_Msg_Trigger");
-                    FC_Msg_Trigger.WriteLine("//Version: x.x");
-                    FC_Msg_Trigger.WriteLine("//Description: xxx");
-                    FC_Msg_Trigger.WriteLine("//Developer: Topcast");
-                    FC_Msg_Trigger.WriteLine("//********************************************************************//");
-                    FC_Msg_Trigger.Write("\n");
-                    FC_Msg_Trigger.Write("\n");
+                    FC_Msg_Trigger.Write(TiaTools.Properties.Resources.FC_Msg_Trigger_Begin);
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        FC_Msg_Trigger.WriteLine("// Msg " + row["Nb"]);
-                        FC_Msg_Trigger.WriteLine("//********************************************************************//");
-                        FC_Msg_Trigger.WriteLine(@"""DB_Msg"".Msg.Msg[" + row["Nb"] + "].Trigger := FALSE;");
+                        FC_Msg_Trigger.Write(TiaTools.Properties.Resources.FC_Msg_Trigger_Body.Replace("$MSG_NUMBER$", row["Nb"].ToString()));
                         FC_Msg_Trigger.Write("\n");
                     }
                     FC_Msg_Trigger.WriteLine("END_FUNCTION");
 
                     FC_Msg_Trigger.Close();
+                    FC_Msg_Trigger.Dispose();
+                }
+                #endregion
+
+                #region DB_Msg
+                if (checkBoxDBMsg.Checked)
+                {
+                    //New Stream For DB_Msg
+                    StreamWriter DB_Msg = new StreamWriter(filePath + @"\DB_Msg.db", false);
+
+                    //Body
+                    DB_Msg.Write(TiaTools.Properties.Resources.DB_Msg);
+
+                    DB_Msg.Close();
+                    DB_Msg.Dispose();
+                }
+                #endregion
+
+                #region Msg_Types
+                if (checkBoxMsgTypes.Checked)
+                {
+                    //New Stream For Msg_Types
+                    StreamWriter Msg_Types = new StreamWriter(filePath + @"\Msg_Types.udt", false);
+
+                    //Body
+                    Msg_Types.Write(TiaTools.Properties.Resources.Msg_Types.Replace("$SM_TOT$", SMNb.ToString()).Replace("$MSG_NUMBER$", MsgNb.ToString()).Replace("$WORD_NUMBER$", WordNb.ToString()));
+
+                    Msg_Types.Close();
+                    Msg_Types.Dispose();
                 }
                 #endregion
             }

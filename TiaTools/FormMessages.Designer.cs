@@ -48,6 +48,8 @@
             this.buttonExportExcel = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dataGridViewMsg = new System.Windows.Forms.DataGridView();
+            this.checkBoxMsgTypes = new System.Windows.Forms.CheckBox();
+            this.checkBoxDBMsg = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -75,6 +77,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.checkBoxMsgTypes);
+            this.panel2.Controls.Add(this.checkBoxDBMsg);
             this.panel2.Controls.Add(this.labelSMNumber);
             this.panel2.Controls.Add(this.textBoxSMNumber);
             this.panel2.Controls.Add(this.buttonNewTable);
@@ -125,7 +129,7 @@
             // checkBoxFCMsgTrigger
             // 
             this.checkBoxFCMsgTrigger.AutoSize = true;
-            this.checkBoxFCMsgTrigger.Location = new System.Drawing.Point(502, 63);
+            this.checkBoxFCMsgTrigger.Location = new System.Drawing.Point(515, 62);
             this.checkBoxFCMsgTrigger.Name = "checkBoxFCMsgTrigger";
             this.checkBoxFCMsgTrigger.Size = new System.Drawing.Size(104, 17);
             this.checkBoxFCMsgTrigger.TabIndex = 15;
@@ -135,11 +139,11 @@
             // checkBoxFBMsgHandler
             // 
             this.checkBoxFBMsgHandler.AutoSize = true;
-            this.checkBoxFBMsgHandler.Location = new System.Drawing.Point(502, 25);
+            this.checkBoxFBMsgHandler.Location = new System.Drawing.Point(515, 24);
             this.checkBoxFBMsgHandler.Name = "checkBoxFBMsgHandler";
             this.checkBoxFBMsgHandler.Size = new System.Drawing.Size(108, 17);
             this.checkBoxFBMsgHandler.TabIndex = 14;
-            this.checkBoxFBMsgHandler.Text = "FB_Msg_Handler";
+            this.checkBoxFBMsgHandler.Text = "FC_Msg_Handler";
             this.checkBoxFBMsgHandler.UseVisualStyleBackColor = true;
             // 
             // buttonCreateFiles
@@ -155,7 +159,7 @@
             // checkBoxFCMsgConfig
             // 
             this.checkBoxFCMsgConfig.AutoSize = true;
-            this.checkBoxFCMsgConfig.Location = new System.Drawing.Point(502, 45);
+            this.checkBoxFCMsgConfig.Location = new System.Drawing.Point(515, 44);
             this.checkBoxFCMsgConfig.Name = "checkBoxFCMsgConfig";
             this.checkBoxFCMsgConfig.Size = new System.Drawing.Size(101, 17);
             this.checkBoxFCMsgConfig.TabIndex = 12;
@@ -165,7 +169,7 @@
             // checkBoxMsgConfig
             // 
             this.checkBoxMsgConfig.AutoSize = true;
-            this.checkBoxMsgConfig.Location = new System.Drawing.Point(502, 6);
+            this.checkBoxMsgConfig.Location = new System.Drawing.Point(515, 5);
             this.checkBoxMsgConfig.Name = "checkBoxMsgConfig";
             this.checkBoxMsgConfig.Size = new System.Drawing.Size(79, 17);
             this.checkBoxMsgConfig.TabIndex = 11;
@@ -253,6 +257,26 @@
             this.dataGridViewMsg.TabIndex = 0;
             this.dataGridViewMsg.Click += new System.EventHandler(this.dataGridViewMsg_Click);
             // 
+            // checkBoxMsgTypes
+            // 
+            this.checkBoxMsgTypes.AutoSize = true;
+            this.checkBoxMsgTypes.Location = new System.Drawing.Point(414, 24);
+            this.checkBoxMsgTypes.Name = "checkBoxMsgTypes";
+            this.checkBoxMsgTypes.Size = new System.Drawing.Size(78, 17);
+            this.checkBoxMsgTypes.TabIndex = 20;
+            this.checkBoxMsgTypes.Text = "Msg Types";
+            this.checkBoxMsgTypes.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxDBMsg
+            // 
+            this.checkBoxDBMsg.AutoSize = true;
+            this.checkBoxDBMsg.Location = new System.Drawing.Point(414, 5);
+            this.checkBoxDBMsg.Name = "checkBoxDBMsg";
+            this.checkBoxDBMsg.Size = new System.Drawing.Size(64, 17);
+            this.checkBoxDBMsg.TabIndex = 19;
+            this.checkBoxDBMsg.Text = "DB Msg";
+            this.checkBoxDBMsg.UseVisualStyleBackColor = true;
+            // 
             // FormMessages
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -297,5 +321,7 @@
         private System.Windows.Forms.Label labelSMNumber;
         private System.Windows.Forms.TextBox textBoxSMNumber;
         private System.Windows.Forms.Button buttonNewTable;
+        private System.Windows.Forms.CheckBox checkBoxMsgTypes;
+        private System.Windows.Forms.CheckBox checkBoxDBMsg;
     }
 }

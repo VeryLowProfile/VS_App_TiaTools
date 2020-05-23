@@ -1,0 +1,7 @@
+﻿	//Msg General Config
+	//********************************************************************//
+	"DB_Msg".Msg.Config.MsgHmiWordNb := $WORD_NUMBER";
+	"DB_Msg".Msg.Config.MsgMaxNb := $MSG_TOT_NUMBER";
+	"DB_Msg".Msg.Config.MsgMaxSM := $SM_TOT$;
+	
+END_FUNCTION
