@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.buttonTextList = new System.Windows.Forms.Button();
+            this.checkBoxFB = new System.Windows.Forms.CheckBox();
+            this.checkBoxTypes = new System.Windows.Forms.CheckBox();
             this.checkBoxA_OUT = new System.Windows.Forms.CheckBox();
             this.checkBoxA_IN = new System.Windows.Forms.CheckBox();
             this.buttonCreateTIAFiles = new System.Windows.Forms.Button();
@@ -44,8 +45,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dataGridViewInput = new System.Windows.Forms.DataGridView();
-            this.checkBoxTypes = new System.Windows.Forms.CheckBox();
-            this.checkBoxFB = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -56,7 +55,6 @@
             // 
             this.panel1.Controls.Add(this.checkBoxFB);
             this.panel1.Controls.Add(this.checkBoxTypes);
-            this.panel1.Controls.Add(this.buttonTextList);
             this.panel1.Controls.Add(this.checkBoxA_OUT);
             this.panel1.Controls.Add(this.checkBoxA_IN);
             this.panel1.Controls.Add(this.buttonCreateTIAFiles);
@@ -73,15 +71,26 @@
             this.panel1.Size = new System.Drawing.Size(627, 74);
             this.panel1.TabIndex = 0;
             // 
-            // buttonTextList
+            // checkBoxFB
             // 
-            this.buttonTextList.Location = new System.Drawing.Point(471, 47);
-            this.buttonTextList.Name = "buttonTextList";
-            this.buttonTextList.Size = new System.Drawing.Size(150, 25);
-            this.buttonTextList.TabIndex = 10;
-            this.buttonTextList.Text = "Create Text List Files";
-            this.buttonTextList.UseVisualStyleBackColor = true;
-            this.buttonTextList.Click += new System.EventHandler(this.buttonTextList_Click);
+            this.checkBoxFB.AutoSize = true;
+            this.checkBoxFB.Location = new System.Drawing.Point(496, 28);
+            this.checkBoxFB.Name = "checkBoxFB";
+            this.checkBoxFB.Size = new System.Drawing.Size(39, 17);
+            this.checkBoxFB.TabIndex = 12;
+            this.checkBoxFB.Text = "FB";
+            this.checkBoxFB.UseMnemonic = false;
+            this.checkBoxFB.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxTypes
+            // 
+            this.checkBoxTypes.AutoSize = true;
+            this.checkBoxTypes.Location = new System.Drawing.Point(496, 10);
+            this.checkBoxTypes.Name = "checkBoxTypes";
+            this.checkBoxTypes.Size = new System.Drawing.Size(55, 17);
+            this.checkBoxTypes.TabIndex = 11;
+            this.checkBoxTypes.Text = "Types";
+            this.checkBoxTypes.UseVisualStyleBackColor = true;
             // 
             // checkBoxA_OUT
             // 
@@ -216,27 +225,6 @@
             this.dataGridViewInput.Size = new System.Drawing.Size(627, 462);
             this.dataGridViewInput.TabIndex = 0;
             // 
-            // checkBoxTypes
-            // 
-            this.checkBoxTypes.AutoSize = true;
-            this.checkBoxTypes.Location = new System.Drawing.Point(496, 10);
-            this.checkBoxTypes.Name = "checkBoxTypes";
-            this.checkBoxTypes.Size = new System.Drawing.Size(55, 17);
-            this.checkBoxTypes.TabIndex = 11;
-            this.checkBoxTypes.Text = "Types";
-            this.checkBoxTypes.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxFB
-            // 
-            this.checkBoxFB.AutoSize = true;
-            this.checkBoxFB.Location = new System.Drawing.Point(496, 28);
-            this.checkBoxFB.Name = "checkBoxFB";
-            this.checkBoxFB.Size = new System.Drawing.Size(39, 17);
-            this.checkBoxFB.TabIndex = 12;
-            this.checkBoxFB.Text = "FB";
-            this.checkBoxFB.UseMnemonic = false;
-            this.checkBoxFB.UseVisualStyleBackColor = true;
-            // 
             // FormIO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -275,7 +263,6 @@
         private System.Windows.Forms.CheckBox checkBoxD_IN;
         private System.Windows.Forms.CheckBox checkBoxA_OUT;
         private System.Windows.Forms.CheckBox checkBoxA_IN;
-        private System.Windows.Forms.Button buttonTextList;
         private System.Windows.Forms.CheckBox checkBoxTypes;
         private System.Windows.Forms.CheckBox checkBoxFB;
     }

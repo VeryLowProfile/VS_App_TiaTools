@@ -1,7 +1,5 @@
 //AI_$VAR_NAME$
 //********************************************************************//
-"AI_$VAR_NAME$".AnalogIN.Config.Name := $TEXT_NUMBER$;
-"AI_$VAR_NAME$".AnalogIN.Config.MUnit := 0;
 "AI_$VAR_NAME$".AnalogIN.Config.HighScaleValue := 0;
 "AI_$VAR_NAME$".AnalogIN.Config.LowScaleValue := 0;
 "AI_$VAR_NAME$".AnalogIN.Config.HighLimit := 0;

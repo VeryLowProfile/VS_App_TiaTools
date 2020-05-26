@@ -10,8 +10,6 @@ END_TYPE
 TYPE "Analog_IN_CONFIG"
 VERSION : 0.1
    STRUCT
-      "Name" : Int;   // Indice della voce dell'elenco testi che visualizza il nome della I/O su Hmi 
-      MUnit : Int;   // Indice della voce dell'elenco testi che visualizza il nome l'unità di misura su Hmi
       HighLimit : Real;   // Limite superiore per generazione allarme
       LowLimit : Real;   // Limite inferiore per generazione allarme
       HighScaleValue : Real;   // Valore massimo fornito dal sensore
@@ -29,8 +27,6 @@ END_TYPE
 TYPE "Analog_OUT_CONFIG"
 VERSION : 0.1
    STRUCT
-      "Name" : Int;   // Indice della voce dell'elenco testi che visualizza il nome della I/O su Hmi 
-      MUnit : Int;   // Indice della voce dell'elenco testi che visualizza il nome l'unità di misura su Hmi
       HighUnscaleLimit : Real;   // Valore massimo della variabile di processo legata a questa uscita analogica 
       LowUnscaleLimit : Real;   // Valore minimo della variabile di processo legata a questa uscita analogica 
       IsBipolar : Bool;   // Flag che indica se il sensore lavora in modalità bipolar
@@ -62,7 +58,6 @@ END_TYPE
 TYPE "Digital_IN_CONFIG"
 VERSION : 0.1
    STRUCT
-      "Name" : Int;   // Indice della voce dell'elenco testi che visualizza il nome della I/O su Hmi 
       R_EventNb : Int;   // Not used
       F_EventNb : Int;   // Not Used
       Smn : Int;   // Not Used
@@ -75,7 +70,6 @@ END_TYPE
 TYPE "Digital_OUT_CONFIG"
 VERSION : 0.1
    STRUCT
-      "Name" : Int;   // Indice della voce dell'elenco testi che visualizza il nome della I/O su Hmi 
       R_EventNb : Int;   // Not Used
       F_EventNb : Int;   // Not Used
       Smn : Int;   // Not Used
@@ -115,11 +109,11 @@ VERSION : 0.1
       Status : Bool;
       Alarm : Bool;
       Manual : Bool;
+      ManualEnable : Bool;
       On : Bool;
       Off : Bool;
-      "Name" : Int;
-      MUnit : Int;
       Value : Real;
+      RowValue : int;
       Command : Real;
    END_STRUCT;
 

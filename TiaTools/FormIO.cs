@@ -136,8 +136,7 @@ namespace TiaTools
                     {
                         if (row["Logical Address"].ToString().Contains("I") && !row["Logical Address"].ToString().Contains("W"))
                         {
-                            string textNumber = row["Logical Address"].ToString().Replace("%", "").Replace("I", "").Replace("W", "").Replace("Q", "").Replace(".", "").Insert(0, "1");
-                            FC_Digital_IN_Config.Write(TiaTools.Properties.Resources.FC_Digital_IN_Config_Part.Replace("$TEXT_NUMBER$", textNumber).Replace("$VAR_NAME$", row["Name"].ToString()));
+                            FC_Digital_IN_Config.Write(TiaTools.Properties.Resources.FC_Digital_IN_Config_Part.Replace("$VAR_NAME$", row["Name"].ToString()));
                             FC_Digital_IN_Config.Write("\n");
                         }
                     }
@@ -202,8 +201,7 @@ namespace TiaTools
                     {
                         if (row["Logical Address"].ToString().Contains("I") && row["Logical Address"].ToString().Contains("W"))
                         {
-                            string textNumber = row["Logical Address"].ToString().Replace("%", "").Replace("I", "").Replace("W", "").Replace("Q", "").Replace(".", "").Insert(0, "3");
-                            FC_Analog_IN_Config.Write(TiaTools.Properties.Resources.FC_Analog_IN_Config_Part.Replace("$TEXT_NUMBER$", textNumber).Replace("$VAR_NAME$", row["Name"].ToString()));
+                            FC_Analog_IN_Config.Write(TiaTools.Properties.Resources.FC_Analog_IN_Config_Part.Replace("$VAR_NAME$", row["Name"].ToString()));
                             FC_Analog_IN_Config.Write("\n");
                         }
                     }
@@ -268,8 +266,7 @@ namespace TiaTools
                     {
                         if (row["Logical Address"].ToString().Contains("Q") && !row["Logical Address"].ToString().Contains("W"))
                         {
-                            string textNumber = row["Logical Address"].ToString().Replace("%", "").Replace("I", "").Replace("W", "").Replace("Q", "").Replace(".", "").Insert(0, "2");
-                            FC_Digital_OUT_Config.Write(TiaTools.Properties.Resources.FC_Digital_OUT_Config_Part.Replace("$TEXT_NUMBER$", textNumber).Replace("$VAR_NAME$", row["Name"].ToString()));
+                            FC_Digital_OUT_Config.Write(TiaTools.Properties.Resources.FC_Digital_OUT_Config_Part.Replace("$VAR_NAME$", row["Name"].ToString()));
                             FC_Digital_OUT_Config.Write("\n");
                         }
                     }
@@ -334,8 +331,7 @@ namespace TiaTools
                     {
                         if (row["Logical Address"].ToString().Contains("Q") && row["Logical Address"].ToString().Contains("W"))
                         {
-                            string textNumber = row["Logical Address"].ToString().Replace("%", "").Replace("I", "").Replace("W", "").Replace("Q", "").Replace(".", "").Insert(0, "4");
-                            FC_Analog_OUT_Config.Write(TiaTools.Properties.Resources.FC_Analog_OUT_Config_Part.Replace("$TEXT_NUMBER$", textNumber).Replace("$VAR_NAME$", row["Name"].ToString()));
+                            FC_Analog_OUT_Config.Write(TiaTools.Properties.Resources.FC_Analog_OUT_Config_Part.Replace("$VAR_NAME$", row["Name"].ToString()));
                             FC_Analog_OUT_Config.Write("\n");
                         }
                     }
@@ -395,167 +391,7 @@ namespace TiaTools
                 }
                 #endregion
             }
-        }
-
-        private void buttonTextList_Click(object sender, EventArgs e)
-        {
-            //Select Folder To save File
-            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            folderBrowserDialog.ShowNewFolderButton = true;
-            folderBrowserDialog.RootFolder = Environment.SpecialFolder.MyComputer;
-
-            //New String To Save Filepath
-            string filePath;
-
-            //New DataTable To Store DataGridView Paramaters
-            DataTable dataTable = new DataTable();
-            dataTable = (DataTable)dataGridViewInput.DataSource;
-
-            //Create Source Files
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-            {
-
-                //Create a New Directory To store New Files
-                filePath = folderBrowserDialog.SelectedPath + @"\TIA_IO_Text_" + DateTime.Now.ToString().Replace("/", "_").Replace(" ", "_").Replace(":", "_");
-                Directory.CreateDirectory(filePath);
-
-                //Open Excel and create new Workbook
-                Excel.Application excel = new Excel.Application();
-                Excel.Workbook workbook = excel.Workbooks.Add(Type.Missing);
-                excel.DisplayAlerts = false;
-
-                #region IO_M_Unit
-                try
-                {
-                    //New WorkSheet
-                    Excel.Worksheet worksheet = (Excel.Worksheet)workbook.ActiveSheet;
-                    worksheet.Name = "M_Unit";
-
-                    //Set Coloumn Header
-                    worksheet.Cells[1, 1] = "Default";
-                    worksheet.Cells[1, 2] = "Value";
-                    worksheet.Cells[1, 3] = "M Unit";
-
-                    //Set Default Value
-                    worksheet.Cells[2, 1] = "True";
-                    worksheet.Cells[2, 2] = "0";
-                    worksheet.Cells[2, 3] = "Unit";
-
-                    //Gradi
-                    worksheet.Cells[3, 1] = "False";
-                    worksheet.Cells[3, 2] = "1";
-                    worksheet.Cells[3, 3] = "°C";
-
-                    //Litri
-                    worksheet.Cells[4, 1] = "False";
-                    worksheet.Cells[4, 2] = "2";
-                    worksheet.Cells[4, 3] = "l";
-
-                    //Secondi
-                    worksheet.Cells[5, 1] = "False";
-                    worksheet.Cells[5, 2] = "3";
-                    worksheet.Cells[5, 3] = "S";
-
-                    //Watt
-                    worksheet.Cells[6, 1] = "False";
-                    worksheet.Cells[6, 2] = "4";
-                    worksheet.Cells[6, 3] = "W";
-
-                }
-                catch (Exception ex)
-                {
-                    //display error message
-                    MessageBox.Show("Exception: " + ex.Message);
-                }
-                #endregion
-
-                #region IO_Text
-                try
-                {
-                    //New WorkSheet
-                    Excel.Worksheet worksheet = (Excel.Worksheet)workbook.Worksheets.Add();
-                    worksheet.Name = "IO_Text";
-
-                    //Set Coloumn Header
-                    worksheet.Cells[1, 1] = "Default";
-                    worksheet.Cells[1, 2] = "Value";
-                    worksheet.Cells[1, 3] = "Text it";
-                    worksheet.Cells[1, 4] = "Text en";
-                    worksheet.Cells[1, 5] = "Text fr";
-                    worksheet.Cells[1, 6] = "Text td";
-                    worksheet.Cells[1, 7] = "Text sp";
-
-                    //Set Default Value
-                    worksheet.Cells[2, 1] = "True";
-                    worksheet.Cells[2, 2] = "0";
-                    worksheet.Cells[2, 3] = "Default";
-                    worksheet.Cells[2, 4] = "Default";
-                    worksheet.Cells[2, 5] = "Default";
-                    worksheet.Cells[2, 6] = "Default";
-                    worksheet.Cells[2, 7] = "Default";
-
-
-
-                    for (int i = 0; i <= dataTable.Rows.Count - 1; i++)
-                    {
-                        string completeName;
-                        string textNumber;
-                        string address = dataTable.Rows[i]["Logical Address"].ToString().Replace("%", "") + "_";
-
-                        if (dataTable.Rows[i]["Logical Address"].ToString().Contains("I") && !dataTable.Rows[i]["Logical Address"].ToString().Contains("W"))
-                        {
-                            completeName = address + "DI_" + dataTable.Rows[i]["Name"];
-                            textNumber = dataTable.Rows[i]["Logical Address"].ToString().Replace("%", "").Replace("I", "").Replace("W", "").Replace("Q", "").Replace(".", "").Insert(0, "1");
-                        }
-                        else if (dataTable.Rows[i]["Logical Address"].ToString().Contains("I") && dataTable.Rows[i]["Logical Address"].ToString().Contains("W"))
-                        {
-                            completeName = address + "AI_" + dataTable.Rows[i]["Name"];
-                            textNumber = dataTable.Rows[i]["Logical Address"].ToString().Replace("%", "").Replace("I", "").Replace("W", "").Replace("Q", "").Replace(".", "").Insert(0, "3");
-                        }
-                        else if (dataTable.Rows[i]["Logical Address"].ToString().Contains("Q") && !dataTable.Rows[i]["Logical Address"].ToString().Contains("W"))
-                        {
-                            completeName = address + "DO_" + dataTable.Rows[i]["Name"];
-                            textNumber = dataTable.Rows[i]["Logical Address"].ToString().Replace("%", "").Replace("I", "").Replace("W", "").Replace("Q", "").Replace(".", "").Insert(0, "2");
-                        }
-                        else if (dataTable.Rows[i]["Logical Address"].ToString().Contains("Q") && dataTable.Rows[i]["Logical Address"].ToString().Contains("W"))
-                        {
-                            completeName = address + "AO_" + dataTable.Rows[i]["Name"];
-                            textNumber = dataTable.Rows[i]["Logical Address"].ToString().Replace("%", "").Replace("I", "").Replace("W", "").Replace("Q", "").Replace(".", "").Insert(0, "4");
-                        }
-                        else
-                        {
-                            completeName = null;
-                            textNumber = null;
-                        }
-
-                        worksheet.Cells[i + 3, 1] = "False";
-                        worksheet.Cells[i + 3, 2] = textNumber;
-                        worksheet.Cells[i + 3, 3] = completeName; //it
-                        worksheet.Cells[i + 3, 4] = address + "en"; //en
-                        worksheet.Cells[i + 3, 5] = address + "fr"; //fr
-                        worksheet.Cells[i + 3, 6] = address + "td"; //td
-                        worksheet.Cells[i + 3, 7] = address + "sp"; //sp
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    //display error message
-                    MessageBox.Show("Exception: " + ex.Message);
-                }
-                #endregion
-
-                //Saving
-                workbook.SaveAs(filePath + @"\IO_Text.xlsx");
-
-                //close Excel
-                workbook.Close();
-                excel.Quit();
-
-            }
-
             #endregion
-
         }
     }
 }
