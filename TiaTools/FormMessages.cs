@@ -46,7 +46,7 @@ namespace TiaTools
             dataTable.Columns.Add("Info Text fr");
             dataTable.Columns.Add("Info Text td");
             dataTable.Columns.Add("Info Text sp");
-            dataTable.Columns.Add("Ack Req");
+            dataTable.Columns.Add("Msg Class");
             for (int i = 1; i <= Int32.Parse(textBoxSMNumber.Text); i++)
             {
                 dataTable.Columns.Add("Msg Reaction SM " + i.ToString());
@@ -145,8 +145,11 @@ namespace TiaTools
 
             //Calculate Tot Alarm Number Hmi word Number SM Number
             MsgNb = dataTable.Rows.Count;
-            WordNb = (MsgNb / 16);
-            WordNb = WordNb + (WordNb % 16);
+            WordNb = (MsgNb / 16) - 1;
+            if ((WordNb % 16) > 0)
+            {
+                WordNb++;
+            }
 
             //Number of SM Coloumns in DataTable
             foreach (DataColumn column in dataTable.Columns)
@@ -178,39 +181,33 @@ namespace TiaTools
                         excel.DisplayAlerts = false;
 
                         //Set Coloumn Header
-                        worksheet.Cells[1, 1] = "Message Text it";
-                        worksheet.Cells[1, 2] = "Message Text en";
-                        worksheet.Cells[1, 3] = "Message Text fr";
-                        worksheet.Cells[1, 4] = "Message Text td";
-                        worksheet.Cells[1, 5] = "Message Text sp";
-                        worksheet.Cells[1, 6] = "Info Text it";
-                        worksheet.Cells[1, 7] = "Info  Text en";
-                        worksheet.Cells[1, 8] = "Info  Text fr";
-                        worksheet.Cells[1, 9] = "Info  Text td";
-                        worksheet.Cells[1, 10] = "Info  Text sp";
-                        worksheet.Cells[1, 11] = "Message Class";
+                        worksheet.Cells[1, 1] = "ID";
+                        worksheet.Cells[1, 2] = "Message Text it";
+                        worksheet.Cells[1, 3] = "Message Text en";
+                        worksheet.Cells[1, 4] = "Message Text fr";
+                        worksheet.Cells[1, 5] = "Message Text td";
+                        worksheet.Cells[1, 6] = "Message Text sp";
+                        worksheet.Cells[1, 7] = "Info Text it";
+                        worksheet.Cells[1, 8] = "Info  Text en";
+                        worksheet.Cells[1, 9] = "Info  Text fr";
+                        worksheet.Cells[1, 10] = "Info  Text td";
+                        worksheet.Cells[1, 11] = "Info  Text sp";
+                        worksheet.Cells[1, 12] = "Message Class";
 
                         for (int i = 0; i <= dataTable.Rows.Count - 1; i++)
                         {
-                            worksheet.Cells[i + 2, 1] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " / " + "Device" + " : " + dataTable.Rows[i]["Device"] + " -> " + dataTable.Rows[i]["Msg Text it"];
-                            worksheet.Cells[i + 2, 2] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " / " + "Device" + " : " + dataTable.Rows[i]["Device"] + " -> " + dataTable.Rows[i]["Msg Text en"]; ;
-                            worksheet.Cells[i + 2, 3] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " / " + "Device" + " : " + dataTable.Rows[i]["Device"] + " -> " + dataTable.Rows[i]["Msg Text fr"]; ;
-                            worksheet.Cells[i + 2, 4] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " / " + "Device" + " : " + dataTable.Rows[i]["Device"] + " -> " + dataTable.Rows[i]["Msg Text td"]; ;
-                            worksheet.Cells[i + 2, 5] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " / " + "Device" + " : " + dataTable.Rows[i]["Device"] + " -> " + dataTable.Rows[i]["Msg Text sp"]; ;
-                            worksheet.Cells[i + 2, 6] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " Info : " + dataTable.Rows[i]["Info Text it"];
-                            worksheet.Cells[i + 2, 7] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " Info : " + dataTable.Rows[i]["Info Text en"]; ;
-                            worksheet.Cells[i + 2, 8] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " Info : " + dataTable.Rows[i]["Info Text fr"]; ;
-                            worksheet.Cells[i + 2, 9] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " Info : " + dataTable.Rows[i]["Info Text td"]; ;
-                            worksheet.Cells[i + 2, 10] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " Info : " + dataTable.Rows[i]["Info Text sp"]; ;
-                            worksheet.Cells[i + 2, 11] = "Message Class";
-                            if (dataTable.Rows[i]["Ack Req"].ToString() == "True")
-                            {
-                                worksheet.Cells[i + 2, 11] = "Acknowledgement";
-                            }
-                            else
-                            {
-                                worksheet.Cells[i + 2, 11] = "No Acknowledgement";
-                            }
+                            worksheet.Cells[i + 2, 1] = dataTable.Rows[i]["Nb"];
+                            worksheet.Cells[i + 2, 2] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " / " + "Device" + " : " + dataTable.Rows[i]["Device"] + " -> " + dataTable.Rows[i]["Msg Text it"];
+                            worksheet.Cells[i + 2, 3] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " / " + "Device" + " : " + dataTable.Rows[i]["Device"] + " -> " + dataTable.Rows[i]["Msg Text en"]; ;
+                            worksheet.Cells[i + 2, 4] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " / " + "Device" + " : " + dataTable.Rows[i]["Device"] + " -> " + dataTable.Rows[i]["Msg Text fr"]; ;
+                            worksheet.Cells[i + 2, 5] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " / " + "Device" + " : " + dataTable.Rows[i]["Device"] + " -> " + dataTable.Rows[i]["Msg Text td"]; ;
+                            worksheet.Cells[i + 2, 6] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " / " + "Device" + " : " + dataTable.Rows[i]["Device"] + " -> " + dataTable.Rows[i]["Msg Text sp"]; ;
+                            worksheet.Cells[i + 2, 7] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " Info : " + dataTable.Rows[i]["Info Text it"];
+                            worksheet.Cells[i + 2, 8] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " Info : " + dataTable.Rows[i]["Info Text en"]; ;
+                            worksheet.Cells[i + 2, 9] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " Info : " + dataTable.Rows[i]["Info Text fr"]; ;
+                            worksheet.Cells[i + 2, 10] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " Info : " + dataTable.Rows[i]["Info Text td"]; ;
+                            worksheet.Cells[i + 2, 11] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " Info : " + dataTable.Rows[i]["Info Text sp"]; ;
+                            worksheet.Cells[i + 2, 12] = dataTable.Rows[i]["Msg Class"];
                         }
 
                         //Saving
@@ -258,16 +255,18 @@ namespace TiaTools
 
                     //Body
                     FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Begin);
+                    FC_Msg_Config.Write("\n");
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body.Replace("$MSG_NUMBER$", row["Nb"].ToString()));
+                        FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body.Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$MSG_CLASS$", row["Msg Class"].ToString()));
                         for (int i = 1; i <= SMNb; i++)
                         {
                             FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body_2.Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$SM_NUMBER$", i.ToString()));
+                            FC_Msg_Config.Write("\n");
                         }
                     }
-                    FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_End.Replace("$WORD_NUMBER",WordNb.ToString()).Replace("$MSG_TOT_NUMBER", MsgNb.ToString().Replace("$SM_TOT$", SMNb.ToString())));
                     FC_Msg_Config.Write("\n");
+                    FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_End.Replace("$WORD_NUMBER$",WordNb.ToString()).Replace("$MSG_TOT_NUMBER$", MsgNb.ToString().Replace("$SM_TOT$", SMNb.ToString())));
 
 
                     FC_Msg_Config.Close();
@@ -322,6 +321,34 @@ namespace TiaTools
                     Msg_Types.Dispose();
                 }
                 #endregion
+
+                #region FC_Msg_Store_Sql
+                if (checkBoxSql.Checked)
+                {
+                    //New Stream For Msg_Types
+                    StreamWriter FC_Msg_Store_Sql = new StreamWriter(filePath + @"\FC_Msg_Store_Sql.scl", false);
+
+                    //Body
+                    FC_Msg_Store_Sql.Write(TiaTools.Properties.Resources.FC_Msg_Store_Sql);
+
+                    FC_Msg_Store_Sql.Close();
+                    FC_Msg_Store_Sql.Dispose();
+                }
+                #endregion
+
+                #region FC_Msg_Reaction
+                if (checkBoxSql.Checked)
+                {
+                    //New Stream For Msg_Types
+                    StreamWriter FC_Msg_Reaction = new StreamWriter(filePath + @"\FC_Msg_Reaction.scl", false);
+
+                    //Body
+                    FC_Msg_Reaction.Write(TiaTools.Properties.Resources.FC_Msg_Reaction);
+
+                    FC_Msg_Reaction.Close();
+                    FC_Msg_Reaction.Dispose();
+                }
+                #endregion
             }
         }
 
@@ -371,10 +398,10 @@ namespace TiaTools
             dataGridView.Columns.Add("Info Text sp", "Info Text sp");
 
             DataGridViewComboBoxColumn columnAckReq = new DataGridViewComboBoxColumn();
-            columnAckReq.Name = "Ack Req";
-            columnAckReq.HeaderText = "Ack Req";
-            columnAckReq.Items.Add("True");
-            columnAckReq.Items.Add("False");
+            columnAckReq.Name = "Msg Class";
+            columnAckReq.HeaderText = "Msg Class";
+            columnAckReq.Items.Add("ACK");
+            columnAckReq.Items.Add("NO_ACK");
             dataGridView.Columns.Add(columnAckReq);
 
             for (int i = 1; i <= SMColNb; i++)
@@ -409,7 +436,7 @@ namespace TiaTools
             dataGridView.Columns["Info Text fr"].DataPropertyName = dataTable.Columns["Info Text fr"].ToString();
             dataGridView.Columns["Info Text td"].DataPropertyName = dataTable.Columns["Info Text td"].ToString();
             dataGridView.Columns["Info Text sp"].DataPropertyName = dataTable.Columns["Info Text sp"].ToString();
-            dataGridView.Columns["Ack Req"].DataPropertyName = dataTable.Columns["Ack Req"].ToString();
+            dataGridView.Columns["Msg Class"].DataPropertyName = dataTable.Columns["Msg Class"].ToString();
             for (int i = 1; i <= SMColNb; i++)
             {
                 dataGridView.Columns["Msg Reaction SM " + i.ToString()].DataPropertyName = dataTable.Columns["Msg Reaction SM " + i.ToString()].ToString();

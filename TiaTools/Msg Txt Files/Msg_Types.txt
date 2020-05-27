@@ -1,8 +1,9 @@
 ﻿TYPE "Msg_CONFIG"
 VERSION : 0.1
    STRUCT
-      Nb : Word;   // Numero Del Messaggio
       Reaction : Array[0..$SM_TOT$] of Int;   // Reazione Scaturita dal msg 0 = None, 1 = pause, 2 = Halt
+      Class : Int;
+      Nb : Int;
    END_STRUCT;
 
 END_TYPE
@@ -20,6 +21,7 @@ TYPE "Msg_GEN"
 VERSION : 0.1
    STRUCT
       Trigger { S7_SetPoint := 'True'} : Bool;   // Trigger del msg, se 1 il messaggio viene visualizzato e viene generato il relativo comando di pausa o stop configurato
+      Active : Bool;   // Message Is Active
       Config : "Msg_CONFIG";
       Sql : "Msg_SQL";
    END_STRUCT;
@@ -29,7 +31,7 @@ END_TYPE
 TYPE "Msg_GEN_CONFIG"
 VERSION : 0.1
    STRUCT
-      MsgHmiWordNb : Int;  //Numero di Word Usate Per inviare la visualizzazione HMI
+      MsgHmiWordNb : Int;
       MsgMaxNb : Int;   // Numero massimo dei messaggi = lunghezza array Msg
       MsgMaxSM : Int;   // Numero di Macchine a stati utilizzate 
    END_STRUCT;
