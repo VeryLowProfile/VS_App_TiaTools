@@ -261,9 +261,13 @@ namespace TiaTools
                         FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body.Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$MSG_CLASS$", row["Msg Class"].ToString()));
                         for (int i = 1; i <= SMNb; i++)
                         {
-                            FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body_2.Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$SM_NUMBER$", i.ToString()));
-                            FC_Msg_Config.Write("\n");
+                            if (row["Msg Reaction SM " + i].ToString() != "NONE")
+                            {
+                                FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body_2.Replace("$MSG_REACTION$", row["Msg Reaction SM "].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$SM_NUMBER$", i.ToString()));
+                                FC_Msg_Config.Write("\n");
+                            }
                         }
+                        FC_Msg_Config.Write("\n");
                     }
                     FC_Msg_Config.Write("\n");
                     FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_End.Replace("$WORD_NUMBER$",WordNb.ToString()).Replace("$MSG_TOT_NUMBER$", MsgNb.ToString().Replace("$SM_TOT$", SMNb.ToString())));
