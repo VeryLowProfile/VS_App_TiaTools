@@ -2,8 +2,3 @@
 	//********************************************************************//
 	"FC_Msg_Reaction"(MsgNb:=$MSG_NUMBER$,
 	                  Msg:="DB_Msg".Msg);
-	
-	"FC_Msg_Store_Sql"(MsgNb:=$MSG_NUMBER$,
-	                   FOData:="DB_FO_Data".FOData,
-	                   Msg:="DB_Msg".Msg);
-
