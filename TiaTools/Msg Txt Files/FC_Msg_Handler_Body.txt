@@ -1,4 +1,5 @@
-﻿	//Msg $MSG_NUMBER$
+﻿	//Msg $MSG_NUMBER$ - $MSG_DEVICE$ - $MSG_TEXT$
 	//********************************************************************//
 	"FC_Msg_Reaction"(MsgNb:=$MSG_NUMBER$,
+					  Ack := "DB_Msg".Msg.Ack,
 	                  Msg:="DB_Msg".Msg);

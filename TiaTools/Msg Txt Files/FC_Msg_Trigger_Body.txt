@@ -1,3 +1,3 @@
-﻿	//Msg $MSG_NUMBER$ 
+﻿	//Msg $MSG_NUMBER$ - $MSG_DEVICE$ - $MSG_TEXT$
 	//********************************************************************//
 	"DB_Msg".Msg.Msg[$MSG_NUMBER$].Trigger := FALSE;

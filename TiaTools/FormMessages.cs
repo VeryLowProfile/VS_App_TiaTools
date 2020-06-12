@@ -146,7 +146,7 @@ namespace TiaTools
             //Calculate Tot Alarm Number Hmi word Number SM Number
             MsgNb = dataTable.Rows.Count;
             WordNb = (MsgNb / 16) - 1;
-            if ((WordNb % 16) > 0)
+            if ((MsgNb % 16) > 0)
             {
                 WordNb++;
             }
@@ -237,8 +237,11 @@ namespace TiaTools
                     FC_Msg_Handler.Write("\n");
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        FC_Msg_Handler.Write(TiaTools.Properties.Resources.FC_Msg_Handler_Body.Replace("$MSG_NUMBER$", row["Nb"].ToString())); ;
-                        FC_Msg_Handler.Write("\n");
+                        if (!row["Device"].ToString().Contains("SPARE"))
+                        {
+                            FC_Msg_Handler.Write(TiaTools.Properties.Resources.FC_Msg_Handler_Body.Replace("$MSG_TEXT$", row["Msg Text it"].ToString()).Replace("$MSG_DEVICE$", row["Device"].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()));
+                            FC_Msg_Handler.Write("\n");
+                        }
                     }
                     FC_Msg_Handler.Write(TiaTools.Properties.Resources.FC_Msg_Handler_End);
 
@@ -258,19 +261,23 @@ namespace TiaTools
                     FC_Msg_Config.Write("\n");
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body.Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$MSG_CLASS$", row["Msg Class"].ToString()));
-                        for (int i = 1; i <= SMNb; i++)
+                        if (!row["Device"].ToString().Contains("SPARE"))
                         {
-                            if (row["Msg Reaction SM " + i].ToString() != "NONE")
+                            FC_Msg_Config.Write("\n");
+                            FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body.Replace("$MSG_TEXT$", row["Msg Text it"].ToString()).Replace("$MSG_DEVICE$", row["Device"].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$MSG_CLASS$", row["Msg Class"].ToString()));
+                            for (int i = 1; i <= SMNb; i++)
                             {
-                                FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body_2.Replace("$MSG_REACTION$", row["Msg Reaction SM "].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$SM_NUMBER$", i.ToString()));
-                                FC_Msg_Config.Write("\n");
+                                if (row["Msg Reaction SM " + i].ToString() != "NONE")
+                                {
+                                    FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body_2.Replace("$MSG_REACTION$", row["Msg Reaction SM "].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$SM_NUMBER$", i.ToString()));
+                                    FC_Msg_Config.Write("\n");
+                                }
                             }
+                            FC_Msg_Config.Write("\n");
                         }
-                        FC_Msg_Config.Write("\n");
                     }
                     FC_Msg_Config.Write("\n");
-                    FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_End.Replace("$WORD_NUMBER$",WordNb.ToString()).Replace("$MSG_TOT_NUMBER$", MsgNb.ToString().Replace("$SM_TOT$", SMNb.ToString())));
+                    FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_End.Replace("$WORD_NUMBER$",WordNb.ToString()).Replace("$MSG_TOT_NUMBER$", MsgNb.ToString()).Replace("$SM_TOT$", SMNb.ToString()));
 
 
                     FC_Msg_Config.Close();
@@ -288,8 +295,11 @@ namespace TiaTools
                     FC_Msg_Trigger.Write(TiaTools.Properties.Resources.FC_Msg_Trigger_Begin);
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        FC_Msg_Trigger.Write(TiaTools.Properties.Resources.FC_Msg_Trigger_Body.Replace("$MSG_NUMBER$", row["Nb"].ToString()));
-                        FC_Msg_Trigger.Write("\n");
+                        if (!row["Device"].ToString().Contains("SPARE"))
+                        {
+                            FC_Msg_Trigger.Write(TiaTools.Properties.Resources.FC_Msg_Trigger_Body.Replace("$MSG_TEXT$", row["Msg Text it"].ToString()).Replace("$MSG_DEVICE$", row["Device"].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()));
+                            FC_Msg_Trigger.Write("\n");
+                        }
                     }
                     FC_Msg_Trigger.WriteLine("END_FUNCTION");
 
