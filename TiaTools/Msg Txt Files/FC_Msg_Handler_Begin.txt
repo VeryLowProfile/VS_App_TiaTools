@@ -18,4 +18,11 @@ BEGIN
 	//Description: FC_Msg_Handler
 	//Developer: Topcast
 	//********************************************************************//
+
+	//Reset Msg Pending
+	//********************************************************************//
+	#Msg.MsgRecap.MsgPending := 0;
+	FOR #i := 0 TO #Msg.Config.MsgMaxSM BY 1 DO
+		#Msg.MsgRecap.MsgPendingSM[#i] := 0;
+	END_FOR;
 	

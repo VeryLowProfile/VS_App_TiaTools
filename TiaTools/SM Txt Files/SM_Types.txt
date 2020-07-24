@@ -40,4 +40,24 @@ VERSION : 0.1
       Flags : "Sm_FLAGS";
    END_STRUCT;
 
+TYPE "Hmi_SM"
+VERSION : 0.1
+   STRUCT
+      CommandStart : Bool;
+      CommandPause : Bool;
+      CommandStop : Bool;
+      CommandReset : Bool;
+      commandRelease : Bool;
+      StatusPlay : Bool;
+      StatusPause : Bool;
+      StatusStop : Bool;
+      StatusReset : Bool;
+      StepNb : Int;
+      SubStepNb : Int;
+      StepName : String;
+      StatusName : String;
+   END_STRUCT;
+
+END_TYPE
+
 END_TYPE

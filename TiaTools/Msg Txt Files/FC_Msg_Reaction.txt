@@ -18,13 +18,14 @@ VERSION : 0.1
 
 
 BEGIN
+
     //********************************************************************//
     //Name: FC_Msg_Reaction
     //Version: 0.1
     //Description: FC_Msg_Reaction
     //Developer: Topcast
     //********************************************************************//
-
+    
     //Msg Active
     //********************************************************************//
     IF #Msg.Msg[#MsgNb].Trigger THEN
@@ -32,7 +33,7 @@ BEGIN
             #Msg.Msg[#MsgNb].Active := 1;
         END_IF;
     END_IF;
-
+    
     //Msg Ack
     //********************************************************************//
     IF #Msg.Msg[#MsgNb].Config.Class = 1 THEN
@@ -50,27 +51,28 @@ BEGIN
         END_IF;
     END_IF;
     
-
     //Check Reaction For Every SM
     //********************************************************************//
     IF #Msg.Msg[#MsgNb].Active THEN
         FOR #i := 0 TO #Msg.Config.MsgMaxSM DO
             IF #Msg.Msg[#MsgNb].Config.Reaction[#i] = "NONE" THEN
                 ; //Non Sono Previste Comandi
-            ELSIF #Msg.Msg[#MsgNb].Config.Reaction[#i] = "PAUSE" THEN
+            END_IF;
+            IF #Msg.Msg[#MsgNb].Config.Reaction[#i] = "PAUSE" THEN
                 #Msg.MsgReactionCommand[#i].Pause := 1;
-            ELSIF #Msg.Msg[#MsgNb].Config.Reaction[#i] = "HALT" THEN
+            END_IF;
+            IF #Msg.Msg[#MsgNb].Config.Reaction[#i] = "HALT" THEN
                 #Msg.MsgReactionCommand[#i].Halt := 1;
             END_IF;
         END_FOR;
     END_IF;
-
+    
     //Hmi Msg Trigger
     //********************************************************************//
     #HmiBitNb := 0;
     #HmiWordNb := 0;
-    #HmiWordNb := #MsgNb / 16;
-    #HmiBitNb := (#MsgNb MOD 16) - 1;
+    #HmiWordNb := ((#MsgNb - 1) / 16);
+    #HmiBitNb := ((#MsgNb - 1) MOD 16);
     IF #Msg.Msg[#MsgNb].Active THEN
         //Hmi Trigger
         CASE #HmiBitNb OF
@@ -142,6 +144,15 @@ BEGIN
             15:
                 #Msg.Msg_Hmi[#HmiWordNb].%X15 := 0;
         END_CASE;
+    END_IF;
+    
+    IF #Msg.Msg[#MsgNb].Active THEN
+        #Msg.MsgRecap.MsgPending := 1;
+        FOR #i := 0 TO #Msg.Config.MsgMaxSM BY 1 DO
+            IF #Msg.Msg[#MsgNb].Config.Reaction[#i] > 0 THEN
+                #Msg.MsgRecap.MsgPendingSM[#i] := 1;
+            END_IF;
+        END_FOR;
     END_IF;
     
 END_FUNCTION

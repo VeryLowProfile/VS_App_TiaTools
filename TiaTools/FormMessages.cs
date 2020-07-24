@@ -35,7 +35,11 @@ namespace TiaTools
 
             //Add Columns To Data Table
             dataTable.Columns.Add("Nb");
-            dataTable.Columns.Add("Device");
+            dataTable.Columns.Add("Device it");
+            dataTable.Columns.Add("Device en");
+            dataTable.Columns.Add("Device fr");
+            dataTable.Columns.Add("Device td");
+            dataTable.Columns.Add("Device sp");
             dataTable.Columns.Add("Msg Text it");
             dataTable.Columns.Add("Msg Text en");
             dataTable.Columns.Add("Msg Text fr");
@@ -197,16 +201,16 @@ namespace TiaTools
                         for (int i = 0; i <= dataTable.Rows.Count - 1; i++)
                         {
                             worksheet.Cells[i + 2, 1] = dataTable.Rows[i]["Nb"];
-                            worksheet.Cells[i + 2, 2] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " / " + "Device" + " : " + dataTable.Rows[i]["Device"] + " -> " + dataTable.Rows[i]["Msg Text it"];
-                            worksheet.Cells[i + 2, 3] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " / " + "Device" + " : " + dataTable.Rows[i]["Device"] + " -> " + dataTable.Rows[i]["Msg Text en"]; ;
-                            worksheet.Cells[i + 2, 4] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " / " + "Device" + " : " + dataTable.Rows[i]["Device"] + " -> " + dataTable.Rows[i]["Msg Text fr"]; ;
-                            worksheet.Cells[i + 2, 5] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " / " + "Device" + " : " + dataTable.Rows[i]["Device"] + " -> " + dataTable.Rows[i]["Msg Text td"]; ;
-                            worksheet.Cells[i + 2, 6] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " / " + "Device" + " : " + dataTable.Rows[i]["Device"] + " -> " + dataTable.Rows[i]["Msg Text sp"]; ;
-                            worksheet.Cells[i + 2, 7] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " Info : " + dataTable.Rows[i]["Info Text it"];
-                            worksheet.Cells[i + 2, 8] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " Info : " + dataTable.Rows[i]["Info Text en"]; ;
-                            worksheet.Cells[i + 2, 9] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " Info : " + dataTable.Rows[i]["Info Text fr"]; ;
-                            worksheet.Cells[i + 2, 10] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " Info : " + dataTable.Rows[i]["Info Text td"]; ;
-                            worksheet.Cells[i + 2, 11] = "Msg Nb" + " : " + dataTable.Rows[i]["Nb"] + " Info : " + dataTable.Rows[i]["Info Text sp"]; ;
+                            worksheet.Cells[i + 2, 2] =  dataTable.Rows[i]["Device it"] + " -> " + dataTable.Rows[i]["Msg Text it"];
+                            worksheet.Cells[i + 2, 3] =  dataTable.Rows[i]["Device en"] + " -> " + dataTable.Rows[i]["Msg Text en"]; 
+                            worksheet.Cells[i + 2, 4] =  dataTable.Rows[i]["Device fr"] + " -> " + dataTable.Rows[i]["Msg Text fr"]; 
+                            worksheet.Cells[i + 2, 5] =  dataTable.Rows[i]["Device td"] + " -> " + dataTable.Rows[i]["Msg Text td"]; 
+                            worksheet.Cells[i + 2, 6] =  dataTable.Rows[i]["Device sp"] + " -> " + dataTable.Rows[i]["Msg Text sp"]; 
+                            worksheet.Cells[i + 2, 7] = "Info : " + dataTable.Rows[i]["Info Text it"];
+                            worksheet.Cells[i + 2, 8] = "Info : " + dataTable.Rows[i]["Info Text en"]; 
+                            worksheet.Cells[i + 2, 9] = "Info : " + dataTable.Rows[i]["Info Text fr"]; 
+                            worksheet.Cells[i + 2, 10] = "Info : " + dataTable.Rows[i]["Info Text td"]; 
+                            worksheet.Cells[i + 2, 11] = "Info : " + dataTable.Rows[i]["Info Text sp"]; 
                             worksheet.Cells[i + 2, 12] = dataTable.Rows[i]["Msg Class"];
                         }
 
@@ -237,9 +241,9 @@ namespace TiaTools
                     FC_Msg_Handler.Write("\n");
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        if (!row["Device"].ToString().Contains("SPARE"))
+                        if (!row["Device it"].ToString().Contains("SPARE"))
                         {
-                            FC_Msg_Handler.Write(TiaTools.Properties.Resources.FC_Msg_Handler_Body.Replace("$MSG_TEXT$", row["Msg Text it"].ToString()).Replace("$MSG_DEVICE$", row["Device"].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()));
+                            FC_Msg_Handler.Write(TiaTools.Properties.Resources.FC_Msg_Handler_Body.Replace("$MSG_TEXT$", row["Msg Text it"].ToString()).Replace("$MSG_DEVICE$", row["Device it"].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()));
                             FC_Msg_Handler.Write("\n");
                         }
                     }
@@ -261,15 +265,15 @@ namespace TiaTools
                     FC_Msg_Config.Write("\n");
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        if (!row["Device"].ToString().Contains("SPARE"))
+                        if (!row["Device it"].ToString().Contains("SPARE"))
                         {
                             FC_Msg_Config.Write("\n");
-                            FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body.Replace("$MSG_TEXT$", row["Msg Text it"].ToString()).Replace("$MSG_DEVICE$", row["Device"].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$MSG_CLASS$", row["Msg Class"].ToString()));
+                            FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body.Replace("$MSG_TEXT$", row["Msg Text it"].ToString()).Replace("$MSG_DEVICE$", row["Device it"].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$MSG_CLASS$", row["Msg Class"].ToString()));
                             for (int i = 1; i <= SMNb; i++)
                             {
                                 if (row["Msg Reaction SM " + i].ToString() != "NONE")
                                 {
-                                    FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body_2.Replace("$MSG_REACTION$", row["Msg Reaction SM "].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$SM_NUMBER$", i.ToString()));
+                                    FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body_2.Replace("$MSG_REACTION$", row["Msg Reaction SM " + i].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$SM_NUMBER$", i.ToString()));
                                     FC_Msg_Config.Write("\n");
                                 }
                             }
@@ -295,9 +299,9 @@ namespace TiaTools
                     FC_Msg_Trigger.Write(TiaTools.Properties.Resources.FC_Msg_Trigger_Begin);
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        if (!row["Device"].ToString().Contains("SPARE"))
+                        if (!row["Device it"].ToString().Contains("SPARE"))
                         {
-                            FC_Msg_Trigger.Write(TiaTools.Properties.Resources.FC_Msg_Trigger_Body.Replace("$MSG_TEXT$", row["Msg Text it"].ToString()).Replace("$MSG_DEVICE$", row["Device"].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()));
+                            FC_Msg_Trigger.Write(TiaTools.Properties.Resources.FC_Msg_Trigger_Body.Replace("$MSG_TEXT$", row["Msg Text it"].ToString()).Replace("$MSG_DEVICE$", row["Device it"].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()));
                             FC_Msg_Trigger.Write("\n");
                         }
                     }
@@ -399,7 +403,11 @@ namespace TiaTools
 
             //Add Same Coloumns To DataGridView but of a different Type
             dataGridView.Columns.Add("Nb", "Nb");
-            dataGridView.Columns.Add("Device", "Device");
+            dataGridView.Columns.Add("Device it", "Device it");
+            dataGridView.Columns.Add("Device en", "Device en");
+            dataGridView.Columns.Add("Device fr", "Device fr");
+            dataGridView.Columns.Add("Device td", "Device td");
+            dataGridView.Columns.Add("Device sp", "Device sp");
             dataGridView.Columns.Add("Msg Text it", "Msg Text it");
             dataGridView.Columns.Add("Msg Text en", "Msg Text en");
             dataGridView.Columns.Add("Msg Text fr", "Msg Text fr");
@@ -439,7 +447,11 @@ namespace TiaTools
 
             //Bind new Coloums To DataTable Coloumns
             dataGridView.Columns["Nb"].DataPropertyName = dataTable.Columns["Nb"].ToString();
-            dataGridView.Columns["Device"].DataPropertyName = dataTable.Columns["Device"].ToString();
+            dataGridView.Columns["Device it"].DataPropertyName = dataTable.Columns["Device it"].ToString();
+            dataGridView.Columns["Device en"].DataPropertyName = dataTable.Columns["Device en"].ToString();
+            dataGridView.Columns["Device fr"].DataPropertyName = dataTable.Columns["Device fr"].ToString();
+            dataGridView.Columns["Device td"].DataPropertyName = dataTable.Columns["Device td"].ToString();
+            dataGridView.Columns["Device sp"].DataPropertyName = dataTable.Columns["Device sp"].ToString();
             dataGridView.Columns["Msg Text it"].DataPropertyName = dataTable.Columns["Msg Text it"].ToString();
             dataGridView.Columns["Msg Text en"].DataPropertyName = dataTable.Columns["Msg Text en"].ToString();
             dataGridView.Columns["Msg Text fr"].DataPropertyName = dataTable.Columns["Msg Text fr"].ToString();
