@@ -433,6 +433,7 @@ namespace TiaTools
                 columnReaction.Name = colName;
                 columnReaction.HeaderText = colName;
                 columnReaction.Items.Add("NONE");
+                columnReaction.Items.Add("STORE");
                 columnReaction.Items.Add("PAUSE");
                 columnReaction.Items.Add("HALT");
                 dataGridView.Columns.Add(columnReaction);

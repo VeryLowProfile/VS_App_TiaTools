@@ -50,8 +50,12 @@ END_TYPE
 TYPE "Msg_RESUME"
 VERSION : 0.1
    STRUCT
-      MsgPending : Bool;   // Almeno un Msg attivo
-      MsgPendingSM : Array[0..$SM_TOT$] of Bool;
+      MsgPendingACK : Bool;
+      MsgPendingNO_ACK : Bool;
+      MsgPendingSM : Array[0..12] of Struct
+         ACK : Bool;
+         NO_ACK : Bool;
+      END_STRUCT;
    END_STRUCT;
 
 END_TYPE

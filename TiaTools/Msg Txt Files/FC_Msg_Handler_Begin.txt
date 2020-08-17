@@ -21,8 +21,10 @@ BEGIN
 
 	//Reset Msg Pending
 	//********************************************************************//
-	#Msg.MsgRecap.MsgPending := 0;
+	#Msg.MsgRecap.MsgPendingACK := 0;
+	#Msg.MsgRecap.MsgPendingNO_ACK := 0;
 	FOR #i := 0 TO #Msg.Config.MsgMaxSM BY 1 DO
-		#Msg.MsgRecap.MsgPendingSM[#i] := 0;
+		#Msg.MsgRecap.MsgPendingSM[#i].ACK := 0;
+		#Msg.MsgRecap.MsgPendingSM[#i].NO_ACK := 0;
 	END_FOR;
 	

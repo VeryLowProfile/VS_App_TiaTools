@@ -3,3 +3,7 @@
 	"FC_Msg_Reaction"(MsgNb:=$MSG_NUMBER$,
 					  Ack := "DB_Msg".Msg.Ack,
 	                  Msg:="DB_Msg".Msg);
+
+	"FC_Msg_Store_Sql"(FOData := "DB_FO_Data".FOData,
+					  MsgNb := $MSG_NUMBER$,
+					  Msg:="DB_Msg".Msg);
