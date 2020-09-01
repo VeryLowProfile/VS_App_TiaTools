@@ -1,7 +1,7 @@
 ﻿TYPE "Msg_CONFIG"
 VERSION : 0.1
    STRUCT
-      Reaction : Array[0..$SM_TOT$] of Int;   // Reazione Scaturita dal msg 0 = None, 1 = pause, 2 = Halt
+      Reaction : Array[0..12] of Int := 13(1);   // Reazione Scaturita dal msg 0 = None,  1 = store, 2 = pause, 3 = Halt
       Class : Int;
       Nb : Int;
    END_STRUCT;

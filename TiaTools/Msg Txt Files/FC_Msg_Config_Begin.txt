@@ -1,6 +1,10 @@
 ﻿FUNCTION "FC_Msg_Config" : Void
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
+   VAR_TEMP 
+      i : Int;
+   END_VAR
+
    VAR CONSTANT 
       NONE : USInt := 0;
       PAUSE : USInt := 1;

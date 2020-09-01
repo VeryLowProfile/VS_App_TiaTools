@@ -271,10 +271,10 @@ namespace TiaTools
                             FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body.Replace("$MSG_TEXT$", row["Msg Text it"].ToString()).Replace("$MSG_DEVICE$", row["Device it"].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$MSG_CLASS$", row["Msg Class"].ToString()));
                             for (int i = 1; i <= SMNb; i++)
                             {
-                                if (row["Msg Reaction SM " + i].ToString() != "NONE")
+                                if (row["Msg Reaction SM " + i].ToString() != "STORE")
                                 {
-                                    FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body_2.Replace("$MSG_REACTION$", row["Msg Reaction SM " + i].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$SM_NUMBER$", i.ToString()));
                                     FC_Msg_Config.Write("\n");
+                                    FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body_2.Replace("$MSG_REACTION$", row["Msg Reaction SM " + i].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$SM_NUMBER$", i.ToString()));                                  
                                 }
                             }
                             FC_Msg_Config.Write("\n");

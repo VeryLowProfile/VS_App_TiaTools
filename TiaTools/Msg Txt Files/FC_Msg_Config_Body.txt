@@ -1,4 +1,3 @@
 ﻿	//Msg $MSG_NUMBER$ - $MSG_DEVICE$ - $MSG_TEXT$
 	//********************************************************************//
-	"DB_Msg".Msg.Msg[$MSG_NUMBER$].Config.Nb := $MSG_NUMBER$;
 	"DB_Msg".Msg.Msg[$MSG_NUMBER$].Config.Class := "$MSG_CLASS$";

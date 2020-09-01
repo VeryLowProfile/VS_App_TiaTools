@@ -3,5 +3,8 @@
 	"DB_Msg".Msg.Config.MsgHmiWordNb := $WORD_NUMBER$;
 	"DB_Msg".Msg.Config.MsgMaxNb := $MSG_TOT_NUMBER$;
 	"DB_Msg".Msg.Config.MsgMaxSM := $SM_TOT$;
+	FOR #i := 0 TO "DB_Msg".Msg.Config.MsgMaxNb DO
+	    "DB_Msg".Msg.Msg[#i].Config.Nb := #i;
+	END_FOR;
 	
 END_FUNCTION
