@@ -1,5 +1,4 @@
 C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Release\TiaTools.csprojAssemblyReference.cache
-C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Release\TiaTools.FormInput.resources
 C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Release\TiaTools.FormToolsHome.resources
 C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Release\TiaTools.Properties.Resources.resources
 C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Release\TiaTools.csproj.GenerateResource.cache
@@ -12,3 +11,6 @@ C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\bin\Release\CustomUtility_NET_F
 C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Release\TiaTools.csproj.CopyComplete
 C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Release\TiaTools.exe
 C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Release\TiaTools.pdb
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Release\TiaTools.FormIO.resources
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Release\TiaTools.FormMessages.resources
+C:\Progetti\VisualStudio\Tools\TiaTools\TiaTools\obj\Release\TiaTools.FormStateMachines.resources

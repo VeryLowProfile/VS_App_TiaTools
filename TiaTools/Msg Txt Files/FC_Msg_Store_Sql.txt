@@ -16,50 +16,32 @@ VERSION : 0.1
 
 
 BEGIN
-	//********************************************************************//
-	//Name: FC_Msg_Store_Sql
-	//Version: 0.1
-	//Description: FC_Msg_Store_Sql
-	//Developer: Topcast
-	//********************************************************************//
-	
-	//Store Sql
-	//********************************************************************//
-	IF #Msg.Msg[#MsgNb].Trigger THEN
-	    IF NOT #Msg.Msg[#MsgNb].Sql.Stored THEN
-	        IF #Msg.Msg[#MsgNb].Sql.StoreForAll THEN
-	            FOR #i := 1 TO #Msg.Config.MsgMaxSM DO
-	                "FC_Sql_Buffer_Add"(Fo := #FOData[#i].Resume.FO,
-	                                    TypeOfRequest := "SQL_INSERT_Msg",
-	                                    EventOrMsgNb := #MsgNb,
-	                                    TrendTimeSec := 0,
-	                                    TrendVar1 := 0,
-	                                    TrendVar2 := 0,
-	                                    TrendVar3 := 0,
-	                                    TrendVar4 := 0);
-	                //Set Stored flag
-	                #Msg.Msg[#MsgNb].Sql.Stored := 1;
-	            END_FOR;
-	        ELSE
-	            FOR #i := 1 TO #Msg.Config.MsgMaxSM DO
-	                IF #Msg.Msg[#MsgNb].Config.Reaction[#MsgNb] > 0 THEN
-	                    IF #FOData[#i].Resume.FO <> '' THEN
-	                        "FC_Sql_Buffer_Add"(Fo := #FOData[#i].Resume.FO,
-	                                            TypeOfRequest := "SQL_INSERT_Msg",
-	                                            EventOrMsgNb := #MsgNb,
-	                                            TrendTimeSec := 0,
-	                                            TrendVar1 := 0,
-	                                            TrendVar2 := 0,
-	                                            TrendVar3 := 0,
-	                                            TrendVar4 := 0);
-	                    END_IF;
-	                END_IF;
-	            END_FOR;
-	            //Set Stored flag
-	            #Msg.Msg[#MsgNb].Sql.Stored := 1;
-	        END_IF;
-	    END_IF;
-	END_IF;
+    //********************************************************************//
+    //Name: FC_Msg_Store_Sql
+    //Version: 0.1
+    //Description: FC_Msg_Store_Sql
+    //Developer: Topcast
+    //********************************************************************//
+
+    //Store Sql
+    //********************************************************************//
+    IF #Msg.Msg[#MsgNb].Active THEN
+        IF NOT #Msg.Msg[#MsgNb].Sql.Stored THEN
+            // FOR #i := 1 TO #Msg.Config.MsgMaxSM DO
+            FOR #i := 1 TO 6 DO
+                IF #Msg.Msg[#MsgNb].Config.Reaction[#i] >= "STORE" THEN
+                    IF #FOData[#i].Resume.FO <> 'No_Data' AND #FOData[#i].Resume.FO <> '' THEN
+                        "FC_Sql_Buffer_Add"(Fo := #FOData[#i].Resume.FO,
+                                            SM := #i,
+                                            TypeOfRequest := "SQL_INSERT_Msg",
+                                            EventOrMsgNb := #MsgNb);
+                    END_IF;
+                END_IF;
+            END_FOR;
+            //Set Stored flag
+            #Msg.Msg[#MsgNb].Sql.Stored := 1;
+        END_IF;
+    END_IF;
 	                
 END_FUNCTION
 
