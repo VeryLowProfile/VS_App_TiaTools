@@ -9,19 +9,20 @@ BEGIN
 	//Description: Configuration Analog IN
 	//Developer: Topcast
 	//********************************************************************//
-	
+
 	//ESEMPIO DI CONFIGURAZIONE 
 	//********************************************************************//
-	// "AI_INGRESSO_ANALOGICO".AnalogIN.Config.Name := 326; Indice Dell'elenco testi per visualizzazione nome variabile su HMI
-	// "AI_INGRESSO_ANALOGICO".AnalogIN.Config.MUnit := 0; Indice dell'elenco testi per visualizare unità di misura su HMI
-	// "AI_INGRESSO_ANALOGICO".AnalogIN.Config.HighScaleValue := 0; Limite di lettura superiore del sensore analogico che fornisce il segnale
-	// "AI_INGRESSO_ANALOGICO".AnalogIN.Config.LowScaleValue := 0; Limite di lettura inferiore del sensore analogico che fornisce il segnale
-	// "AI_INGRESSO_ANALOGICO".AnalogIN.Config.HighLimit := 0; Limite software superiore per generazione allarme limite superiore superato
-	// "AI_INGRESSO_ANALOGICO".AnalogIN.Config.LowLimit := 0; Limite software inferiore per generazione allarme limite inferiore superato
-	// "AI_INGRESSO_ANALOGICO".AnalogIN.Config.CompValue := 0; Valore compensazione lineare (è sommato algebricamente al segnale già scalato)
-	// "AI_INGRESSO_ANALOGICO".AnalogIN.Config.LimitDelay := T#5S; Tempo di ritardo prima che si generi l'allarme di limite inferiore/superiore superato (se segnale > o < di limite per più di questo tempo si genera allarme)
-	// "AI_INGRESSO_ANALOGICO".AnalogIN.Config.IsBipolar := 0; Se 1 allora Si presume che il valore nel parametro IN sia bipolare e si collochi in un campo di valori compreso tra -27648 e 27648
-	// "AI_INGRESSO_ANALOGICO".AnalogIN.Config.DoNotScale := 0; Se 1 allora non si esegue la scalatura del segnale, il segnale viene elaborato direttamente come valore valido, è il caso di termocoppie collegate all'apposita scheda, queste forniscono un valore già in gradi, valgono però tutte le altre opzioni
-	// "AI_INGRESSO_ANALOGICO".AnalogIN.Config.AddCompensation := 0; Se 1 allora al valore viene aggiunto comp value nelle modalità indicate sopra
-	// "AI_INGRESSO_ANALOGICO".AnalogIN.AnalogIN.Config.EnableAlarm := 0; Se 1 allora viene abilitata la generazione deglia allarmi sui limiti
+	// "AI_INGRESSO_ANALOGICO".Config.Name := 326; Indice Dell'elenco testi per visualizzazione nome variabile su HMI
+	// "AI_INGRESSO_ANALOGICO".Config.MUnit := 0; Indice dell'elenco testi per visualizare unitÃ  di misura su HMI
+	// "AI_INGRESSO_ANALOGICO".Config.HighScaleValue := 0; Limite di lettura superiore del sensore analogico che fornisce il segnale
+	// "AI_INGRESSO_ANALOGICO".Config.LowScaleValue := 0; Limite di lettura inferiore del sensore analogico che fornisce il segnale
+	// "AI_INGRESSO_ANALOGICO".Config.HighLimit := 0; Limite software superiore per generazione allarme limite superiore superato
+	// "AI_INGRESSO_ANALOGICO".Config.LowLimit := 0; Limite software inferiore per generazione allarme limite inferiore superato
+	// "AI_INGRESSO_ANALOGICO".Config.CompValue := 0; Valore compensazione lineare (Ã¨ sommato algebricamente al segnale giÃ  scalato)
+	// "AI_INGRESSO_ANALOGICO".Config.AlarmDelay := T#5S; Tempo di ritardo prima che si generi l'allarme di limite inferiore/superiore superato (se segnale > o < di limite per piÃ¹ di questo tempo si genera allarme)
+	// "AI_INGRESSO_ANALOGICO".Config.IsBipolar := 0; Se 1 allora Si presume che il valore nel parametro IN sia bipolare e si collochi in un campo di valori compreso tra -27648 e 27648
+	// "AI_INGRESSO_ANALOGICO".Config.DoNotScale := 0; Se 1 allora non si esegue la scalatura del segnale, il segnale viene elaborato direttamente come valore valido, Ã¨ il caso di termocoppie collegate all'apposita scheda, queste forniscono un valore giÃ  in gradi, valgono perÃ² tutte le altre opzioni
+	// "AI_INGRESSO_ANALOGICO".Config.AddCompensation := 0; Se 1 allora al valore viene aggiunto comp value nelle modalitÃ  indicate sopra
+	// "AI_INGRESSO_ANALOGICO".Config.EnableAlarm := 0; Se 1 allora viene abilitata la generazione deglia allarmi sui limiti
+
 	

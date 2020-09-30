@@ -1,7 +1,7 @@
 ﻿TYPE "Msg_CONFIG"
 VERSION : 0.1
    STRUCT
-      Reaction : Array[0..12] of Int := 13(1);   // Reazione Scaturita dal msg 0 = None,  1 = store, 2 = pause, 3 = Halt
+      Reaction : Array[0..$SM_TOT$] of Int := $ARRAY_LENGHT$($DEFAULT_REACTION$);   // Reazione Scaturita dal msg 0 = None,  1 = store, 2 = pause, 3 = Halt
       Class : Int;
       Nb : Int;
    END_STRUCT;
@@ -42,7 +42,7 @@ TYPE "Msg_REACTION_COMMANDS"
 VERSION : 0.1
    STRUCT
       Pause : Bool;   // Comando di pausa generato da uno o piu msg
-      Halt : Bool;   // Comando di halt generato da uno o più msg
+      Stop : Bool;   // Comando di halt generato da uno o più msg
    END_STRUCT;
 
 END_TYPE
@@ -52,7 +52,7 @@ VERSION : 0.1
    STRUCT
       MsgPendingACK : Bool;
       MsgPendingNO_ACK : Bool;
-      MsgPendingSM : Array[0..12] of Struct
+      MsgPendingSM : Array[0..$SM_TOT$] of Struct
          ACK : Bool;
          NO_ACK : Bool;
       END_STRUCT;
@@ -79,7 +79,7 @@ VERSION : 0.1
    STRUCT
       None : Int;   // Somma dei messaggi attivi che hanno reazione NONE
       Pause : Int;   // Somma dei messaggi attivi che hanno reazione PAUSE
-      Halt : Int;   // Somma dei messaggi attivi che hanno reazione HALT
+      Stop : Int;   // Somma dei messaggi attivi che hanno reazione HALT
    END_STRUCT;
 
 END_TYPE

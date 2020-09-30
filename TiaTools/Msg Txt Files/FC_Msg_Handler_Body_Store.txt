@@ -1,0 +1,11 @@
+﻿    //Msg Reaction
+	//********************************************************************//
+    FOR #i := 0 TO #Msg.Config.MsgMaxNb DO
+        "FC_Msg_Reaction"(MsgNb := #i,
+                          Ack := "DB_Msg".Msg.Ack,
+                          Msg := "DB_Msg".Msg);
+    
+        "FC_Msg_Store_Sql"(FOData := "DB_FO_Data".FOData,
+                           MsgNb := #i,
+                           Msg := "DB_Msg".Msg);
+    END_FOR;

@@ -28,6 +28,16 @@ namespace TiaTools
             textBoxSMNumber.Text = 6.ToString();
         }
 
+        private void checkBoxDefStore_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBoxDefNone.Checked = false;
+        }
+
+        private void checkBoxDefNone_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBoxDefStore.Checked = false;
+        }
+
         private void buttonNewTable_Click(object sender, EventArgs e)
         {
             //Create new DataTable
@@ -55,7 +65,6 @@ namespace TiaTools
             {
                 dataTable.Columns.Add("Msg Reaction SM " + i.ToString());
             }
-            dataTable.Columns.Add("Msg Store For All");
 
             //Update DataGridView Structure
             SetDatGridViewSMCol(dataGridViewMsg, dataTable);
@@ -239,14 +248,15 @@ namespace TiaTools
                     //Body
                     FC_Msg_Handler.Write(TiaTools.Properties.Resources.FC_Msg_Handler_Begin);
                     FC_Msg_Handler.Write("\n");
-                    foreach (DataRow row in dataTable.Rows)
+                    if (checkBoxDefStore.Checked)
                     {
-                        if (!row["Device it"].ToString().Contains("SPARE"))
-                        {
-                            FC_Msg_Handler.Write(TiaTools.Properties.Resources.FC_Msg_Handler_Body.Replace("$MSG_TEXT$", row["Msg Text it"].ToString()).Replace("$MSG_DEVICE$", row["Device it"].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()));
-                            FC_Msg_Handler.Write("\n");
-                        }
+                        FC_Msg_Handler.Write(TiaTools.Properties.Resources.FC_Msg_Handler_Body_Store);
                     }
+                    if (checkBoxDefNone.Checked)
+                    {
+                        FC_Msg_Handler.Write(TiaTools.Properties.Resources.FC_Msg_Handler_Body_None);
+                    }
+                    FC_Msg_Handler.Write("\n");
                     FC_Msg_Handler.Write(TiaTools.Properties.Resources.FC_Msg_Handler_End);
 
                     FC_Msg_Handler.Close();
@@ -261,28 +271,26 @@ namespace TiaTools
                     StreamWriter FC_Msg_Config = new StreamWriter(filePath + @"\FC_Msg_Config.scl", false);
 
                     //Body
-                    FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Begin);
+                    FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Begin.Replace("$WORD_NUMBER$", WordNb.ToString()).Replace("$MSG_TOT_NUMBER$", MsgNb.ToString()).Replace("$SM_TOT$", SMNb.ToString()));
                     FC_Msg_Config.Write("\n");
                     foreach (DataRow row in dataTable.Rows)
                     {
                         if (!row["Device it"].ToString().Contains("SPARE"))
                         {
                             FC_Msg_Config.Write("\n");
-                            FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body.Replace("$MSG_TEXT$", row["Msg Text it"].ToString()).Replace("$MSG_DEVICE$", row["Device it"].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$MSG_CLASS$", row["Msg Class"].ToString()));
                             for (int i = 1; i <= SMNb; i++)
                             {
-                                if (row["Msg Reaction SM " + i].ToString() != "STORE")
+                                if ((checkBoxDefStore.Checked & row["Msg Reaction SM " + i].ToString() != "STORE") || (checkBoxDefNone.Checked & row["Msg Reaction SM " + i].ToString() != "NONE"))
                                 {
                                     FC_Msg_Config.Write("\n");
-                                    FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body_2.Replace("$MSG_REACTION$", row["Msg Reaction SM " + i].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$SM_NUMBER$", i.ToString()));                                  
+                                    FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_Body.Replace("$MSG_TEXT$", row["Msg Text it"].ToString()).Replace("$MSG_DEVICE$", row["Device it"].ToString()).Replace("$MSG_NUMBER$", row["Nb"].ToString()).Replace("$MSG_REACTION$", row["Msg Reaction SM " + i].ToString()).Replace("$SM_NUMBER$", i.ToString()));                                  
                                 }
                             }
-                            FC_Msg_Config.Write("\n");
                         }
                     }
-                    FC_Msg_Config.Write("\n");
-                    FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_End.Replace("$WORD_NUMBER$",WordNb.ToString()).Replace("$MSG_TOT_NUMBER$", MsgNb.ToString()).Replace("$SM_TOT$", SMNb.ToString()));
 
+                    FC_Msg_Config.Write("\n");
+                    FC_Msg_Config.Write(TiaTools.Properties.Resources.FC_Msg_Config_End);
 
                     FC_Msg_Config.Close();
                     FC_Msg_Config.Dispose();
@@ -333,7 +341,15 @@ namespace TiaTools
                     StreamWriter Msg_Types = new StreamWriter(filePath + @"\Msg_Types.udt", false);
 
                     //Body
-                    Msg_Types.Write(TiaTools.Properties.Resources.Msg_Types.Replace("$SM_TOT$", SMNb.ToString()).Replace("$MSG_NUMBER$", MsgNb.ToString()).Replace("$WORD_NUMBER$", WordNb.ToString()));
+                    if (checkBoxDefNone.Checked)
+                    {
+                        Msg_Types.Write(TiaTools.Properties.Resources.Msg_Types.Replace("$DEFAULT_REACTION$", 0.ToString()).Replace("$ARRAY_LENGHT$", (SMNb + 1).ToString()).Replace("$SM_TOT$", SMNb.ToString()).Replace("$MSG_NUMBER$", MsgNb.ToString()).Replace("$WORD_NUMBER$", WordNb.ToString()));
+
+                    }
+                    if (checkBoxDefStore.Checked)
+                    {
+                        Msg_Types.Write(TiaTools.Properties.Resources.Msg_Types.Replace("$DEFAULT_REACTION$", 1.ToString()).Replace("$ARRAY_LENGHT$", (SMNb + 1).ToString()).Replace("$SM_TOT$", SMNb.ToString()).Replace("$MSG_NUMBER$", MsgNb.ToString()).Replace("$WORD_NUMBER$", WordNb.ToString()));
+                    }
 
                     Msg_Types.Close();
                     Msg_Types.Dispose();
@@ -439,13 +455,6 @@ namespace TiaTools
                 dataGridView.Columns.Add(columnReaction);
             }
 
-            DataGridViewComboBoxColumn columnStoreAll = new DataGridViewComboBoxColumn();
-            columnStoreAll.Name = "Msg Store For All";
-            columnStoreAll.HeaderText = "Msg Store For All";
-            columnStoreAll.Items.Add("True");
-            columnStoreAll.Items.Add("False");
-            dataGridView.Columns.Add(columnStoreAll);
-
             //Bind new Coloums To DataTable Coloumns
             dataGridView.Columns["Nb"].DataPropertyName = dataTable.Columns["Nb"].ToString();
             dataGridView.Columns["Device it"].DataPropertyName = dataTable.Columns["Device it"].ToString();
@@ -468,7 +477,6 @@ namespace TiaTools
             {
                 dataGridView.Columns["Msg Reaction SM " + i.ToString()].DataPropertyName = dataTable.Columns["Msg Reaction SM " + i.ToString()].ToString();
             }
-            dataGridView.Columns["Msg Store For All"].DataPropertyName = dataTable.Columns["Msg Store For All"].ToString();
 
             dataGridView.Update();
         }

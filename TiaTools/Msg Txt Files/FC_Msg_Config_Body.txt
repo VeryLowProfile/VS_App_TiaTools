@@ -1,3 +1,3 @@
 ﻿	//Msg $MSG_NUMBER$ - $MSG_DEVICE$ - $MSG_TEXT$
 	//********************************************************************//
-	"DB_Msg".Msg.Msg[$MSG_NUMBER$].Config.Class := "$MSG_CLASS$";
+	"DB_Msg".Msg.Msg[$MSG_NUMBER$].Config.Reaction[$SM_NUMBER$] := $MSG_REACTION$;

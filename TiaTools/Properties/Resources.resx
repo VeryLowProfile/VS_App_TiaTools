@@ -205,17 +205,17 @@
   <data name="FC_Msg_Config_Body" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\msg txt files\fc_msg_config_body.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="FC_Msg_Config_Body_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\msg txt files\fc_msg_config_body_2.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="FC_Msg_Config_End" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\msg txt files\fc_msg_config_end.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="FC_Msg_Handler_Begin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\msg txt files\fc_msg_handler_begin.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="FC_Msg_Handler_Body" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\msg txt files\fc_msg_handler_body.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="FC_Msg_Handler_Body_None" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\msg txt files\fc_msg_handler_body_none.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FC_Msg_Handler_Body_Store" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\msg txt files\fc_msg_handler_body_store.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="FC_Msg_Handler_End" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\msg txt files\fc_msg_handler_end.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

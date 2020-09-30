@@ -305,7 +305,7 @@ namespace TiaTools
                                 FC_SM_Reset_Seq.WriteLine("\t" + "\t" + "\t" + "//RESET SEQUENCE SM " + i);
                                 FC_SM_Reset_Seq.WriteLine("\t" + "\t" + "\t" + "//********************************************************************//");
                                 FC_SM_Reset_Seq.WriteLine("\t" + "\t" + i + ":");
-                                FC_SM_Reset_Seq.WriteLine("\t" + "\t" + "\t" + "\"" + "DB_SM" + "\"" + ".Sm[#SMN] := " + "\"" + "DB_SM" + ".Sm[0];");
+                                FC_SM_Reset_Seq.WriteLine("\t" + "\t" + "\t" + "\"" + "DB_SM" + "\"" + ".Sm[#SMN] := " + "\"" + "DB_SM" + "\"" + ".Sm[0];");
                                 FC_SM_Reset_Seq.Write("\n");
                             }
                             FC_SM_Reset_Seq.WriteLine("END_CASE;");

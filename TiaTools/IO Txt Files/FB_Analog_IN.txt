@@ -6,82 +6,86 @@ VERSION : 0.1
    END_VAR
 
    VAR 
-      AnalogIN : "Analog_IN";
-      T_HighLimit {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
-      T_LowLimit {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
-      SCALE_RET_VAL : Word;
+      Value : Real;
+      Config : "Analog_IN_CONFIG";
+      Alarm : "Analog_IN_ALARM";
+      Aux : "Analog_IN_AUX";
+      Hmi { S7_SetPoint := 'False'} : "Hmi_IO";
    END_VAR
 
 
 BEGIN
-    //********************************************************************//
-    //Name: FB_Analog_IN
-    //Version: 0.1
-    //Description: Analogic IN Management
-    //Developer: Topcast
-    //********************************************************************//
-
-    //PARAMETRI
-    //********************************************************************//
-    //Signal: Word di ingresso di tipo "int" dichiarata sulla tabella delle variabili PLC
-
-    //ESEMPIO DI UTILIZZO
-    //********************************************************************//
-    //Dopo aver richiamato correttamente il blocco ed avere eseguito la configurazione si può accedere alla varei funzioni nel seguente modo.
-    //Si fa riferimento alla variabile di esempio "INGRESSO_ANALOGICO" usata negli esempi precedenti
-    //
-    //Lettura del valore
-    //MyValue := AI_INGRESSO_ANALOGICO.AnalogIN.Value
-    //
-    //Allarmi
-    // MyAlarm1 := "AI_INGRESSO_ANALOGICO".AnalogIN.Alarm.HighLimitExceeded;
-    // MyAlarm2 := "AI_INGRESSO_ANALOGICO".AnalogIN.Alarm.LowLimitExceeded;
-
-    //Value
-    //********************************************************************//
-    IF NOT #AnalogIN.Config.DoNotScale THEN
-        #SCALE_RET_VAL := SCALE(IN := #Signal,
-                                HI_LIM := #AnalogIN.Config.HighScaleValue,
-                                LO_LIM := #AnalogIN.Config.LowScaleValue,
-                                BIPOLAR := #AnalogIN.Config.IsBipolar,
-                                OUT => #AnalogIN.Value);
-    ELSE
-        #AnalogIN.Value := #Signal;
-    END_IF;
-
-    IF #AnalogIN.Config.AddManualScaling THEN
-        #AnalogIN.Value := #AnalogIN.Value * #AnalogIN.Config.ManualScalingValue;
-    END_IF;
-
-    IF #AnalogIN.Config.AddManualCompensation THEN
-        #AnalogIN.Value := #AnalogIN.Value + #AnalogIN.Config.ManualCompValue;
-    END_IF;
-
-    //AlarmDelay Delay
-    //********************************************************************//
-    #T_HighLimit(IN := #AnalogIN.Value > #AnalogIN.Config.HighLimit AND #AnalogIN.Config.HighLimit <> 0,
-                 PT := #AnalogIN.Config.AlarmDelay);
-
-    #T_LowLimit(IN := #AnalogIN.Value < #AnalogIN.Config.LowLimit AND #AnalogIN.Config.LowLimit <> 0,
-                PT := #AnalogIN.Config.AlarmDelay);
-
-    #T_SensorFault(IN := (#AnalogIN.Config.DoNotScale AND (#Signal > 27660 OR #Signal < -27660))
-                          OR (NOT #AnalogIN.Config.DoNotScale AND #SCALE_RET_VAL = 16#0008 AND (#Signal > 27648 OR #Signal < -27648)),
-                   PT := #AnalogIN.Config.AlarmDelay);
-
-    //Alarms
-    //********************************************************************//
-    IF #AnalogIN.Config.EnableAlarm THEN
-        #AnalogIN.Alarm.HighLimitExceeded := #T_HighLimit.Q;
-        #AnalogIN.Alarm.LowLimitExceeded := #T_LowLimit.Q;
-        #AnalogIN.Alarm.SensorError := #T_SensorFault.Q;
-    END_IF;
-
-    //Hmi
-    //********************************************************************//
-    #AnalogIN.Hmi.Value := #AnalogIN.Value;
-    #AnalogIN.Hmi.RawValue := #Signal;
-    #AnalogIN.Hmi.Alarm := #AnalogIN.Alarm.HighLimitExceeded OR #AnalogIN.Alarm.LowLimitExceeded;
+	//********************************************************************//
+	//Name: FB_Analog_IN
+	//Version: 0.1
+	//Description: Analogic IN Management
+	//Developer: Topcast
+	//********************************************************************//
+	
+	//PARAMETRI
+	//********************************************************************//
+	//Signal: Word di ingresso di tipo "int" dichiarata sulla tabella delle variabili PLC
+	
+	//ESEMPIO DI UTILIZZO
+	//********************************************************************//
+	//Dopo aver richiamato correttamente il blocco ed avere eseguito la configurazione si può accedere alla varei funzioni nel seguente modo.
+	//Si fa riferimento alla variabile di esempio "INGRESSO_ANALOGICO" usata negli esempi precedenti
+	//
+	//Lettura del valore
+	//MyValue := AI_INGRESSO_ANALOGICO.AnalogIN.Value
+	//
+	//Allarmi
+	// MyAlarm1 := "AI_INGRESSO_ANALOGICO".AnalogIN.Alarm.HighLimitExceeded;
+	// MyAlarm2 := "AI_INGRESSO_ANALOGICO".AnalogIN.Alarm.LowLimitExceeded;
+	
+	//Value
+	//********************************************************************//
+	IF NOT #Config.DoNotScale THEN
+	    #Aux.SCALE_RET_VAL := SCALE(IN := #Signal,
+	                            HI_LIM := #Config.HighScaleValue,
+	                            LO_LIM := #Config.LowScaleValue,
+	                            BIPOLAR := #Config.IsBipolar,
+	                            OUT => #Value);
+	ELSE
+	    #Value := #Signal;
+	END_IF;
+	
+	IF #Config.AddManualScaling THEN
+	    #Value := #Value * #Config.ManualScalingValue;
+	END_IF;
+	
+	IF #Config.AddManualCompensation THEN
+	    #Value := #Value + #Config.ManualCompValue;
+	END_IF;
+	
+	//AlarmDelay Delay
+	//********************************************************************//
+	//High Limit
+	#Aux.T_HighLimit(IN := #Value > #Config.HighLimit AND #Config.HighLimit <> 0,
+	                 PT := #Config.AlarmDelay);
+	
+	//Low Limit
+	#Aux.T_LowLimit(IN := #Value < #Config.LowLimit AND #Config.LowLimit <> 0,
+	                PT := #Config.AlarmDelay);
+	
+	//Sensor Fault
+	#Aux.T_SensorFault(IN := (#Config.DoNotScale AND (#Signal > 27660 OR #Signal < -27660))
+	                   OR (NOT #Config.DoNotScale AND #Aux.#SCALE_RET_VAL = 16#0008 AND (#Signal > 27648 OR #Signal < -27648)),
+	                   PT := #Config.AlarmDelay);
+	
+	//Alarms
+	//********************************************************************//
+	IF #Config.EnableAlarm THEN
+	    #Alarm.HighLimitExceeded := #Aux.T_HighLimit.Q;
+	    #Alarm.LowLimitExceeded := #Aux.T_LowLimit.Q;
+	    #Alarm.SensorError := #Aux.T_SensorFault.Q;
+	END_IF;
+	
+	//Hmi
+	//********************************************************************//
+	#Hmi.Value := #Value;
+	#Hmi.RawValue := #Signal;
+	#Hmi.Alarm := #Alarm.HighLimitExceeded OR #Alarm.LowLimitExceeded OR #Alarm.SensorError;
 
 END_FUNCTION_BLOCK
 

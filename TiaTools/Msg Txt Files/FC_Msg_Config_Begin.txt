@@ -5,13 +5,6 @@ VERSION : 0.1
       i : Int;
    END_VAR
 
-   VAR CONSTANT 
-      NONE : USInt := 0;
-      PAUSE : USInt := 1;
-      HALT : USInt := 2;
-   END_VAR
-
-
 BEGIN
 	//********************************************************************//
 	//Name: FC_Msg_Config
@@ -19,4 +12,21 @@ BEGIN
 	//Description: FC_Msg_Config
 	//Developer: Topcast
 	//********************************************************************//
+
+	//Msg General Config
+	//********************************************************************//
+	"DB_Msg".Msg.Config.MsgHmiWordNb := $WORD_NUMBER$;
+	"DB_Msg".Msg.Config.MsgMaxNb := $MSG_TOT_NUMBER$;
+	"DB_Msg".Msg.Config.MsgMaxSM := $SM_TOT$;
+	FOR #i := 0 TO "DB_Msg".Msg.Config.MsgMaxNb DO
+		"DB_Msg".Msg.Msg[#i].Config.Nb := #i;
+	END_FOR;
+
+	FOR #i := 1 TO 499 DO
+		"DB_Msg".Msg.Msg[#i].Config.Class := "ACK";
+	END_FOR;
+
+	FOR #i := 500 TO "DB_Msg".Msg.Config.MsgMaxNb DO
+		"DB_Msg".Msg.Msg[#i].Config.Class := "NO_ACK";
+	END_FOR;
 	

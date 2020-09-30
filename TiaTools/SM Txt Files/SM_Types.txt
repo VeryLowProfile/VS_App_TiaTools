@@ -1,10 +1,14 @@
-﻿TYPE "Sm_COMMANDS"
+﻿TYPE "Sm_STATUS"
 VERSION : 0.1
    STRUCT
-      Start : Bool;   // Trigger che mette in play la macchina a stati
-      Pause : Bool;   // Trigger che mette in pausa la macchina a stati
-      Stop : Bool;   // Trigger che mette in pausa la macchina a stati
-      Reset : Bool;   // Trigger che resetta la macchina a stati
+      Busy : Bool;   // Se 1 indica che la macchina a stati Ã¨ avviata
+      StepName : String;   // Nome dello step attuale
+      StatusName : String;   // Nome dello stato attuale
+      StepNb : Int;   // Step attuale in cui si trova la macchina
+      SubStepNb : Int;   // SubStep in cui si trova la macchina, se usato alla fine dello step va resettato
+      LastStepNb : Int;   // Memoria che tiene traccia dello step attuale della macchina, serve a ripartire in caso di pausa
+      LastSubStepNb : Int;   // Memoria che tiene traccia dello substep attuale della macchina, serve a ripartire in caso di pausa
+      Status : Int;   // Intero che indica lo stato attuale della macchina
    END_STRUCT;
 
 END_TYPE
@@ -17,17 +21,13 @@ VERSION : 0.1
 
 END_TYPE
 
-TYPE "Sm_STATUS"
+TYPE "Sm_COMMANDS"
 VERSION : 0.1
    STRUCT
-      Busy : Bool;   // Se 1 indica che la macchina a stati è avviata
-      StepName : String;   // Nome dello step attuale
-      StatusName : String;   // Nome dello stato attuale
-      StepNb : Int;   // Step attuale in cui si trova la macchina
-      SubStepNb : Int;   // SubStep in cui si trova la macchina, se usato alla fine dello step va resettato
-      LastStepNb : Int;   // Memoria che tiene traccia dello step attuale della macchina, serve a ripartire in caso di pausa
-      LastSubStepNb : Int;   // Memoria che tiene traccia dello substep attuale della macchina, serve a ripartire in caso di pausa
-      Status : Int;   // Intero che indica lo stato attuale della macchina
+      Start : Bool;   // Trigger che mette in play la macchina a stati
+      Pause : Bool;   // Trigger che mette in pausa la macchina a stati
+      Stop : Bool;   // Trigger che mette in pausa la macchina a stati
+      Reset : Bool;   // Trigger che resetta la macchina a stati
    END_STRUCT;
 
 END_TYPE
@@ -38,7 +38,10 @@ VERSION : 0.1
       Status : "Sm_STATUS";
       Command : "Sm_COMMANDS";
       Flags : "Sm_FLAGS";
+      Hmi : "Hmi_SM";
    END_STRUCT;
+
+END_TYPE
 
 TYPE "Hmi_SM"
 VERSION : 0.1
@@ -47,17 +50,17 @@ VERSION : 0.1
       CommandPause : Bool;
       CommandStop : Bool;
       CommandReset : Bool;
-      commandRelease : Bool;
+      CommandAbort : Bool;
+      CommandRelease : Bool;
       StatusPlay : Bool;
       StatusPause : Bool;
       StatusStop : Bool;
       StatusReset : Bool;
+      StatusAbort : Bool;
       StepNb : Int;
       SubStepNb : Int;
       StepName : String;
       StatusName : String;
    END_STRUCT;
-
-END_TYPE
 
 END_TYPE

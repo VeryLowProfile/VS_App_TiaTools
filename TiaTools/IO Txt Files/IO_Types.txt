@@ -1,8 +1,38 @@
-﻿TYPE "Analog_IN_ALARM"
+﻿TYPE "Hmi_IO"
+VERSION : 0.1
+   STRUCT
+      Status : Bool;
+      Alarm : Bool;
+      Manual : Bool;
+      On : Bool;
+      Off : Bool;
+      toggle : Bool;
+      ManualEnable : Bool;
+      SafeSwitch : Bool;
+      Value : Real;
+      Command : Real;
+      RawValue : Int;
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "Analog_IN_ALARM"
 VERSION : 0.1
    STRUCT
       LowLimitExceeded : Bool;   // Allarme Limite inferiore superato
       HighLimitExceeded : Bool;   // Allarme Limite superiore superato
+      SensorError : Bool;   // Allareme sensore scollegato o non funzionante
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "Analog_IN_AUX"
+VERSION : 0.1
+   STRUCT
+      T_HighLimit {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      T_LowLimit {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      T_SensorFault {InstructionName := 'TON_TIME'; LibVersion := '1.0'; S7_SetPoint := 'False'} : TON_TIME;
+      SCALE_RET_VAL : Word;
    END_STRUCT;
 
 END_TYPE
@@ -14,55 +44,25 @@ VERSION : 0.1
       LowLimit : Real;   // Limite inferiore per generazione allarme
       HighScaleValue : Real;   // Valore massimo fornito dal sensore
       LowScaleValue : Real;   // Valore minimo fornito dal sensore
-      CompValue : Real;   // Valore di compensazione da aggiunge al valore fornito dal sensore
-      LimitDelay : Time;   // tempo di ritardo sulla generazione dell'allarme sui limiti
+      ManualCompValue : Real;   // Valore di compensazione da aggiunge al valore fornito dal sensore
+      ManualScalingValue : Real;
+      AlarmDelay : Time;   // tempo di ritardo sulla generazione dell'allarme sui limiti
       IsBipolar : Bool;   // Flag che indica se il sensore lavora in modalità bipolar
       DoNotScale : Bool;   // Se 1 allora non si esegue la scalatura ma si utilizza il valore row fornito dall'ingresso
-      AddCompensation : Bool;   // Se 1 si aggiunge CompValue al valore fornito dal sensore
+      AddManualCompensation : Bool;   // Se 1 si aggiunge CompValue al valore fornito dal sensore
+      AddManualScaling : Bool;
       EnableAlarm : Bool;   // Se 1 Abilita la generazione degli allarmi sui Limiti
    END_STRUCT;
 
 END_TYPE
 
-TYPE "Analog_OUT_CONFIG"
+TYPE "Digital_OUT_AUX"
 VERSION : 0.1
    STRUCT
-      HighUnscaleLimit : Real;   // Valore massimo della variabile di processo legata a questa uscita analogica 
-      LowUnscaleLimit : Real;   // Valore minimo della variabile di processo legata a questa uscita analogica 
-      IsBipolar : Bool;   // Flag che indica se il sensore lavora in modalità bipolar
-   END_STRUCT;
-
-END_TYPE
-
-TYPE "Analog_IN"
-VERSION : 0.1
-   STRUCT
-      Value : Real;   // Valore Della variabile
-      Config : "Analog_IN_CONFIG";   // Parametri di configurazione
-      Alarm : "Analog_IN_ALARM";   // Allarmi
-      Hmi : "Hmi_IO";   // Parametri per HMI
-   END_STRUCT;
-
-END_TYPE
-
-TYPE "Analog_OUT"
-VERSION : 0.1
-   STRUCT
-      Command : Real;   // Comando
-      Config : "Analog_OUT_CONFIG";   // Parametri di Configurazione
-      Hmi : "Hmi_IO";   // Parametri HMI
-   END_STRUCT;
-
-END_TYPE
-
-TYPE "Digital_IN_CONFIG"
-VERSION : 0.1
-   STRUCT
-      R_EventNb : Int;   // Not used
-      F_EventNb : Int;   // Not Used
-      Smn : Int;   // Not Used
-      DebounceTime : Time;   // Tempo filtro antirimbalzo
-      EnableStoreEvent : Bool;   // Not Used
+      T_OnDelay {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      T_OffDelay {InstructionName := 'TOF_TIME'; LibVersion := '1.0'} : TOF_TIME;
+      R_Aux { S7_SetPoint := 'True'} : Bool;
+      F_Aux { S7_SetPoint := 'True'} : Bool;
    END_STRUCT;
 
 END_TYPE
@@ -70,52 +70,44 @@ END_TYPE
 TYPE "Digital_OUT_CONFIG"
 VERSION : 0.1
    STRUCT
-      R_EventNb : Int;   // Not Used
-      F_EventNb : Int;   // Not Used
-      Smn : Int;   // Not Used
       OnDelay : Time;   // Tempo di ritardo all'attivazione
       OFFDelay : Time;   // Tempo di ritardo sul rilascio
-      EnableStoreEvent : Bool;   // Not Used
    END_STRUCT;
 
 END_TYPE
 
-TYPE "Digital_IN"
+TYPE "Digital_IN_AUX"
 VERSION : 0.1
    STRUCT
-      Status : Bool;   // Valore Della variabile
-      R_Status : Bool;   // Fronte di salita della variabile
-      F_Status : Bool;   // Fronte di discesa della variabile
-      Config : "Digital_IN_CONFIG";   // Parametri di Configurazione
-      Hmi : "Hmi_IO";   // Parametri HMIù
+      T_Debounce {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      R_Aux { S7_SetPoint := 'True'} : Bool;
+      F_Aux { S7_SetPoint := 'True'} : Bool;
    END_STRUCT;
 
 END_TYPE
 
-TYPE "Digital_OUT"
+TYPE "Digital_IN_CONFIG"
 VERSION : 0.1
    STRUCT
-      Status : Bool;   // Valore Della variabile
-      Command : Bool;   // Comando 
-      Config : "Digital_OUT_CONFIG";   // Parametri di Configurazione
-      Hmi : "Hmi_IO";   // Parametri HMI
+      DebounceTime : Time;   // Tempo filtro antirimbalzo
    END_STRUCT;
 
 END_TYPE
 
-TYPE "Hmi_IO"
+TYPE "Analog_OUT_AUX"
 VERSION : 0.1
    STRUCT
-      Status : Bool;
-      Alarm : Bool;
-      Manual : Bool;
-      ManualEnable : Bool;
-      On : Bool;
-      Off : Bool;
-      Value : Real;
-      RowValue : int;
-      Command : Real;
+      UNSCALE_RET_VAL : Word;
    END_STRUCT;
 
 END_TYPE
 
+TYPE "Analog_OUT_CONFIG"
+VERSION : 0.1
+   STRUCT
+      HighUnscaleLimit : Real;   // Valore massimo della variabile di processo legata a questa uscita analogica
+      LowUnscaleLimit : Real;   // Valore minimo della variabile di processo legata a questa uscita analogica
+      IsBipolar : Bool;   // Flag che indica se il sensore lavora in modalità bipolar
+   END_STRUCT;
+
+END_TYPE

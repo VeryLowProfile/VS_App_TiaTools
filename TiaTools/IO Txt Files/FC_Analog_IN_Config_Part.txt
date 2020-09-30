@@ -1,12 +1,14 @@
-//AI_$VAR_NAME$
-//********************************************************************//
-"AI_$VAR_NAME$".AnalogIN.Config.HighScaleValue := 0;
-"AI_$VAR_NAME$".AnalogIN.Config.LowScaleValue := 0;
-"AI_$VAR_NAME$".AnalogIN.Config.HighLimit := 0;
-"AI_$VAR_NAME$".AnalogIN.Config.LowLimit := 0;
-"AI_$VAR_NAME$".AnalogIN.Config.CompValue := 0;
-"AI_$VAR_NAME$".AnalogIN.Config.LimitDelay := T#5S;
-"AI_$VAR_NAME$".AnalogIN.Config.IsBipolar := 0;
-"AI_$VAR_NAME$".AnalogIN.Config.DoNotScale := 0;
-"AI_$VAR_NAME$".AnalogIN.Config.AddCompensation := 0;
-"AI_$VAR_NAME$".AnalogIN.Config.EnableAlarm := 0;
+	//AI_$VAR_NAME$
+	//********************************************************************//
+	"AI_$VAR_NAME$".Config.HighScaleValue := 0;
+	"AI_$VAR_NAME$".Config.LowScaleValue := 0;
+	"AI_$VAR_NAME$".Config.HighLimit := 0;
+	"AI_$VAR_NAME$".Config.LowLimit := 0;
+	"AI_$VAR_NAME$".Config.ManualCompValue := 0;
+	"AI_$VAR_NAME$".Config.ManualScalingValue := 0;
+	"AI_$VAR_NAME$".Config.AlarmDelay := T#5S;
+	"AI_$VAR_NAME$".Config.IsBipolar := 0;
+	"AI_$VAR_NAME$".Config.DoNotScale := 0;
+	"AI_$VAR_NAME$".Config.AddManualCompensation := 0;
+	"AI_$VAR_NAME$".Config.AddManualScaling := 0;
+	"AI_$VAR_NAME$".Config.EnableAlarm := 0;

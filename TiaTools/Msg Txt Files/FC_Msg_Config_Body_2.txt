@@ -1,1 +1,0 @@
-﻿	"DB_Msg".Msg.Msg[$MSG_NUMBER$].Config.Reaction[$SM_NUMBER$] := $MSG_REACTION$;

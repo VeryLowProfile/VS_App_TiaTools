@@ -7,206 +7,249 @@ VERSION : 0.1
       Autostart : Bool;
    END_VAR
 
+   VAR_IN_OUT 
+      MsgStop : Bool;
+      MsgPause : Bool;
+   END_VAR
+
 
 BEGIN
+	    //********************************************************************//
+	    //Name: FC_SM_Common
+	    //Version: x.x
+	    //Description: FC_SM_Common
+	    //Developer: Topcast
+	    //********************************************************************//
+	    
+	    //PARAMETRI
+	    //********************************************************************//
+	    // SMN: Parametro che indica il numero della macchina a stati a cui si sta facendo riferimento, punta all'elemento dell'array SM[] contenuto all'interno di db_SM.
+	    // StartPhase: Parametro che indica il numero della prima fase della macchina a stati, quando la macchina va in play la sequenza inizia dalla fase indicata in questo parametro
+	    // Autostart: Se 1 La macchina va in Play automaticamente all'avvio del plc, successivi stop o pause richiedono il play manuale
+	    
+	    //DESCRIZIONE ED UTILIZZO DEL BLOCCO
+	    //********************************************************************//
+	    // Questo FC Gestisce il core della macchina a stati ovvero le funzioni da pausa stop e start.
+	    // L'FC tramite il parametro SMN che viene passato in ingresso (State Machine Number) punta all'elemento SMN dell'array SM[] contenuto nel Db_SM.
+	    
+	    // Stati della macchina:
+	    // BUSY: Indica che la macchina è in uno stato diverso da WAIT_START, ovvero è in esecuzione in uno qualsiasi degli altri astati
+	    // 
+	    // WAIT_START: la macchina si trova nello step 0, che è riservato, non si può definire una fase con il numero 0
+	    // 
+	    // PLAY: La macchina è in PLAY, si trova in una delle fasi scritte dal programmatore, 1 => Step < 100
+	    // 
+	    // PAUSE: La macchina si trova in PAUSA, questo Stato corrisponde allo step 100 che è riservato, la macchina va in questo stato se
+	    // mentre era nello stato di PLAY è stato triggerato il comando di PAUSA, la macchina esce da questo stato e Torna nello stato di
+	    // PLAY allo step e substep in cui si trovava quando è stato triggerato il comando di PAUSA, se viene triggerato il comando di START,
+	    // la macchina esce da questo stato e va nello stato di STOP se viene triggerato il comando di STOP
+	    // 
+	    // STOP: La macchina si trova nello stato di STOP, questo step corrisponde allo step 110 che è riservato, la macchina va in questo stato se
+	    // mentre era nello stato di PLAY oppure PAUSA è stato triggerato il comando di STOP, dallo stato di stop la macchina esce solo ed esclusivamente
+	    // se viene triggerato il comando di RESET
+	    // 
+	    // RESET: La macchina si trova nello stato di RESET, questo stato corrisponde allo step 120 che è riservato, la macchina esce da questo stato e si porta nello stato
+	    // di WAIT_START automaticamente dopo aver eseguito la procedura di RESET, si può accedere a questo stato solo dallo stato di STOP.
+	    // 
+	    //Procedure di pause, stop, reset
+	    //Se la macchina entra nello stato di PAUSE, STOP, o RESET vengono chiamate le rispettive routine.
+	    //
+	    //Step Riservati
+	    //0: WAIT_START
+	    //100: PAUSE
+	    //110: STOP
+	    //120: RESET
+	    //
+	    //Comandi
+	    //I comandi sono accessibili nella struttura Commands, a seguito un esempio di accesso per la macchina a stati numero X, i comandi sono di tipo trigger
+	    //non è necessario eseguire il reset del comando.
+	    //
+	    //Db_SM.Sm[x].Commands.Start := 1; per avviare la macchina
+	    //Db_SM.Sm[x].Commands.pause := 1; per mettere in pausa la macchina
+	    //Db_SM.Sm[x].Commands.Stop := 1; per mettere in stop la macchina
+	    //Db_SM.Sm[x].Commands.Reset := 1; per resettare la macchina
+	    
+	    //SM Status
+	    //********************************************************************//
+	    "DB_SM".Sm[#SMN].Status.Status := 0;
+	    IF "DB_SM".Sm[#SMN].Status.StepNb = 0 THEN
+	        "DB_SM".Sm[#SMN].Status.Status := "SM_WAIT_START";
+	        "DB_SM".Sm[#SMN].Status.StatusName := 'WAIT START';
+	    ELSIF "DB_SM".Sm[#SMN].Status.StepNb < "SM_PAUSE_SEQUENCE" THEN
+	        "DB_SM".Sm[#SMN].Status.Status := "SM_PLAY";
+	        "DB_SM".Sm[#SMN].Status.StatusName := 'PLAY';
+	    ELSIF "DB_SM".Sm[#SMN].Status.StepNb = "SM_PAUSE_SEQUENCE" THEN
+	        "DB_SM".Sm[#SMN].Status.Status := "SM_PAUSE";
+	        "DB_SM".Sm[#SMN].Status.StatusName := 'PAUSE';
+	    ELSIF "DB_SM".Sm[#SMN].Status.StepNb = "SM_STOP_SEQUENCE" THEN
+	        "DB_SM".Sm[#SMN].Status.Status := "SM_STOP";
+	        "DB_SM".Sm[#SMN].Status.StatusName := 'STOP';
+	    ELSIF "DB_SM".Sm[#SMN].Status.StepNb = "SM_RESET_SEQUENCE" THEN
+	        "DB_SM".Sm[#SMN].Status.Status := "SM_RESET";
+	        "DB_SM".Sm[#SMN].Status.StatusName := 'RESET';
+	    ELSIF "DB_SM".Sm[#SMN].Status.StepNb = "SM_ABORT_SEQUENCE" THEN
+	        "DB_SM".Sm[#SMN].Status.Status := "SM_ABORT";
+	        "DB_SM".Sm[#SMN].Status.StatusName := 'ABORT';
+	    END_IF;
+	    
+	    "DB_SM".Sm[#SMN].Status.Busy := 0;
+	    IF "DB_SM".Sm[#SMN].Status.StepNb > "SM_WAIT_START" THEN
+	        "DB_SM".Sm[#SMN].Status.Busy := 1;
+	    END_IF;
+	    
+	    //Hmi Status
+	    //********************************************************************//
+	    "DB_SM".Sm[#SMN].Hmi.StatusName := "DB_SM".Sm[#SMN].Status.StatusName;
+	    "DB_SM".Sm[#SMN].Hmi.StepName := "DB_SM".Sm[#SMN].Status.StepName;
+	    "DB_SM".Sm[#SMN].Hmi.StepNb := "DB_SM".Sm[#SMN].Status.StepNb;
+	    "DB_SM".Sm[#SMN].Hmi.SubStepNb := "DB_SM".Sm[#SMN].Status.SubStepNb;
+	    "DB_SM".Sm[#SMN].Hmi.StatusPlay := "DB_SM".Sm[#SMN].Status.Status = "SM_PLAY";
+	    "DB_SM".Sm[#SMN].Hmi.StatusPause := "DB_SM".Sm[#SMN].Status.Status = "SM_PAUSE";
+	    "DB_SM".Sm[#SMN].Hmi.StatusStop := "DB_SM".Sm[#SMN].Status.Status = "SM_STOP";
+	    "DB_SM".Sm[#SMN].Hmi.StatusReset := "DB_SM".Sm[#SMN].Status.Status = "SM_RESET";
+	    "DB_SM".Sm[#SMN].Hmi.StatusAbort := "DB_SM".Sm[#SMN].Status.Status = "SM_ABORT";
+	    
+		//Msg Commands
+		//********************************************************************//
+		//Pause
+		IF #MsgPause AND ("DB_SM".Sm[#SMN].Status.Status = "SM_PLAY") THEN
+			"DB_SM".Sm[#SMN].Command.Pause := 1;
+			#MsgPause := 0;
+		END_IF;
 
-    //********************************************************************//
-    //Name: FC_SM_Common
-    //Version: x.x
-    //Description: FC_SM_Common
-    //Developer: Topcast
-    //********************************************************************//
-    
-    //PARAMETRI
-    //********************************************************************//
-    // SMN: Parametro che indica il numero della macchina a stati a cui si sta facendo riferimento, punta all'elemento dell'array SM[] contenuto all'interno di db_SM.
-    // StartPhase: Parametro che indica il numero della prima fase della macchina a stati, quando la macchina va in play la sequenza inizia dalla fase indicata in questo parametro
-    // Autostart: Se 1 La macchina va in Play automaticamente all'avvio del plc, successivi stop o pause richiedono il play manuale
-    
-    //DESCRIZIONE ED UTILIZZO DEL BLOCCO
-    //********************************************************************//
-    // Questo FC Gestisce il core della macchina a stati ovvero le funzioni da pausa stop e start.
-    // L'FC tramite il parametro SMN che viene passato in ingresso (State Machine Number) punta all'elemento SMN dell'array SM[] contenuto nel Db_SM.
-    
-    // Stati della macchina:
-    // BUSY: Indica che la macchina è in uno stato diverso da WAIT_START, ovvero è in esecuzione in uno qualsiasi degli altri astati
-    // 
-    // WAIT_START: la macchina si trova nello step 0, che è riservato, non si può definire una fase con il numero 0
-    // 
-    // PLAY: La macchina è in PLAY, si trova in una delle fasi scritte dal programmatore, 1 => Step < 100
-    // 
-    // PAUSE: La macchina si trova in PAUSA, questo Stato corrisponde allo step 100 che è riservato, la macchina va in questo stato se
-    // mentre era nello stato di PLAY è stato triggerato il comando di PAUSA, la macchina esce da questo stato e Torna nello stato di
-    // PLAY allo step e substep in cui si trovava quando è stato triggerato il comando di PAUSA, se viene triggerato il comando di START,
-    // la macchina esce da questo stato e va nello stato di STOP se viene triggerato il comando di STOP
-    // 
-    // STOP: La macchina si trova nello stato di STOP, questo step corrisponde allo step 110 che è riservato, la macchina va in questo stato se
-    // mentre era nello stato di PLAY oppure PAUSA è stato triggerato il comando di STOP, dallo stato di stop la macchina esce solo ed esclusivamente
-    // se viene triggerato il comando di RESET
-    // 
-    // RESET: La macchina si trova nello stato di RESET, questo stato corrisponde allo step 120 che è riservato, la macchina esce da questo stato e si porta nello stato
-    // di WAIT_START automaticamente dopo aver eseguito la procedura di RESET, si può accedere a questo stato solo dallo stato di STOP.
-    // 
-    //Procedure di pause, stop, reset
-    //Se la macchina entra nello stato di PAUSE, STOP, o RESET vengono chiamate le rispettive routine.
-    //
-    //Step Riservati
-    //0: WAIT_START
-    //100: PAUSE
-    //110: STOP
-    //120: RESET
-    //
-    //Comandi
-    //I comandi sono accessibili nella struttura Commands, a seguito un esempio di accesso per la macchina a stati numero X, i comandi sono di tipo trigger
-    //non è necessario eseguire il reset del comando.
-    //
-    //Db_SM.Sm[x].Commands.Start := 1; per avviare la macchina
-    //Db_SM.Sm[x].Commands.pause := 1; per mettere in pausa la macchina
-    //Db_SM.Sm[x].Commands.Stop := 1; per mettere in stop la macchina
-    //Db_SM.Sm[x].Commands.Reset := 1; per resettare la macchina
-    
-    //SM Status
-    //********************************************************************//
-    "DB_SM".Sm[#SMN].Status.Status := 0;
-    IF "DB_SM".Sm[#SMN].Status.StepNb = 0 THEN
-        "DB_SM".Sm[#SMN].Status.Status := "SM_WAIT_START";
-        "DB_SM".Sm[#SMN].Status.StatusName := 'WAIT START';
-    ELSIF "DB_SM".Sm[#SMN].Status.StepNb < "SM_PAUSE_SEQUENCE" THEN
-        "DB_SM".Sm[#SMN].Status.Status := "SM_PLAY";
-        "DB_SM".Sm[#SMN].Status.StatusName := 'PLAY';
-    ELSIF "DB_SM".Sm[#SMN].Status.StepNb = "SM_PAUSE_SEQUENCE" THEN
-        "DB_SM".Sm[#SMN].Status.Status := "SM_PAUSE";
-        "DB_SM".Sm[#SMN].Status.StatusName := 'PAUSE';
-    ELSIF "DB_SM".Sm[#SMN].Status.StepNb = "SM_STOP_SEQUENCE" THEN
-        "DB_SM".Sm[#SMN].Status.Status := "SM_STOP";
-        "DB_SM".Sm[#SMN].Status.StatusName := 'STOP';
-    ELSIF "DB_SM".Sm[#SMN].Status.StepNb = "SM_RESET_SEQUENCE" THEN
-        "DB_SM".Sm[#SMN].Status.Status := "SM_RESET";
-        "DB_SM".Sm[#SMN].Status.StatusName := 'RESET';
-    END_IF;
-    
-    "DB_SM".Sm[#SMN].Status.Busy := 0;
-    IF "DB_SM".Sm[#SMN].Status.StepNb > "SM_WAIT_START" THEN
-        "DB_SM".Sm[#SMN].Status.Busy := 1;
-    END_IF;
-    
-    //Hmi Status
-    //********************************************************************//
-    "DB_SM".Sm[#SMN].Hmi.StatusName := "DB_SM".Sm[#SMN].Status.StatusName;
-    "DB_SM".Sm[#SMN].Hmi.StepName := "DB_SM".Sm[#SMN].Status.StepName;
-    "DB_SM".Sm[#SMN].Hmi.StepNb := "DB_SM".Sm[#SMN].Status.StepNb;
-    "DB_SM".Sm[#SMN].Hmi.SubStepNb := "DB_SM".Sm[#SMN].Status.SubStepNb;
-    "DB_SM".Sm[#SMN].Hmi.StatusPlay := "DB_SM".Sm[#SMN].Status.Status = "SM_PLAY";
-    "DB_SM".Sm[#SMN].Hmi.StatusPause := "DB_SM".Sm[#SMN].Status.Status = "SM_PAUSE";
-    "DB_SM".Sm[#SMN].Hmi.StatusStop := "DB_SM".Sm[#SMN].Status.Status = "SM_STOP";
-    "DB_SM".Sm[#SMN].Hmi.StatusReset := "DB_SM".Sm[#SMN].Status.Status = "SM_RESET";
-    
-    //Msg Commands
-    //********************************************************************//
-    //Pause
-    IF #MsgPause THEN
-        "DB_SM".Sm[#SMN].Command.Pause := 1;
-        #MsgPause := 0;
-    END_IF;
-    
-    //Stop
-    IF #MsgStop THEN
-        "DB_SM".Sm[#SMN].Command.Stop := 1;
-        #MsgStop := 0;
-    END_IF;
-    
-    //Hmi Commands
-    //********************************************************************//
-    //Start
-    IF "DB_SM".Sm[#SMN].Hmi.CommandStart THEN
-        "DB_SM".Sm[#SMN].Command.Start := 1;
-        "DB_SM".Sm[#SMN].Hmi.CommandStart := 0;
-    END_IF;
-    
-    //Pause
-    IF "DB_SM".Sm[#SMN].Hmi.CommandPause THEN
-        "DB_SM".Sm[#SMN].Command.Pause := 1;
-        "DB_SM".Sm[#SMN].Hmi.CommandPause := 0;
-    END_IF;
-    
-    //Stop
-    IF "DB_SM".Sm[#SMN].Hmi.CommandStop THEN
-        "DB_SM".Sm[#SMN].Command.Stop := 1;
-        "DB_SM".Sm[#SMN].Hmi.CommandStop := 0;
-    END_IF;
-    
-    //Reset
-    IF "DB_SM".Sm[#SMN].Hmi.CommandReset THEN
-        "DB_SM".Sm[#SMN].Command.Reset := 1;
-        "DB_SM".Sm[#SMN].Hmi.CommandReset := 0;
-    END_IF;
-    
-    //Release
-    IF "DB_SM".Sm[#SMN].Hmi.commandRelease THEN
-        "DB_SM".Sm[#SMN].Flags.Release := 1;
-        "DB_SM".Sm[#SMN].Hmi.commandRelease := 0;
-    END_IF;
-    
-    //SM Control
-    //********************************************************************//
-    //If SM is in "WAIT START"
-    IF "DB_SM".Sm[#SMN].Status.Status = "SM_WAIT_START" THEN
-        IF "DB_SM".Sm[#SMN].Command.Start THEN
-            "DB_SM".Sm[#SMN].Command.Start := 0;
-            "DB_SM".Sm[#SMN].Status.StepNb := #StartPhase;
-            "DB_SM".Sm[#SMN].Status.SubStepNb := 0;
-        END_IF;
-    END_IF;
-    
-    //Autostart
-    IF "DB_SM".Sm[#SMN].Status.Status = "SM_WAIT_START" THEN
-        IF #Autostart THEN
-            "DB_SM".Sm[#SMN].Command.Start := 1;
-        END_IF;
-    END_IF;
-    
-    //If SM is in "STOP"
-    IF "DB_SM".Sm[#SMN].Status.Status = "SM_STOP" THEN
-        IF "DB_SM".Sm[#SMN].Command.Reset THEN
-            "DB_SM".Sm[#SMN].Command.Reset := 0;
-            "DB_SM".Sm[#SMN].Status.StepNb := "SM_RESET_SEQUENCE";
-            //Call Reset Sequence
-            "FC_SM_Reset_Seq"(#SMN);
-        END_IF;
-    END_IF;
-    
-    //If SM is in "PAUSE"
-    IF "DB_SM".Sm[#SMN].Status.Status = "SM_PAUSE" THEN
-        IF "DB_SM".Sm[#SMN].Command.Start THEN
-            "DB_SM".Sm[#SMN].Command.Start := 0;
-            "DB_SM".Sm[#SMN].Status.StepNb := "DB_SM".Sm[#SMN].Status.LastStepNb;
-            "DB_SM".Sm[#SMN].Status.SubStepNb := "DB_SM".Sm[#SMN].Status.LastSubStepNb;
-        END_IF;
-        IF
-            "DB_SM".Sm[#SMN].Command.Stop THEN
-            "DB_SM".Sm[#SMN].Command.Stop := 0;
-            "DB_SM".Sm[#SMN].Status.StepNb := "SM_STOP_SEQUENCE";
-        END_IF;
-    END_IF;
-    
-    //If SM is in "PLAY"
-    IF "DB_SM".Sm[#SMN].Status.Status = "SM_PLAY" THEN
-        IF "DB_SM".Sm[#SMN].Command.Pause THEN
-            "DB_SM".Sm[#SMN].Command.Pause := 0;
-            "DB_SM".Sm[#SMN].Status.LastStepNb := "DB_SM".Sm[#SMN].Status.StepNb;
-            "DB_SM".Sm[#SMN].Status.LastSubStepNb := "DB_SM".Sm[#SMN].Status.SubStepNb;
-            "DB_SM".Sm[#SMN].Status.StepNb := "SM_PAUSE_SEQUENCE";
-            "DB_SM".Sm[#SMN].Status.SubStepNb := 0;
-            //Call Pause Sequence
-            "FC_SM_Pause_Seq"(#SMN);
-        END_IF;
-        IF "DB_SM".Sm[#SMN].Command.Stop THEN
-            "DB_SM".Sm[#SMN].Command.Stop := 0;
-            "DB_SM".Sm[#SMN].Status.StepNb := "SM_STOP_SEQUENCE";
-            //Call Stop Sequence
-            "FC_SM_Stop_Seq"(#SMN);
-        END_IF;
-    END_IF;
-    
+		//Stop
+		IF #MsgStop AND ("DB_SM".Sm[#SMN].Status.Status = "SM_PLAY" OR "DB_SM".Sm[#SMN].Status.Status = "SM_PAUSE") THEN
+			"DB_SM".Sm[#SMN].Command.Stop := 1;
+			#MsgStop := 0;
+		END_IF;
+	    
+	    //Hmi Commands
+	    //********************************************************************//
+	    //Start
+	    IF "DB_SM".Sm[#SMN].Hmi.CommandStart THEN
+	        "DB_SM".Sm[#SMN].Command.Start := 1;
+	        "DB_SM".Sm[#SMN].Hmi.CommandStart := 0;
+	    END_IF;
+	    
+	    //Pause
+	    IF "DB_SM".Sm[#SMN].Hmi.CommandPause THEN
+	        "DB_SM".Sm[#SMN].Command.Pause := 1;
+	        "DB_SM".Sm[#SMN].Hmi.CommandPause := 0;
+	    END_IF;
+	    
+	    //Stop
+	    IF "DB_SM".Sm[#SMN].Hmi.CommandStop THEN
+	        "DB_SM".Sm[#SMN].Command.Stop := 1;
+	        "DB_SM".Sm[#SMN].Hmi.CommandStop := 0;
+	    END_IF;
+	    
+	    //Reset
+	    IF "DB_SM".Sm[#SMN].Hmi.CommandReset THEN
+	        "DB_SM".Sm[#SMN].Command.Reset := 1;
+	        "DB_SM".Sm[#SMN].Hmi.CommandReset := 0;
+	    END_IF;
+	    
+	    //Abort
+	    IF "DB_SM".Sm[#SMN].Hmi.CommandAbort THEN
+	        "DB_SM".Sm[#SMN].Command.Abort := 1;
+	        "DB_SM".Sm[#SMN].Hmi.CommandAbort := 0;
+	    END_IF;
+	    
+	    //Release
+	    IF "DB_SM".Sm[#SMN].Hmi.CommandRelease THEN
+	        "DB_SM".Sm[#SMN].Flags.Release := 1;
+	        "DB_SM".Sm[#SMN].Hmi.CommandRelease := 0;
+	    END_IF;
+	    
+	    //SM Control
+	    //********************************************************************//
+	    //If SM is in "SM_RESET_SEQUENCE"
+	    IF "DB_SM".Sm[#SMN].Status.Status = "SM_RESET" THEN
+	        "DB_SM".Sm[#SMN].Status.StepNb := "SM_WAIT_START";
+	        "DB_SM".Sm[#SMN].Status.SubStepNb := 0;
+	    END_IF;
+	    
+	    //If SM is in "SMABORT_SEQUENCE"
+	    IF "DB_SM".Sm[#SMN].Status.Status = "SM_ABORT" THEN
+	        "DB_SM".Sm[#SMN].Status.StepNb := "SM_WAIT_START";
+	        "DB_SM".Sm[#SMN].Status.SubStepNb := 0;
+	    END_IF;
+	    
+	    //If SM is in "WAIT START"
+	    IF "DB_SM".Sm[#SMN].Status.Status = "SM_WAIT_START" THEN
+	        IF "DB_SM".Sm[#SMN].Command.Start THEN
+	            "DB_SM".Sm[#SMN].Command.Start := 0;
+	            "DB_SM".Sm[#SMN].Status.StepNb := #StartPhase;
+	            "DB_SM".Sm[#SMN].Status.SubStepNb := 0;
+	        END_IF;
+	    END_IF;
+	    
+	    //Autostart
+	    IF "DB_SM".Sm[#SMN].Status.Status = "SM_WAIT_START" THEN
+	        IF #Autostart THEN
+	            "DB_SM".Sm[#SMN].Command.Start := 1;
+	        END_IF;
+	    END_IF;
+	    
+	    //If SM is in "STOP"
+	    IF "DB_SM".Sm[#SMN].Status.Status = "SM_STOP" THEN
+	        IF "DB_SM".Sm[#SMN].Command.Reset THEN
+	            //Call Reset Sequence
+	            "FC_SM_Reset_Seq"(#SMN);
+	            "DB_SM".Sm[#SMN].Command.Reset := 0;
+	            "DB_SM".Sm[#SMN].Status.StepNb := "SM_RESET_SEQUENCE";
+	        END_IF;
+	        IF "DB_SM".Sm[#SMN].Command.Abort THEN
+	            //Call Abort Sequence
+	            "FC_SM_Abort_Seq"(#SMN);
+	            "DB_SM".Sm[#SMN].Command.Abort := 0;
+	            "DB_SM".Sm[#SMN].Status.StepNb := "SM_ABORT_SEQUENCE";
+	        END_IF;
+	    END_IF;
+	    
+	    //If SM is in "PAUSE"
+	    IF "DB_SM".Sm[#SMN].Status.Status = "SM_PAUSE" THEN
+	        IF "DB_SM".Sm[#SMN].Command.Start THEN
+	            "DB_SM".Sm[#SMN].Command.Start := 0;
+	            "DB_SM".Sm[#SMN].Status.StepNb := "DB_SM".Sm[#SMN].Status.LastStepNb;
+	            "DB_SM".Sm[#SMN].Status.SubStepNb := "DB_SM".Sm[#SMN].Status.LastSubStepNb;
+	        END_IF;
+	        IF "DB_SM".Sm[#SMN].Command.Stop THEN
+	            "DB_SM".Sm[#SMN].Command.Stop := 0;
+	            "DB_SM".Sm[#SMN].Status.StepNb := "SM_STOP_SEQUENCE";
+	        END_IF;
+	        IF "DB_SM".Sm[#SMN].Command.Abort THEN
+	            //Call Abort Sequence
+	            "FC_SM_Abort_Seq"(#SMN);
+	            "DB_SM".Sm[#SMN].Command.Abort := 0;
+	            "DB_SM".Sm[#SMN].Status.StepNb := "SM_ABORT_SEQUENCE";
+	        END_IF;
+	    END_IF;
+	    
+	    //If SM is in "PLAY"
+	    IF "DB_SM".Sm[#SMN].Status.Status = "SM_PLAY" THEN
+	        IF "DB_SM".Sm[#SMN].Command.Pause THEN
+	            //Call Pause Sequence
+	            "FC_SM_Pause_Seq"(#SMN);
+	            "DB_SM".Sm[#SMN].Command.Pause := 0;
+	            "DB_SM".Sm[#SMN].Status.LastStepNb := "DB_SM".Sm[#SMN].Status.StepNb;
+	            "DB_SM".Sm[#SMN].Status.LastSubStepNb := "DB_SM".Sm[#SMN].Status.SubStepNb;
+	            "DB_SM".Sm[#SMN].Status.StepNb := "SM_PAUSE_SEQUENCE";
+	            "DB_SM".Sm[#SMN].Status.SubStepNb := 0;
+	        END_IF;
+	        IF "DB_SM".Sm[#SMN].Command.Stop THEN
+	            //Call Stop Sequence
+	            "FC_SM_Stop_Seq"(#SMN);
+	            "DB_SM".Sm[#SMN].Command.Stop := 0;
+	            "DB_SM".Sm[#SMN].Status.StepNb := "SM_STOP_SEQUENCE";
+	        END_IF;
+	        IF "DB_SM".Sm[#SMN].Command.Abort THEN
+	            //Call Abort Sequence
+	            "FC_SM_Abort_Seq"(#SMN);
+	            "DB_SM".Sm[#SMN].Command.Abort := 0;
+	            "DB_SM".Sm[#SMN].Status.StepNb := "SM_ABORT_SEQUENCE";
+	        END_IF;
+	    END_IF;
+	    
 END_FUNCTION
 

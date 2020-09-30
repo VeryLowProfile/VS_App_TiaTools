@@ -132,10 +132,10 @@
     <Content Include="Msg Txt Files\DB_Msg.txt" />
     <Content Include="Msg Txt Files\FC_Msg_Config_Begin.txt" />
     <Content Include="Msg Txt Files\FC_Msg_Config_Body.txt" />
-    <Content Include="Msg Txt Files\FC_Msg_Config_Body_2.txt" />
     <Content Include="Msg Txt Files\FC_Msg_Config_End.txt" />
     <Content Include="Msg Txt Files\FC_Msg_Handler_Begin.txt" />
-    <Content Include="Msg Txt Files\FC_Msg_Handler_Body.txt" />
+    <Content Include="Msg Txt Files\FC_Msg_Handler_Body_Store.txt" />
+    <None Include="Msg Txt Files\FC_Msg_Handler_Body_None.txt" />
     <Content Include="Msg Txt Files\FC_Msg_Handler_End.txt" />
     <Content Include="Msg Txt Files\FC_Msg_Reaction.txt" />
     <Content Include="Msg Txt Files\FC_Msg_Store_Sql.txt" />

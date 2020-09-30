@@ -1,4 +1,4 @@
 //DO_$VAR_NAME$
 //********************************************************************//
-"DO_$VAR_NAME$".DigitalOUT.Config.OFFDelay := T#0MS;
-"DO_$VAR_NAME$".DigitalOUT.Config.OnDelay := T#0MS;
+"DO_$VAR_NAME$".Config.OFFDelay := T#0MS;
+"DO_$VAR_NAME$".Config.OnDelay := T#0MS;

@@ -12,6 +12,6 @@ BEGIN
 	
 	//ESEMPIO DI CONFIGURAZIONE
 	//********************************************************************//
-	//"DI_INGRESSO_DIGITALE".DigitalIN.Config.Name := 1180; Indice Dell'elenco testi per visualizzazione nome variabile su HMI
-	//"DI_INGRESSO_DIGITALE".DigitalIN.Config.DebounceTime := T#0MS; Tempo di ritardo utilizzato per filtrare i rimbalzi (agisce come filtro passa basso, il value diventa 1 se l'ingresso collegato al blocco rimane alto più di questo tempo)
+	//"DI_INGRESSO_DIGITALE".Config.Name := 1180; Indice Dell'elenco testi per visualizzazione nome variabile su HMI
+	//"DI_INGRESSO_DIGITALE".Config.DebounceTime := T#0MS; Tempo di ritardo utilizzato per filtrare i rimbalzi (agisce come filtro passa basso, il value diventa 1 se l'ingresso collegato al blocco rimane alto più di questo tempo)
 	

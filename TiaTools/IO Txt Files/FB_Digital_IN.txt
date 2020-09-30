@@ -6,10 +6,12 @@ VERSION : 0.1
    END_VAR
 
    VAR 
-      DigitalIN : "Digital_IN";
-      R_DigitalIN {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
-      F_DigitalIN {InstructionName := 'F_TRIG'; LibVersion := '1.0'} : F_TRIG;
-      T_Debounce {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      Status { S7_SetPoint := 'True'} : Bool;
+      F_Status { S7_SetPoint := 'True'} : Bool;
+      R_Status { S7_SetPoint := 'True'} : Bool;
+      Config { S7_SetPoint := 'False'} : "Digital_IN_CONFIG";
+      Aux { S7_SetPoint := 'False'} : "Digital_IN_AUX";
+      Hmi : "Hmi_IO";
    END_VAR
 
 
@@ -31,17 +33,17 @@ BEGIN
 	//Si fa riferimento alla variabile di esempio "INGRESSO_DIGITALE" usata negli esempi precedenti
 	//
 	//Lettura dello stato attuale dell'ingresso
-	//MyStatus := "DI_INGRESSO_DIGITALE".DigitalIN.Status
+	//MyStatus := "DI_INGRESSO_DIGITALE".Status
 	//
 	//Interrogazione del fronte di salita dell'ingresso
-	//IF "DI_INGRESSO_DIGITALE".DigitalIN.R_Status THEN (R_Status fornisce il fronte di salita dell'ingresso)
+	//IF "DI_INGRESSO_DIGITALE".R_Status THEN (R_Status fornisce il fronte di salita dell'ingresso)
 	//
 	//  Some PLC code ....
 	//
 	//END_IF;
 	//  
 	//Interrogazione del fronte di discesa dell'ingresso
-	//IF "DI_INGRESSO_DIGITALE".DigitalIN.F_Status THEN (F_Status fornisce il fronte di discesa dell'ingresso)
+	//IF "DI_INGRESSO_DIGITALE".F_Status THEN (F_Status fornisce il fronte di discesa dell'ingresso)
 	//
 	//  Some PLC code ....
 	//
@@ -49,51 +51,26 @@ BEGIN
 	
 	//Debounce
 	//********************************************************************//
-	#T_Debounce(IN := #Signal,
-	            PT := #DigitalIN.Config.DebounceTime);
+	#Aux.#T_Debounce(IN := #Signal,
+	                 PT := #Config.DebounceTime);
 	
 	//Status
 	//********************************************************************//
-	#DigitalIN.Status := #T_Debounce.Q;
+	#Status := #Aux.#T_Debounce.Q;
 	
 	//Edges
 	//********************************************************************//
-	#R_DigitalIN(CLK := #DigitalIN.Status);
-	#F_DigitalIN(CLK := #DigitalIN.Status);
+	//R
+	#R_Status := #Aux.R_Aux <> #Status;
+	#Aux.R_Aux := #Status;
 	
-	#DigitalIN.R_Status := #R_DigitalIN.Q;
-	#DigitalIN.F_Status := #F_DigitalIN.Q;
+	//F
+	#F_Status := #Aux.F_Aux <> #Status;
+	#Aux.F_Aux := #Status;
 	
 	//Hmi
 	//********************************************************************//
-	#DigitalIN.Hmi.Status := #DigitalIN.Status;
-	#DigitalIN.Hmi.Name := #DigitalIN.Config.Name;
+	#Hmi.Status := #Status;
 	
-	// //Events
-	// //********************************************************************//
-	// IF #DigitalIN.Config.EnableStoreEvent THEN
-	//     IF #DigitalIN.R_Status THEN
-	//         "FC_Sql_Buffer_Add"(Fo := #Fo_Data[#DigitalIN.Config.Smn].Resume.FO,
-	//                             TypeOfRequest := "SQL_INSERT_Events",
-	//                             EventOrMsgNb := #DigitalIN.Config.R_EventNb,
-	//                             TrendTimeSec := 0,
-	//                             TrendVar1 := 0,
-	//                             TrendVar2 := 0,
-	//                             TrendVar3 := 0,
-	//                             TrendVar4 := 0);
-	//     END_IF;
-	    
-	//     IF #DigitalIN.F_Status THEN
-	//         "FC_Sql_Buffer_Add"(Fo := #Fo_Data[#DigitalIN.Config.Smn].Resume.FO,
-	//                             TypeOfRequest := "SQL_INSERT_Events",
-	//                             EventOrMsgNb := #DigitalIN.Config.F_EventNb,
-	//                             TrendTimeSec := 0,
-	//                             TrendVar1 := 0,
-	//                             TrendVar2 := 0,
-	//                             TrendVar3 := 0,
-	//                             TrendVar4 := 0);
-	//     END_IF;
-	// END_IF;
-	    
 END_FUNCTION_BLOCK
 

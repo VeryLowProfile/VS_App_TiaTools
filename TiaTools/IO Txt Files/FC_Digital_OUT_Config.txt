@@ -12,7 +12,7 @@ BEGIN
 	
 	//ESEMPIO DI CONFIGURAZIONE
 	//********************************************************************//
-	// "DO_USCITA_DIGITALE.DigitalOUT.Config.Name := 2220;  Indice Dell'elenco testi per visualizzazione nome variabile su HMI
-	// "DO_USCITA_DIGITALE".DigitalOUT.Config.OFFDelay := T#0MS; Tempo di ritardo sull'azionamento
-	// "DO_USCITA_DIGITALE".DigitalOUT.Config.OnDelay := T#0MS; Tempo di ritardo sul rilascio
+	// "DO_USCITA_DIGITALE".Config.Name := 2220;  Indice Dell'elenco testi per visualizzazione nome variabile su HMI
+	// "DO_USCITA_DIGITALE".Config.OFFDelay := T#0MS; Tempo di ritardo sull'azionamento
+	// "DO_USCITA_DIGITALE".Config.OnDelay := T#0MS; Tempo di ritardo sul rilascio
 	

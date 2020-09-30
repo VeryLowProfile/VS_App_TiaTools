@@ -1,5 +1,5 @@
-//AO_$VAR_NAME$
-//********************************************************************//
-"AO_$VAR_NAME$".AnalogOUT.Config.HighUnscaleLimit := 0;
-"AO_$VAR_NAME$".AnalogOUT.Config.LowUnscaleLimit := 0;
-"AO_$VAR_NAME$".AnalogOUT.Config.IsBipolar := 0;
+	//AO_$VAR_NAME$
+	//********************************************************************//
+	"AO_$VAR_NAME$".Config.HighUnscaleLimit := 0;
+	"AO_$VAR_NAME$".Config.LowUnscaleLimit := 0;
+	"AO_$VAR_NAME$".Config.IsBipolar := 0;

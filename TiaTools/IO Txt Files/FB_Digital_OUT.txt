@@ -6,12 +6,13 @@ VERSION : 0.1
    END_VAR
 
    VAR 
-      DigitalOUT : "Digital_OUT";
-      T_OnDelay {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
-      T_OffDelay {InstructionName := 'TOF_TIME'; LibVersion := '1.0'} : TOF_TIME;
-      R_DigitalOUT {InstructionName := 'R_TRIG'; LibVersion := '1.0'} : R_TRIG;
-      F_DigitalOUT {InstructionName := 'F_TRIG'; LibVersion := '1.0'} : F_TRIG;
-      CommandResult { S7_SetPoint := 'True'} : Bool;
+      Command : Bool;
+      Status : Bool;
+      R_Status : Bool;
+      F_Status : Bool;
+      Config { S7_SetPoint := 'False'} : "Digital_OUT_CONFIG";
+      Aux : "Digital_OUT_AUX";
+      Hmi : "Hmi_IO";
    END_VAR
 
 
@@ -33,82 +34,72 @@ BEGIN
 	//Si fa riferimento alla variabile di esempio "USCITA_DIGITALE" usata negli esempi precedenti
 	//
 	//Comado dell'uscita digitale
-	//"DO_USCITA_GITALE".DigitalOUT.Command := Valore che si desidera assegnare all'uscita (Questo valore deve essere di tipo Bool)
+	//"DO_USCITA_GITALE".Command := Valore che si desidera assegnare all'uscita (Questo valore deve essere di tipo Bool)
 	//
 	//Interrogazione dello stato dell'uscita
-	//IF "DO_USCITA_GITALE".DigitalOUT.Status THEN
+	//IF "DO_USCITA_GITALE".Status THEN
 	//
 	//  Some PLC Code ....
 	//  
 	//END_IF;
 	
-	//Command Result
+	//Manual Command
 	//********************************************************************//
-	IF #DigitalOUT.Hmi.Manual THEN
-	    IF #DigitalOUT.Hmi.On THEN
-	        #DigitalOUT.Hmi.On := 0;
-	        #CommandResult := 1;
-	    ELSIF #DigitalOUT.Hmi.Off THEN
-	        #DigitalOUT.Hmi.Off := 0;
-	        #CommandResult := 0;
+	IF #Hmi.Off THEN
+	    #Hmi.Off := 0;
+	    IF #Hmi.Manual THEN
+	        IF #Hmi.ManualEnable THEN
+	            IF #Hmi.SafeSwitch THEN
+	                IF #Command THEN
+	                    #Command := 0;
+	                END_IF;
+	            END_IF;
+	        END_IF;
 	    END_IF;
-	ELSE
-	    #CommandResult := #DigitalOUT.Command;
+	END_IF;
+	
+	IF #Hmi.On THEN
+	    #Hmi.On := 0;
+	    IF #Hmi.Manual THEN
+	        IF #Hmi.ManualEnable THEN
+	            IF #Hmi.SafeSwitch THEN
+	                IF NOT #Command THEN
+	                    #Command := 1;
+	                END_IF;
+	            END_IF;
+	        END_IF;
+	    END_IF;
 	END_IF;
 	
 	//Delay
 	//********************************************************************//
-	#T_OnDelay(IN := #CommandResult,
-	           PT := #DigitalOUT.Config.OnDelay);
+	#Aux.#T_OnDelay(IN := #Command OR (#Hmi.toggle AND #Hmi.Manual AND #Hmi.ManualEnable),
+	                PT := #Config.OnDelay);
 	
-	#T_OffDelay(IN := #T_OffDelay.Q,
-	            PT := #DigitalOUT.Config.OFFDelay);
+	#Aux.#T_OffDelay(IN := #Aux.#T_OnDelay.Q,
+	                 PT := #Config.OFFDelay);
 	
 	//Output
 	//********************************************************************//
-	#Signal := #T_OnDelay.Q OR #T_OffDelay.Q;
+	#Signal := #Aux.#T_OnDelay.Q OR #Aux.#T_OffDelay.Q;
 	
 	//Status
 	//********************************************************************//
-	#DigitalOUT.Status := #Signal;
-	
-	//Hmi
-	//********************************************************************//
-	#DigitalOUT.Hmi.Status := #DigitalOUT.Status;
-	#DigitalOUT.Hmi.Name := #DigitalOUT.Config.Name;
+	#Status := #Signal;
 	
 	//Edges
 	//********************************************************************//
-	#R_DigitalOUT(CLK := #Signal);
-	#F_DigitalOUT(CLK := #Signal);
+	//R
+	#R_Status := #Aux.R_Aux <> #Status;
+	#Aux.R_Aux := #Status;
 	
-	// //Events
-	// //********************************************************************//
-	// IF #DigitalOUT.Config.EnableStoreEvent THEN
-	//     IF #R_DigitalOUT.Q THEN
-	//         "FC_Sql_Buffer_Add"(Fo := #Fo_Data[#DigitalOUT.Config.Smn].Resume.FO,
-	//                             TypeOfRequest := "SQL_INSERT_Events",
-	//                             EventOrMsgNb := #DigitalOUT.Config.R_EventNb,
-	//                             TrendTimeSec := 0,
-	//                             TrendVar1 := 0,
-	//                             TrendVar2 := 0,
-	//                             TrendVar3 := 0,
-	//                             TrendVar4 := 0);
-	//     END_IF;
-	    
-	//     IF #F_DigitalOUT.Q THEN
-	//         "FC_Sql_Buffer_Add"(Fo := #Fo_Data[#DigitalOUT.Config.Smn].Resume.FO,
-	//                             TypeOfRequest := "SQL_INSERT_Events",
-	//                             EventOrMsgNb := #DigitalOUT.Config.F_EventNb,
-	//                             TrendTimeSec := 0,
-	//                             TrendVar1 := 0,
-	//                             TrendVar2 := 0,
-	//                             TrendVar3 := 0,
-	//                             TrendVar4 := 0);
-	//     END_IF;
-	// END_IF;
+	//F
+	#F_Status := #Aux.F_Aux <> #Status;
+	#Aux.F_Aux := #Status;
 	
-	
+	//Hmi
+	//********************************************************************//
+	#Hmi.Status := #Status;
 	
 END_FUNCTION_BLOCK
 

@@ -201,10 +201,11 @@ namespace TiaTools.Properties {
         ///   END_VAR
         ///
         ///   VAR 
-        ///      AnalogIN : &quot;Analog_IN&quot;;
-        ///      T_HighLimit {InstructionName := &apos;TON_TIME&apos;; LibVersion := &apos;1.0&apos;} : TON_TIME;
-        ///      T_LowLimit {InstructionName := &apos;TON_TIME&apos;; LibVersion := &apos;1.0&apos;} : TON_TIME;
-        ///      SCALE_RET_VAL : Word;
+        ///      Value : Real;
+        ///      Config : &quot;Analog_IN_CONFIG&quot;;
+        ///      Alarm : &quot;Analog_IN_ALARM&quot;;
+        ///      Aux : &quot;Analog_IN_AUX&quot;;
+        ///      Hmi { S7_SetPoint := &apos;False&apos;} : &quot;Hmi_IO&quot;;
         ///   END_VAR
         ///
         ///
@@ -212,7 +213,9 @@ namespace TiaTools.Properties {
         ///	//********************************************************************//
         ///	//Name: FB_Analog_IN
         ///	//Version: 0.1
-        ///	//Desc [stringa troncata]&quot;;.
+        ///	//Description: Analogic IN Management
+        ///	//Developer: Topcast
+        ///	 [stringa troncata]&quot;;.
         /// </summary>
         internal static string FB_Analog_IN {
             get {
@@ -229,9 +232,10 @@ namespace TiaTools.Properties {
         ///   END_VAR
         ///
         ///   VAR 
-        ///      AnalogOUT : &quot;Analog_OUT&quot;;
-        ///      CommandResult : Real;
-        ///      UNSCALE_RET_VAL : Word;
+        ///      Command : Real;
+        ///      Config { S7_SetPoint := &apos;False&apos;} : &quot;Analog_OUT_CONFIG&quot;;
+        ///      Aux { S7_SetPoint := &apos;False&apos;} : &quot;Analog_OUT_AUX&quot;;
+        ///      Hmi : &quot;Hmi_IO&quot;;
         ///   END_VAR
         ///
         ///
@@ -241,7 +245,7 @@ namespace TiaTools.Properties {
         ///	//Version: 0.1
         ///	//Description: Analogic OUT Management
         ///	//Developer: Topcast
-        ///	//********************************************************************//        /// [stringa troncata]&quot;;.
+        ///	 [stringa troncata]&quot;;.
         /// </summary>
         internal static string FB_Analog_OUT {
             get {
@@ -258,15 +262,17 @@ namespace TiaTools.Properties {
         ///   END_VAR
         ///
         ///   VAR 
-        ///      DigitalIN : &quot;Digital_IN&quot;;
-        ///      R_DigitalIN {InstructionName := &apos;R_TRIG&apos;; LibVersion := &apos;1.0&apos;} : R_TRIG;
-        ///      F_DigitalIN {InstructionName := &apos;F_TRIG&apos;; LibVersion := &apos;1.0&apos;} : F_TRIG;
-        ///      T_Debounce {InstructionName := &apos;TON_TIME&apos;; LibVersion := &apos;1.0&apos;} : TON_TIME;
+        ///      Status { S7_SetPoint := &apos;True&apos;} : Bool;
+        ///      F_Status { S7_SetPoint := &apos;True&apos;} : Bool;
+        ///      R_Status { S7_SetPoint := &apos;True&apos;} : Bool;
+        ///      Config { S7_SetPoint := &apos;False&apos;} : &quot;Digital_IN_CONFIG&quot;;
+        ///      Aux { S7_SetPoint := &apos;False&apos;} : &quot;Digital_IN_AUX&quot;;
+        ///      Hmi : &quot;Hmi_IO&quot;;
         ///   END_VAR
         ///
         ///
         ///BEGIN
-        ///	//******************************************************************** [stringa troncata]&quot;;.
+        ///	//******************************************************** [stringa troncata]&quot;;.
         /// </summary>
         internal static string FB_Digital_IN {
             get {
@@ -283,12 +289,21 @@ namespace TiaTools.Properties {
         ///   END_VAR
         ///
         ///   VAR 
-        ///      DigitalOUT : &quot;Digital_OUT&quot;;
-        ///      T_OnDelay {InstructionName := &apos;TON_TIME&apos;; LibVersion := &apos;1.0&apos;} : TON_TIME;
-        ///      T_OffDelay {InstructionName := &apos;TOF_TIME&apos;; LibVersion := &apos;1.0&apos;} : TOF_TIME;
-        ///      R_DigitalOUT {InstructionName := &apos;R_TRIG&apos;; LibVersion := &apos;1.0&apos;} : R_TRIG;
-        ///      F_DigitalOUT {InstructionName := &apos;F_TRIG&apos;; LibVersion := &apos;1.0&apos;} : F_TRIG;
-        ///       [stringa troncata]&quot;;.
+        ///      Command : Bool;
+        ///      Status : Bool;
+        ///      R_Status : Bool;
+        ///      F_Status : Bool;
+        ///      Config { S7_SetPoint := &apos;False&apos;} : &quot;Digital_OUT_CONFIG&quot;;
+        ///      Aux : &quot;Digital_OUT_AUX&quot;;
+        ///      Hmi : &quot;Hmi_IO&quot;;
+        ///   END_VAR
+        ///
+        ///
+        ///BEGIN
+        ///	//********************************************************************//
+        ///	//Name: FB_Digital_OUT
+        ///	//Version: x.x
+        ///	//Description:  [stringa troncata]&quot;;.
         /// </summary>
         internal static string FB_Digital_OUT {
             get {
@@ -331,10 +346,10 @@ namespace TiaTools.Properties {
         ///	//Description: Configuration Analog IN
         ///	//Developer: Topcast
         ///	//********************************************************************//
-        ///	
+        ///
         ///	//ESEMPIO DI CONFIGURAZIONE 
         ///	//********************************************************************//
-        ///	// &quot;AI_INGRESSO_ANALOGICO&quot;.AnalogIN.Config. [stringa troncata]&quot;;.
+        ///	// &quot;AI_INGRESSO_ANALOGICO&quot;.Config.Name := 32 [stringa troncata]&quot;;.
         /// </summary>
         internal static string FC_Analog_IN_Config {
             get {
@@ -343,17 +358,18 @@ namespace TiaTools.Properties {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a //AI_$VAR_NAME$
-        /////********************************************************************//
-        ///&quot;AI_$VAR_NAME$&quot;.AnalogIN.Config.Name := $TEXT_NUMBER$;
-        ///&quot;AI_$VAR_NAME$&quot;.AnalogIN.Config.MUnit := 0;
-        ///&quot;AI_$VAR_NAME$&quot;.AnalogIN.Config.HighScaleValue := 0;
-        ///&quot;AI_$VAR_NAME$&quot;.AnalogIN.Config.LowScaleValue := 0;
-        ///&quot;AI_$VAR_NAME$&quot;.AnalogIN.Config.HighLimit := 0;
-        ///&quot;AI_$VAR_NAME$&quot;.AnalogIN.Config.LowLimit := 0;
-        ///&quot;AI_$VAR_NAME$&quot;.AnalogIN.Config.CompValue := 0;
-        ///&quot;AI_$VAR_NAME$&quot;.AnalogIN.Config.LimitDelay := T#5S;
-        ///&quot;AI_$VAR_NAME$ [stringa troncata]&quot;;.
+        ///   Cerca una stringa localizzata simile a 	//AI_$VAR_NAME$
+        ///	//********************************************************************//
+        ///	&quot;AI_$VAR_NAME$&quot;.Config.HighScaleValue := 0;
+        ///	&quot;AI_$VAR_NAME$&quot;.Config.LowScaleValue := 0;
+        ///	&quot;AI_$VAR_NAME$&quot;.Config.HighLimit := 0;
+        ///	&quot;AI_$VAR_NAME$&quot;.Config.LowLimit := 0;
+        ///	&quot;AI_$VAR_NAME$&quot;.Config.ManualCompValue := 0;
+        ///	&quot;AI_$VAR_NAME$&quot;.Config.ManualScalingValue := 0;
+        ///	&quot;AI_$VAR_NAME$&quot;.Config.AlarmDelay := T#5S;
+        ///	&quot;AI_$VAR_NAME$&quot;.Config.IsBipolar := 0;
+        ///	&quot;AI_$VAR_NAME$&quot;.Config.DoNotScale := 0;
+        ///	&quot;AI_$VAR_NAME$&quot;.Confi [stringa troncata]&quot;;.
         /// </summary>
         internal static string FC_Analog_IN_Config_Part {
             get {
@@ -420,13 +436,11 @@ namespace TiaTools.Properties {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a //AO_$VAR_NAME$
-        /////********************************************************************//
-        ///&quot;AO_$VAR_NAME$&quot;.AnalogOUT.Config.Name := $TEXT_NUMBER$;
-        ///&quot;AO_$VAR_NAME$&quot;.AnalogOUT.Config.MUnit := 0;
-        ///&quot;AO_$VAR_NAME$&quot;.AnalogOUT.Config.HighUnscaleLimit := 0;
-        ///&quot;AO_$VAR_NAME$&quot;.AnalogOUT.Config.LowUnscaleLimit := 0;
-        ///&quot;AO_$VAR_NAME$&quot;.AnalogOUT.Config.IsBipolar := 0;
+        ///   Cerca una stringa localizzata simile a 	//AO_$VAR_NAME$
+        ///	//********************************************************************//
+        ///	&quot;AO_$VAR_NAME$&quot;.Config.HighUnscaleLimit := 0;
+        ///	&quot;AO_$VAR_NAME$&quot;.Config.LowUnscaleLimit := 0;
+        ///	&quot;AO_$VAR_NAME$&quot;.Config.IsBipolar := 0;
         ///.
         /// </summary>
         internal static string FC_Analog_OUT_Config_Part {
@@ -485,7 +499,7 @@ namespace TiaTools.Properties {
         ///	
         ///	//ESEMPIO DI CONFIGURAZIONE
         ///	//********************************************************************//
-        ///	//&quot;DI_INGRESSO_DIGITALE&quot;.DigitalIN.Config [stringa troncata]&quot;;.
+        ///	//&quot;DI_INGRESSO_DIGITALE&quot;.Config.Name := 1 [stringa troncata]&quot;;.
         /// </summary>
         internal static string FC_Digital_IN_Config {
             get {
@@ -496,8 +510,7 @@ namespace TiaTools.Properties {
         /// <summary>
         ///   Cerca una stringa localizzata simile a //DI_$VAR_NAME$
         /////********************************************************************//
-        ///&quot;DI_$VAR_NAME$&quot;.DigitalIN.Config.Name := $TEXT_NUMBER$;
-        ///&quot;DI_$VAR_NAME$&quot;.DigitalIN.Config.DebounceTime := T#0MS;
+        ///&quot;DI_$VAR_NAME$&quot;.DigitalIN.DebounceTime := T#0MS;
         ///.
         /// </summary>
         internal static string FC_Digital_IN_Config_Part {
@@ -556,7 +569,7 @@ namespace TiaTools.Properties {
         ///	
         ///	//ESEMPIO DI CONFIGURAZIONE
         ///	//********************************************************************//
-        ///	// &quot;DO_USCITA_DIGITALE.DigitalOUT.Conf [stringa troncata]&quot;;.
+        ///	// &quot;DO_USCITA_DIGITALE&quot;.Config.Name := [stringa troncata]&quot;;.
         /// </summary>
         internal static string FC_Digital_OUT_Config {
             get {
@@ -567,9 +580,8 @@ namespace TiaTools.Properties {
         /// <summary>
         ///   Cerca una stringa localizzata simile a //DO_$VAR_NAME$
         /////********************************************************************//
-        ///&quot;DO_$VAR_NAME$&quot;.DigitalOUT.Config.Name := $TEXT_NUMBER$;
-        ///&quot;DO_$VAR_NAME$&quot;.DigitalOUT.Config.OFFDelay := T#0MS;
-        ///&quot;DO_$VAR_NAME$&quot;.DigitalOUT.Config.OnDelay := T#0MS;
+        ///&quot;DO_$VAR_NAME$&quot;.Config.OFFDelay := T#0MS;
+        ///&quot;DO_$VAR_NAME$&quot;.Config.OnDelay := T#0MS;
         ///.
         /// </summary>
         internal static string FC_Digital_OUT_Config_Part {
@@ -594,12 +606,9 @@ namespace TiaTools.Properties {
         ///   Cerca una stringa localizzata simile a FUNCTION &quot;FC_Msg_Config&quot; : Void
         ///{ S7_Optimized_Access := &apos;TRUE&apos; }
         ///VERSION : 0.1
-        ///   VAR CONSTANT 
-        ///      NONE : USInt := 0;
-        ///      PAUSE : USInt := 1;
-        ///      HALT : USInt := 2;
+        ///   VAR_TEMP 
+        ///      i : Int;
         ///   END_VAR
-        ///
         ///
         ///BEGIN
         ///	//********************************************************************//
@@ -608,10 +617,10 @@ namespace TiaTools.Properties {
         ///	//Description: FC_Msg_Config
         ///	//Developer: Topcast
         ///	//********************************************************************//
-        ///	
         ///
-        ///
-        ///.
+        ///	//Msg General Config
+        ///	//********************************************************************//
+        ///	&quot;DB_Msg&quot;.Msg.Config.MsgHmiWordNb [stringa troncata]&quot;;.
         /// </summary>
         internal static string FC_Msg_Config_Begin {
             get {
@@ -620,15 +629,9 @@ namespace TiaTools.Properties {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a 	//Msg $MSG_NUMBER$ 
+        ///   Cerca una stringa localizzata simile a 	//Msg $MSG_NUMBER$ - $MSG_DEVICE$ - $MSG_TEXT$
         ///	//********************************************************************//
-        ///	&quot;DB_Msg&quot;.Msg.Msg[$MSG_NUMBER$].Config.Nb := $MSG_NUMBER$ ;
-        ///	&quot;DB_Msg&quot;.Msg.Msg[$MSG_NUMBER$].Sql.StoreForAll := 0;
-        ///
-        ///
-        ///
-        ///
-        ///.
+        ///	&quot;DB_Msg&quot;.Msg.Msg[$MSG_NUMBER$].Config.Reaction[$SM_NUMBER$] := $MSG_REACTION$;.
         /// </summary>
         internal static string FC_Msg_Config_Body {
             get {
@@ -637,29 +640,7 @@ namespace TiaTools.Properties {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a 	&quot;DB_Msg&quot;.Msg.Msg[$MSG_NUMBER$].Config.Reaction[$SM_NUMBER$] := #NONE;
-        ///
-        ///
-        ///
-        ///
-        ///.
-        /// </summary>
-        internal static string FC_Msg_Config_Body_2 {
-            get {
-                return ResourceManager.GetString("FC_Msg_Config_Body_2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Cerca una stringa localizzata simile a 	//Msg General Config
-        ///	//********************************************************************//
-        ///	&quot;DB_Msg&quot;.Msg.Config.MsgHmiWordNb := $WORD_NUMBER&quot;;
-        ///	&quot;DB_Msg&quot;.Msg.Config.MsgMaxNb := $MSG_TOT_NUMBER&quot;;
-        ///	&quot;DB_Msg&quot;.Msg.Config.MsgMaxSM := $SM_TOT$;
-        ///	
-        ///END_FUNCTION
-        ///
-        ///.
+        ///   Cerca una stringa localizzata simile a END_FUNCTION.
         /// </summary>
         internal static string FC_Msg_Config_End {
             get {
@@ -688,10 +669,9 @@ namespace TiaTools.Properties {
         ///	//Description: FC_Msg_Handler
         ///	//Developer: Topcast
         ///	//********************************************************************//
-        ///	
         ///
-        ///
-        ///.
+        ///	//Reset Msg Pending
+        ///	//***************************** [stringa troncata]&quot;;.
         /// </summary>
         internal static string FC_Msg_Handler_Begin {
             get {
@@ -700,39 +680,52 @@ namespace TiaTools.Properties {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a 	//Msg $MSG_NUMBER$
+        ///   Cerca una stringa localizzata simile a     //Msg Reaction
         ///	//********************************************************************//
-        ///	&quot;FC_Msg_Reaction&quot;(MsgNb:=$MSG_NUMBER$,
-        ///	                  Msg:=&quot;DB_Msg&quot;.Msg);
-        ///	
-        ///	&quot;FC_Msg_Store_Sql&quot;(MsgNb:=$MSG_NUMBER$,
-        ///	                   FOData:=&quot;DB_FO_Data&quot;.FOData,
-        ///	                   Msg:=&quot;DB_Msg&quot;.Msg);
-        ///
-        ///
-        ///
+        ///    FOR #i := 0 TO #Msg.Config.MsgMaxNb DO
+        ///        &quot;FC_Msg_Reaction&quot;(MsgNb := #i,
+        ///                          Ack := &quot;DB_Msg&quot;.Msg.Ack,
+        ///                          Msg := &quot;DB_Msg&quot;.Msg);
+        ///    
+        ///        &quot;FC_Msg_Store_Sql&quot;(FOData := &quot;DB_FO_Data&quot;.FOData,
+        ///                           MsgNb := #i,
+        ///                           Msg := &quot;DB_Msg&quot;.Msg);
+        ///    END_FOR;
         ///.
         /// </summary>
-        internal static string FC_Msg_Handler_Body {
+        internal static string FC_Msg_Handler_Body_None {
             get {
-                return ResourceManager.GetString("FC_Msg_Handler_Body", resourceCulture);
+                return ResourceManager.GetString("FC_Msg_Handler_Body_None", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a //Ack
+        ///   Cerca una stringa localizzata simile a 	//Msg $MSG_NUMBER$ - $MSG_DEVICE$ - $MSG_TEXT$
+        ///	//********************************************************************//
+        ///	&quot;FC_Msg_Reaction&quot;(MsgNb:=$MSG_NUMBER$,
+        ///					  Ack := &quot;DB_Msg&quot;.Msg.Ack,
+        ///	                  Msg:=&quot;DB_Msg&quot;.Msg);
+        ///
+        ///	&quot;FC_Msg_Store_Sql&quot;(FOData := &quot;DB_FO_Data&quot;.FOData,
+        ///					  MsgNb := $MSG_NUMBER$,
+        ///					  Msg:=&quot;DB_Msg&quot;.Msg);
+        ///.
+        /// </summary>
+        internal static string FC_Msg_Handler_Body_Store {
+            get {
+                return ResourceManager.GetString("FC_Msg_Handler_Body_Store", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a 	//Ack
         ///	//********************************************************************//
         ///	IF #Msg.Ack THEN
-        ///	    FOR #i := 0 TO #Msg.Config.MsgHmiWordNb DO
-        ///	        #Msg.Msg_Hmi[#i] := 16#00;
-        ///	    END_FOR;
-        ///	    #Msg.Ack := 0;
+        ///		#Msg.Ack := 0;
         ///	END_IF;
         ///	
         ///	            
-        ///END_FUNCTION
-        ///
-        ///.
+        ///END_FUNCTION.
         /// </summary>
         internal static string FC_Msg_Handler_End {
             get {
@@ -746,6 +739,7 @@ namespace TiaTools.Properties {
         ///VERSION : 0.1
         ///   VAR_INPUT 
         ///      MsgNb : Int;
+        ///      Ack : Bool;
         ///   END_VAR
         ///
         ///   VAR_IN_OUT 
@@ -760,12 +754,13 @@ namespace TiaTools.Properties {
         ///
         ///
         ///BEGIN
-        ///	//********************************************************************//
-        ///	//Name: FC_Msg_Reaction
-        ///	//Version: 0.1
-        ///	//Description: FC_Msg_Reaction
-        ///	//Developer: Topcast
-        ///	//*************************************************** [stringa troncata]&quot;;.
+        ///
+        ///    //********************************************************************//
+        ///    //Name: FC_Msg_Reaction
+        ///    //Version: 0.1
+        ///    //Description: FC_Msg_Reaction
+        ///    //Developer: Topcast
+        ///    //************ [stringa troncata]&quot;;.
         /// </summary>
         internal static string FC_Msg_Reaction {
             get {
@@ -792,12 +787,12 @@ namespace TiaTools.Properties {
         ///
         ///
         ///BEGIN
-        ///	//********************************************************************//
-        ///	//Name: FC_Msg_Store_Sql
-        ///	//Version: 0.1
-        ///	//Description: FC_Msg_Store_Sql
-        ///	//Developer: Topcast
-        ///	//**************************************************** [stringa troncata]&quot;;.
+        ///    //********************************************************************//
+        ///    //Name: FC_Msg_Store_Sql
+        ///    //Version: 0.1
+        ///    //Description: FC_Msg_Store_Sql
+        ///    //Developer: Topcast
+        ///    //********************************** [stringa troncata]&quot;;.
         /// </summary>
         internal static string FC_Msg_Store_Sql {
             get {
@@ -817,7 +812,6 @@ namespace TiaTools.Properties {
         ///	//Description: FC_Msg_Trigger
         ///	//Developer: Topcast
         ///	//********************************************************************//
-        ///	
         ///
         ///.
         /// </summary>
@@ -828,11 +822,9 @@ namespace TiaTools.Properties {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a 	//Msg 1 
+        ///   Cerca una stringa localizzata simile a 	//Msg $MSG_NUMBER$ - $MSG_DEVICE$ - $MSG_TEXT$
         ///	//********************************************************************//
-        ///	&quot;DB_Msg&quot;.Msg.Msg[1].Trigger := FALSE;
-        ///
-        ///
+        ///	&quot;DB_Msg&quot;.Msg.Msg[$MSG_NUMBER$].Trigger := FALSE;
         ///.
         /// </summary>
         internal static string FC_Msg_Trigger_Body {
@@ -903,15 +895,16 @@ namespace TiaTools.Properties {
         ///
         ///
         ///BEGIN
-        ///	    //********************************************************************//
-        ///	    //Name: FC_SM_Common
-        ///	    //Version: x.x
-        ///	    //Description: FC_SM_Common
-        ///	    //Developer: Topcast
-        ///	    //********************************************************************//
         ///
-        ///		//PARAMETRI
-        ///		//************************************ [stringa troncata]&quot;;.
+        ///    //********************************************************************//
+        ///    //Name: FC_SM_Common
+        ///    //Version: x.x
+        ///    //Description: FC_SM_Common
+        ///    //Developer: Topcast
+        ///    //********************************************************************//
+        ///    
+        ///    //PARAMETRI
+        ///    //******************************** [stringa troncata]&quot;;.
         /// </summary>
         internal static string FC_SM_Common {
             get {
@@ -1087,21 +1080,30 @@ namespace TiaTools.Properties {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a TYPE &quot;Analog_IN_ALARM&quot;
+        ///   Cerca una stringa localizzata simile a TYPE &quot;Hmi_IO&quot;
         ///VERSION : 0.1
         ///   STRUCT
-        ///      LowLimitExceeded : Bool;   // Allarme Limite inferiore superato
-        ///      HighLimitExceeded : Bool;   // Allarme Limite superiore superato
+        ///      Status : Bool;
+        ///      Alarm : Bool;
+        ///      Manual : Bool;
+        ///      On : Bool;
+        ///      Off : Bool;
+        ///      toggle : Bool;
+        ///      ManualEnable : Bool;
+        ///      SafeSwitch : Bool;
+        ///      Value : Real;
+        ///      Command : Real;
+        ///      RawValue : Int;
         ///   END_STRUCT;
         ///
         ///END_TYPE
         ///
-        ///TYPE &quot;Analog_IN_CONFIG&quot;
+        ///TYPE &quot;Analog_IN_ALARM&quot;
         ///VERSION : 0.1
         ///   STRUCT
-        ///      &quot;Name&quot; : Int;   // Indice della voce dell&apos;elenco testi che visualizza il nome della I/O su Hmi 
-        ///      MUnit : Int;   // Indice della voce dell&apos;elenco testi che visualizza il nome l&apos;unità di misura su Hmi
-        ///      HighLimit : Real;    [stringa troncata]&quot;;.
+        ///      LowLimitExceeded : Bool;   // Allarme Limite inferiore superato
+        ///      HighLimitExceeded : Bool;   // Allarme Limite superiore superato
+        ///    [stringa troncata]&quot;;.
         /// </summary>
         internal static string IO_Types {
             get {
@@ -1113,8 +1115,9 @@ namespace TiaTools.Properties {
         ///   Cerca una stringa localizzata simile a TYPE &quot;Msg_CONFIG&quot;
         ///VERSION : 0.1
         ///   STRUCT
-        ///      Nb : Word;   // Numero Del Messaggio
-        ///      Reaction : Array[0..$SM_NUMBER$] of Int;   // Reazione Scaturita dal msg 0 = None, 1 = pause, 2 = Halt
+        ///      Reaction : Array[0..12] of Int := 13(1);   // Reazione Scaturita dal msg 0 = None,  1 = store, 2 = pause, 3 = Halt
+        ///      Class : Int;
+        ///      Nb : Int;
         ///   END_STRUCT;
         ///
         ///END_TYPE
@@ -1131,7 +1134,7 @@ namespace TiaTools.Properties {
         ///TYPE &quot;Msg_GEN&quot;
         ///VERSION : 0.1
         ///   STRUCT
-        ///      Trigger { S7_SetPoint : [stringa troncata]&quot;;.
+        ///      Trigger { S7_SetPo [stringa troncata]&quot;;.
         /// </summary>
         internal static string Msg_Types {
             get {
